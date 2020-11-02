@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:bottom = "6dp" android:drawable="@drawable/border_blue_button" android:top = "6dp"/>
+
+    <item android:bottom = "6dp" android:drawable="@drawable/border_white_button" android:top = "6dp"/>
+
+</selector>

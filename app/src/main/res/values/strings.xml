@@ -1,0 +1,60 @@
+<resources>
+    <string name="app_name">Fundi App</string>
+    <string name="sign_up">Sign up</string>
+
+    <!--MainActivity-->
+    <string name="have_account">Already have an account?</string>
+    <string name="log_in">Log in to my account</string>
+    <string name="no_account">Do not have an account?</string>
+    <string name="create_account">Create new account</string>
+    <string name="contact_us">Contact us</string>
+    <string name="about">About us</string>
+
+    <!--Log in page-->
+    <string name="log_in_to_account">Login to your account</string>
+    <string name="email_login">Enter your email address</string>
+    <string name="password_login">Password</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="button_worker_login">Worker Login</string>
+    <string name="button_employer_login">Employer Login</string>
+
+    <!--sign up page-->
+    <string name="welcome">Welcome to Fundi App</string>
+    <string name="choose_account_type">Select account type</string>
+    <string name="account_employer">Create employer account</string>
+    <string name="account_worker">Create worker account</string>
+
+    <!--About page-->
+    <string name="about_page_text">
+        Find a wide market for your casual skills among businesses and homesteads within Mombasa. Are you proficient in plumbing,
+        gardening, painting, wiring, manicure and pedicure, photography among many other fields listed on our platform? Then Fundi App
+        is just for you. Create an account and start receiving job invitations or send job requests. You can, on the other hand,
+        create an account to post jobs and employ from our talented team.
+    </string>
+
+    <!--Sign up globals-->
+    <string name="sign_up_firstname">First Name</string>
+    <string name="sign_up_lastname">Lastname</string>
+    <string name="sign_up_email">Email eg. example@gmail.com</string>
+    <string name="sign_up_phone_number">Phone Number eg. +254#########</string>
+    <string name="sign_up_password">Password (At least 4 characters) </string>
+    <string name="sign_up_confirm_password">Confirm password</string>
+    <string name="gender">Gender</string>
+    <string name="gender_male">Male</string>
+    <string name="gender_female">Female</string>
+
+    <!--Employer sign_up page-->
+    <string name="employer_sign_up_label">Employer sign up</string>
+
+    <!--Worker sign_up page-->
+    <string name="worker_sign_up_label">Step 1/2</string>
+    <string name="worker_sign_up_label2">Step 2/2</string>
+    <string name="next_step">Next step</string>
+
+    <!--Worker sign up page2-->
+    <string name="job_field">Job field</string>
+    <string name="location">Location</string>
+    <string name="description">Describe your profile(At least 50 characters)</string>
+    <string name="portfolio">My portfolio</string>
+
+</resources>

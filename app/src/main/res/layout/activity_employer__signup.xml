@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Employer_Signup">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/employer_firstname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/sign_up_firstname"
+                android:inputType="text"
+                android:padding="15dp"
+                android:layout_marginBottom="1dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/colorAccent" />
+
+            <EditText
+                android:id="@+id/employer_lastname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/sign_up_lastname"
+                android:inputType="text"
+                android:padding="15dp"
+                android:layout_marginBottom="1dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/colorAccent" />
+
+            <EditText
+                android:id="@+id/employer_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/sign_up_email"
+                android:inputType="textEmailAddress"
+                android:padding="15dp"
+                android:layout_marginBottom="1dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/colorAccent" />
+
+            <EditText
+                android:id="@+id/employer_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/sign_up_phone_number"
+                android:inputType="phone"
+                android:padding="15dp"
+                android:layout_marginBottom="1dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/colorAccent" />
+
+            <EditText
+                android:id="@+id/employer_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/sign_up_password"
+                android:inputType="textPassword"
+                android:padding="15dp"
+                android:layout_marginBottom="1dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/colorAccent" />
+
+            <EditText
+                android:id="@+id/employer_confirm_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/sign_up_confirm_password"
+                android:inputType="textPassword"
+                android:padding="15dp"
+                android:layout_marginBottom="1dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/colorAccent" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:padding="20dp"
+                    android:text="@string/gender"
+                    android:textColor="@color/black" />
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+
+                    <RadioButton
+                        android:id="@+id/gender_male"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/gender_male" />
+
+                    <RadioButton
+                        android:id="@+id/gender_female"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/gender_female" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/button_sign_up_employer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border_blue_button"
+                android:text="@string/sign_up"
+                android:layout_gravity="center"
+                android:layout_margin="20dp"
+                android:textColor="@color/link"/>
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
