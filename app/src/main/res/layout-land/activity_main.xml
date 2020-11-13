@@ -44,7 +44,6 @@
                 android:textColor="@color/white_shade"
                 android:background="@drawable/border_white_button"
                 android:text="@string/log_in"
-                android:onClick="login"
                 android:layout_gravity="center"
                 android:layout_marginBottom="40dp">
             </Button>
@@ -56,7 +55,6 @@
                 android:textColor="@color/white_shade"
                 android:background="@drawable/border_white_button"
                 android:text="@string/create_account"
-                android:onClick="signup"
                 android:layout_gravity="center">
             </Button>
         </LinearLayout>
@@ -85,7 +83,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:onClick="about"
                     android:text="@string/about"
                     android:textColor="@color/white_shade"
                     android:layout_marginBottom="30dp"
