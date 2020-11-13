@@ -72,10 +72,10 @@
                     android:text="@string/no_account"
                     android:textColor="@color/black" />
                 <TextView
+                    android:id="@+id/link_sign_up"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/sign_up"
-                    android:onClick="to_signup_page"
                     android:textColor="@color/link"
                     android:layout_marginLeft="45dp"/>
             </LinearLayout>
