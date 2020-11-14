@@ -39,10 +39,10 @@
             android:layout_marginBottom="20dp"/>
 
         <Button
+            android:id="@+id/button_account_employer"
             android:layout_width="115dp"
             android:layout_height="wrap_content"
             android:text="@string/account_employer"
-            android:onClick="employer_sign_up"
             android:textColor="@color/link"
             android:background="@drawable/border_blue_button"
             android:layout_gravity="center"
@@ -51,12 +51,12 @@
         </Button>
 
         <Button
+            android:id="@+id/button_account_worker"
             android:layout_width="105dp"
             android:layout_height="wrap_content"
             android:text="@string/account_worker"
             android:textColor="@color/link"
             android:background="@drawable/border_blue_button"
-            android:onClick="worker_sign_up"
             android:layout_gravity="center">
 
         </Button>
