@@ -37,7 +37,7 @@
     <string name="sign_up_lastname">Lastname</string>
     <string name="sign_up_email">Email eg. example@gmail.com</string>
     <string name="sign_up_phone_number">Phone Number eg. +254#########</string>
-    <string name="sign_up_password">Password (At least 4 characters) </string>
+    <string name="sign_up_password">Password (At least 6 characters) </string>
     <string name="sign_up_confirm_password">Confirm password</string>
     <string name="gender">Gender</string>
     <string name="gender_male">Male</string>
