@@ -14,6 +14,8 @@ class Login : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        val intent = getIntent()
+
         link_sign_up.setOnClickListener {
             val intent = Intent(this, Signup::class.java)
             startActivity(intent)

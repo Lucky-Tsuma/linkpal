@@ -8,5 +8,7 @@ class Employer_Signup : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_employer__signup)
+
+        val intent = getIntent()
     }
 }
