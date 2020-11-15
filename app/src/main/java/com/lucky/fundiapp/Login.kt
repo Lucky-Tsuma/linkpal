@@ -42,11 +42,11 @@ class Login : AppCompatActivity() {
         val password: String = password_login.text.toString().trim()
 
         /*Check whether any of the fields is not filled*/
-        if(email_address.length == 0 || password.length == 0) {
+        if(email_address.isEmpty() || password.isEmpty() ) {
             Toast.makeText(applicationContext, "Please fill the highlighted fields", Toast.LENGTH_SHORT).show()
             user_input_status = false
-            if(email_address.length == 0) {email_login.setBackgroundColor(Color.RED)}
-            if(password.length == 0) {password_login.setBackgroundColor(Color.RED)}
+            if(email_address.isEmpty()) {email_login.setBackgroundColor(Color.RED)}
+            if(password.isEmpty()) {password_login.setBackgroundColor(Color.RED)}
         }
 
         /*Checking email format and length*/
