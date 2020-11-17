@@ -8,13 +8,11 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_login.*
 
 class Login : AppCompatActivity() {
-    private  var  user_input_status: Boolean = true
+    private  var  status: Boolean = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-
-        val intent = getIntent()
 
         link_sign_up.setOnClickListener {
             val intent = Intent(this, Signup::class.java)
@@ -22,49 +20,49 @@ class Login : AppCompatActivity() {
         }
 
         button_employer_login.setOnClickListener {
-            check_user_input()
+            checkUserInput()
         }
 
         button_worker_login.setOnClickListener {
-            check_user_input()
+            checkUserInput()
         }
     }
 
-    fun check_user_input() {
+    private fun checkUserInput() {
 
-        /*reset incase there was previous wrong input*/
-        user_input_status = true
+        /*reset in case there was previous wrong input*/
+        status = true
         email_login.setBackgroundColor(Color.WHITE)
         password_login.setBackgroundColor(Color.WHITE)
 
         /*getting user input string, deleting whitespaces as well*/
-        val email_address: String = email_login.text.toString().trim()
+        val email: String = email_login.text.toString().trim()
         val password: String = password_login.text.toString().trim()
 
         /*Check whether any of the fields is not filled*/
-        if(email_address.isEmpty() || password.isEmpty() ) {
+        if(email.isEmpty() || password.isEmpty() ) {
             Toast.makeText(applicationContext, "Please fill the highlighted fields", Toast.LENGTH_SHORT).show()
-            user_input_status = false
-            if(email_address.isEmpty()) {email_login.setBackgroundColor(Color.RED)}
+            status = false
+            if(email.isEmpty()) {email_login.setBackgroundColor(Color.RED)}
             if(password.isEmpty()) {password_login.setBackgroundColor(Color.RED)}
         }
 
         /*Checking email format and length*/
-        if(user_input_status){
-            if(!(email_address.matches("(.*)@(.*)\\.(.*)".toRegex())) || email_address.length < 10 ||
-                email_address.startsWith("@") || email_address.endsWith("@")) {
+        if(status){
+            if(!(email.matches("(.*)@(.*)\\.(.*)".toRegex())) || email.length < 10 ||
+                email.startsWith("@") || email.endsWith("@")) {
                 Toast.makeText(applicationContext, "Invalid email address", Toast.LENGTH_SHORT).show()
                 email_login.setBackgroundColor(Color.RED)
-                user_input_status = false
+                status = false
             }
         }
 
         /*Checking for password length*/
-        if(user_input_status) {
+        if(status) {
             if(password.length < 6) {
                 Toast.makeText(applicationContext, "Password too short", Toast.LENGTH_SHORT).show()
                 password_login.setBackgroundColor(Color.RED)
-                user_input_status = false
+                status = false
             }
         }
     }

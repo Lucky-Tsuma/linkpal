@@ -53,7 +53,7 @@
             </Button>
 
             <Button
-                android:id="@+id/button_sign_up_worker"
+                android:id="@+id/button_account_worker"
                 android:layout_width="105dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

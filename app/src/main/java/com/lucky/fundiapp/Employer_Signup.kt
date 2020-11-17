@@ -15,7 +15,7 @@ import org.json.JSONObject
 
 class Employer_Signup : AppCompatActivity() {
 
-    private var user_input_status: Boolean = true
+    private var status: Boolean = true
     private lateinit var firstname: String
     private lateinit var lastname: String
     private lateinit var email: String
@@ -27,17 +27,16 @@ class Employer_Signup : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_employer__signup)
 
-        val intent = getIntent()
 
         button_sign_up_employer.setOnClickListener {
-            check_user_input()
-            if(user_input_status) {register_employer()}
+            checkUserInput()
+            if(status) {registerEmployer()}
         }
     }
 
-    fun check_user_input() {
-        /*reset incase there were problems with previous input*/
-        user_input_status = true
+    private fun checkUserInput() {
+        /*reset in case there were problems with previous input*/
+        status = true
         employer_firstname.setBackgroundColor(Color.WHITE)
         employer_lastname.setBackgroundColor(Color.WHITE)
         employer_email.setBackgroundColor(Color.WHITE)
@@ -57,7 +56,7 @@ class Employer_Signup : AppCompatActivity() {
         if(firstname.isEmpty() || lastname.isEmpty() || email.isEmpty() || phone.isEmpty() ||
             password.isEmpty() || password2.isEmpty()) {
             Toast.makeText(applicationContext, "Please fill the highlighted fields", Toast.LENGTH_SHORT).show()
-            user_input_status = false
+            status = false
             if(firstname.isEmpty()) { employer_firstname.setBackgroundColor(Color.RED) }
             if(lastname.isEmpty()) { employer_lastname.setBackgroundColor(Color.RED) }
             if(email.isEmpty()) { employer_email.setBackgroundColor(Color.RED) }
@@ -67,49 +66,49 @@ class Employer_Signup : AppCompatActivity() {
         }
 
         /*Check for gender*/
-        if(user_input_status) {
+        if(status) {
             if(!(gender_male_emp.isChecked || gender_female_emp.isChecked)){
                 Toast.makeText(applicationContext, "Please select gender", Toast.LENGTH_SHORT).show()
-                user_input_status = false
+                status = false
             } else {
                 if(gender_male_emp.isChecked) gender = "M" else gender = "F"
             }
         }
 
         /*Checking email format and length*/
-        if(user_input_status) {
+        if(status) {
             if(!(email.matches("(.*)@(.*)\\.(.*)".toRegex())) || email.length < 10
                 || email.startsWith("@") || email.endsWith("@")) {
                 Toast.makeText(applicationContext, "Invalid email address", Toast.LENGTH_SHORT).show()
                 employer_email.setBackgroundColor(Color.RED)
-                user_input_status = false
+                status = false
             }
         }
 
         /*Checking phone number format and length*/
-        if(user_input_status){
+        if(status){
             if(!(phone.length == 13) || !(phone.matches("\\+254(.*)".toRegex()))) {
                 Toast.makeText(applicationContext, "Phone number is invalid", Toast.LENGTH_SHORT).show()
                 employer_phone.setBackgroundColor(Color.RED)
-                user_input_status = false
+                status = false
             }
         }
 
         /*Checking for password length*/
-        if(user_input_status) {
+        if(status) {
             if(password.length < 6 || password2.length < 6) {
                 Toast.makeText(applicationContext, "Password too short", Toast.LENGTH_SHORT).show()
-                user_input_status = false
+                status = false
                 if(password.length < 6) {employer_password.setBackgroundColor(Color.RED)}
                 if(password2.length < 6) {employer_confirm_password.setBackgroundColor(Color.RED)}
             }
         }
 
         /*Checking whether passwords match*/
-        if(user_input_status) {
+        if(status) {
             if(!(password.matches(Regex(password2)))) {
                 Toast.makeText(applicationContext, "Passwords do not match", Toast.LENGTH_SHORT).show()
-                user_input_status = false
+                status = false
                 employer_password.setBackgroundColor(Color.RED)
                 employer_confirm_password.setBackgroundColor(Color.RED)
             }
@@ -117,15 +116,15 @@ class Employer_Signup : AppCompatActivity() {
     }/*check_user_input() ends here*/
 
     /*SEND EMPLOYER DATA TO SERVER*/
-    fun register_employer() {
+    private fun registerEmployer() {
         val requestQueue = Volley.newRequestQueue(this)
         val url = "http://192.168.43.209/Fundi_App/register_employer.php"
 
         val emp = JSONObject()
 
         try {
-            emp.put("firstname", firstname)
-            emp.put("lastname", lastname)
+            emp.put("firstName", firstname)
+            emp.put("lastName", lastname)
             emp.put("email", email)
             emp.put("phone", phone)
             emp.put("password", password)
