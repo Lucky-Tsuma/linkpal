@@ -68,9 +68,8 @@ class Worker_Signup2 : AppCompatActivity() {
 
     /*ON JOB FIELD*/
     private fun populateJobFieldMenu() {
-        val url = "http://192.168.43.209/Fundi_App/get_specialty.php"
 
-        val specialtyReq = JsonObjectRequest(Request.Method.GET, url, null,
+        val specialtyReq = JsonObjectRequest(Request.Method.GET, URLs.specialty_get, null,
             Response.Listener { response ->
                 try {
                     val specialtyList = ArrayList<HashMap<String, String>>()
@@ -104,9 +103,8 @@ class Worker_Signup2 : AppCompatActivity() {
 //
     /*ON LOCATION*/
     private  fun populateLocationMenu() {
-    val url = "http://192.168.43.209/Fundi_App/get_location.php"
 
-    val locationReq = JsonObjectRequest(Request.Method.GET, url, null,
+    val locationReq = JsonObjectRequest(Request.Method.GET, URLs.location_get, null,
         Response.Listener { response ->
             try {
                 val locationList = ArrayList<HashMap<String, String>>()
