@@ -3,11 +3,14 @@ package com.lucky.fundiapp
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
+import com.android.volley.AuthFailureError
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import kotlinx.android.synthetic.main.activity_employer__signup.*
 import org.json.JSONObject
@@ -114,11 +117,10 @@ class Employer_Signup : AppCompatActivity() {
             }
         }
     }/*check_user_input() ends here*/
-
+    
     /*SEND EMPLOYER DATA TO SERVER*/
     private fun registerEmployer() {
         val requestQueue = Volley.newRequestQueue(this)
-        val url = "http://192.168.43.209/Fundi_App/register_employer.php"
 
         val emp = JSONObject()
 
@@ -134,21 +136,15 @@ class Employer_Signup : AppCompatActivity() {
             e.printStackTrace()
         }
 
-        val req = JsonObjectRequest(
-            Request.Method.POST, url, emp,
-            Response.Listener<JSONObject>() {
-                @Override
-                fun onResponse(response: JSONObject) {
-
-                }
+        val req = JsonObjectRequest(Request.Method.POST, URLs.emp_register, emp,
+            Response.Listener {
+                response ->  Toast.makeText(applicationContext, response.toString(), Toast.LENGTH_SHORT).show()
             },
-            Response.ErrorListener(){
-                fun onErrorResponse(error: VolleyError){
-                    error.printStackTrace();
-                }
-            });
+            Response.ErrorListener { error -> error.printStackTrace()
+                Toast.makeText(applicationContext, error.toString(), Toast.LENGTH_LONG).show()
+            })
 
         requestQueue.add(req)
-
     }
+
 }
