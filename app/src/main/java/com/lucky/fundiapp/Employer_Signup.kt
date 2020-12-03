@@ -2,6 +2,7 @@ package com.lucky.fundiapp
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.Request
@@ -134,7 +135,7 @@ class Employer_Signup : AppCompatActivity() {
 
         val req = JsonObjectRequest(Request.Method.POST, URLs.emp_register, emp,
             Response.Listener {
-                response ->  Toast.makeText(applicationContext, "Success!!", Toast.LENGTH_SHORT).show()
+                response ->  Toast.makeText(applicationContext, response.toString(), Toast.LENGTH_SHORT).show()
             },
             Response.ErrorListener { error -> error.printStackTrace()
                 Toast.makeText(applicationContext, error.toString(), Toast.LENGTH_LONG).show()
