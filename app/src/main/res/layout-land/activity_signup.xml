@@ -24,7 +24,7 @@
                 android:layout_marginLeft="15dp"
                 android:text="@string/welcome"
                 android:textColor="@color/white_shade"
-                android:textSize="30sp" />
+                android:textSize="30sp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -38,7 +38,7 @@
                 android:layout_marginBottom="20dp"
                 android:gravity="center"
                 android:text="@string/choose_account_type"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"/>
 
             <Button
                 android:id="@+id/button_account_employer"
@@ -48,9 +48,7 @@
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/border_blue_button"
                 android:text="@string/account_employer"
-                android:textColor="@color/link">
-
-            </Button>
+                android:textColor="@color/link"/>
 
             <Button
                 android:id="@+id/button_account_worker"
@@ -59,9 +57,7 @@
                 android:layout_gravity="center"
                 android:background="@drawable/border_blue_button"
                 android:text="@string/account_worker"
-                android:textColor="@color/link">
-
-            </Button>
+                android:textColor="@color/link"/>
 
         </LinearLayout>
 

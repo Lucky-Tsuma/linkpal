@@ -29,7 +29,7 @@
                 android:inputType="text"
                 android:padding="15dp"
                 android:textColor="@color/black"
-                android:textColorHint="@color/colorAccent" />
+                android:textColorHint="@color/colorAccent"/>
 
             <EditText
                 android:id="@+id/worker_lastname"
@@ -40,7 +40,7 @@
                 android:inputType="text"
                 android:padding="15dp"
                 android:textColor="@color/black"
-                android:textColorHint="@color/colorAccent" />
+                android:textColorHint="@color/colorAccent"/>
 
             <EditText
                 android:id="@+id/worker_email"
@@ -51,7 +51,7 @@
                 android:inputType="textEmailAddress"
                 android:padding="15dp"
                 android:textColor="@color/black"
-                android:textColorHint="@color/colorAccent" />
+                android:textColorHint="@color/colorAccent"/>
 
             <EditText
                 android:id="@+id/worker_phone"
@@ -62,7 +62,7 @@
                 android:inputType="phone"
                 android:padding="15dp"
                 android:textColor="@color/black"
-                android:textColorHint="@color/colorAccent" />
+                android:textColorHint="@color/colorAccent"/>
 
             <EditText
                 android:id="@+id/worker_password"
@@ -73,7 +73,7 @@
                 android:inputType="textPassword"
                 android:padding="15dp"
                 android:textColor="@color/black"
-                android:textColorHint="@color/colorAccent" />
+                android:textColorHint="@color/colorAccent"/>
 
             <EditText
                 android:id="@+id/worker_confirm_password"
@@ -84,7 +84,7 @@
                 android:inputType="textPassword"
                 android:padding="15dp"
                 android:textColor="@color/black"
-                android:textColorHint="@color/colorAccent" />
+                android:textColorHint="@color/colorAccent"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -97,7 +97,7 @@
                     android:layout_marginRight="10dp"
                     android:padding="20dp"
                     android:text="@string/gender"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"/>
 
                 <RadioGroup
                     android:layout_width="match_parent"
@@ -107,13 +107,13 @@
                         android:id="@+id/gender_male_worker"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/gender_male" />
+                        android:text="@string/gender_male"/>
 
                     <RadioButton
                         android:id="@+id/gender_female_worker"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/gender_female" />
+                        android:text="@string/gender_female"/>
                 </RadioGroup>
             </LinearLayout>
 

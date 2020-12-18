@@ -51,8 +51,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/carret_down"
-                        android:layout_gravity="center">
-                    </TextView>
+                        android:layout_gravity="center"/>
 
                     <TextView
                         android:id="@+id/job_field"
@@ -63,8 +62,7 @@
                         android:padding="15dp"
                         android:layout_gravity="center"
                         android:textColor="@color/black"
-                        android:textColorHint="@color/colorAccent">
-                    </TextView>
+                        android:textColorHint="@color/colorAccent"/>
 
                 </LinearLayout>
 
@@ -78,8 +76,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/carret_down"
-                        android:layout_gravity="center">
-                    </TextView>
+                        android:layout_gravity="center"/>
 
 
                     <TextView
@@ -91,8 +88,7 @@
                         android:layout_gravity="center"
                         android:padding="15dp"
                         android:textColor="@color/black"
-                        android:textColorHint="@color/colorAccent">
-                    </TextView>
+                        android:textColorHint="@color/colorAccent"/>
 
                 </LinearLayout>
 
@@ -106,8 +102,7 @@
                     android:gravity="center"
                     android:padding="15dp"
                     android:textColor="@color/black"
-                    android:textColorHint="@color/colorAccent">
-                </EditText>
+                    android:textColorHint="@color/colorAccent"/>
 
                 <TextView
                     android:id="@+id/portfolio"
@@ -116,8 +111,7 @@
                     android:layout_marginBottom="30dp"
                     android:gravity="center_horizontal"
                     android:text="@string/portfolio"
-                    android:textColor="@color/link">
-                </TextView>
+                    android:textColor="@color/link"/>
 
                 <Button
                     android:id="@+id/button_sign_up_worker"
@@ -126,9 +120,7 @@
                     android:layout_gravity="center"
                     android:background="@drawable/border_blue_button"
                     android:text="@string/sign_up"
-                    android:textColor="@color/link">
-
-                </Button>
+                    android:textColor="@color/link"/>
             </LinearLayout>
         </ScrollView>
     </LinearLayout>
@@ -142,8 +134,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/linearLayout2">
-    </ListView>
+        app:layout_constraintTop_toTopOf="@+id/linearLayout2"/>
 
     <ListView
         android:id="@+id/listview_job_field"
@@ -153,7 +144,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/linearLayout2"
         app:layout_constraintStart_toStartOf="@+id/linearLayout2"
-        app:layout_constraintTop_toTopOf="parent">
-    </ListView>
+        app:layout_constraintTop_toTopOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
