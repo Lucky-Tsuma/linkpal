@@ -134,8 +134,7 @@ class Employer_Signup : AppCompatActivity() {
         }
 
         val req = JsonObjectRequest(Request.Method.POST, URLs.emp_register, emp,
-            Response.Listener {
-                response ->  Toast.makeText(applicationContext, response.toString(), Toast.LENGTH_SHORT).show()
+            Response.Listener { _ ->  Toast.makeText(applicationContext, "Registration was successful.", Toast.LENGTH_SHORT).show()
             },
             Response.ErrorListener { error -> error.printStackTrace()
                 Toast.makeText(applicationContext, error.toString(), Toast.LENGTH_LONG).show()
