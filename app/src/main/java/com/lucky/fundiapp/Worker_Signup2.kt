@@ -1,6 +1,8 @@
 package com.lucky.fundiapp
 
+import android.content.Intent
 import android.graphics.Color
+import android.icu.number.IntegerWidth
 import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
@@ -16,6 +18,7 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import kotlinx.android.synthetic.main.activity_worker__signup2.*
 import org.json.JSONException
+import org.json.JSONObject
 import java.util.*
 
 class Worker_Signup2 : AppCompatActivity() {
@@ -26,9 +29,26 @@ class Worker_Signup2 : AppCompatActivity() {
     private lateinit var profileDescription: String
     private lateinit var jsonQueue: RequestQueue
 
+    private lateinit var firstname: String
+    private lateinit var lastname: String
+    private lateinit var email: String
+    private lateinit var phone: String
+    private lateinit var password: String
+    private lateinit var gender: String
+    private  var userJobField0: Int? = null
+    private  var userLocation0: Int? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_worker__signup2)
+
+        val intent = intent
+        firstname = intent.getStringExtra("firstname").toString()
+        lastname = intent.getStringExtra("lastname").toString()
+        email = intent.getStringExtra("email").toString()
+        phone = intent.getStringExtra("phone").toString()
+        password = intent.getStringExtra("password").toString()
+        gender = intent.getStringExtra("gender").toString()
 
         jsonQueue = Volley.newRequestQueue(this)
 
@@ -38,8 +58,11 @@ class Worker_Signup2 : AppCompatActivity() {
         listview_job_field.setOnItemClickListener { _, view, _, _ ->
             val selectedItem = view as LinearLayout
             val textViewJobField = selectedItem.getChildAt(1) as TextView
+            val textViewJobField0 = selectedItem.getChildAt(0) as TextView
             val stringJobField = textViewJobField.text.toString()
+            val stringJobField0 = textViewJobField0.text.toString()
             job_field.text = stringJobField
+            userJobField0 = stringJobField0.toInt()/*A key we will send to database*/
             listview_job_field.visibility = View.GONE
         }
 
@@ -54,8 +77,11 @@ class Worker_Signup2 : AppCompatActivity() {
         listview_location.setOnItemClickListener { _, view, _, _ ->
             val selectedItem = view as LinearLayout
             val textViewLocation = selectedItem.getChildAt(1) as TextView
+            val textViewLocation0 = selectedItem.getChildAt(0) as TextView
             val stringLocation = textViewLocation.text.toString()
+            val stringLocation0 = textViewLocation0.text.toString()
             location.text = stringLocation
+            userLocation0 = stringLocation0.toInt()/*A key we will send to database*/
             listview_location.visibility = View.GONE
         }
 
@@ -67,6 +93,7 @@ class Worker_Signup2 : AppCompatActivity() {
         /*ON SIGN UP BUTTON*/
         button_sign_up_worker.setOnClickListener {
             checkUserInput()
+            if(status) {registerWorker()}
         }
     }
 
@@ -171,5 +198,40 @@ class Worker_Signup2 : AppCompatActivity() {
             }
         }
 
+    }
+
+    /*SEND WORKER DATA TO SERVER*/
+    private fun registerWorker() {
+        val requestQueue = Volley.newRequestQueue(this)
+
+        val worker = JSONObject()
+
+        try {
+            worker.put("firstName", firstname)
+            worker.put("lastName", lastname)
+            worker.put("email", email)
+            worker.put("phone", phone)
+            worker.put("password", password)
+            worker.put("gender", gender)
+            worker.put("jobField", userJobField0)
+            worker.put("location", userLocation0)
+            worker.put("profileSummary", profileDescription)
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        val req = JsonObjectRequest(Request.Method.POST, URLs.worker_register, worker,
+            Response.Listener { response ->  Toast.makeText(applicationContext, "Registration Successful. You may" +
+                    "log in to your account now", Toast.LENGTH_SHORT).show()
+
+                val intent = Intent(this, Login::class.java)
+                startActivity(intent)
+            },
+            Response.ErrorListener { error -> error.printStackTrace()
+                Toast.makeText(applicationContext, error.toString(), Toast.LENGTH_LONG).show()
+            })
+
+        requestQueue.add(req)
     }
 }

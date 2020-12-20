@@ -17,7 +17,6 @@ class Worker_Signup : AppCompatActivity() {
     private lateinit var password: String
     private lateinit var gender: String
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_worker__signup)
@@ -26,6 +25,12 @@ class Worker_Signup : AppCompatActivity() {
             checkUserInput()
             if(status){
                 val intent = Intent(this, Worker_Signup2:: class.java)
+                intent.putExtra("firstname", firstname)
+                intent.putExtra("lastname", lastname)
+                intent.putExtra("email", email)
+                intent.putExtra("phone", phone)
+                intent.putExtra("password", password)
+                intent.putExtra("gender", gender)
                 startActivity(intent)
             }
         }
