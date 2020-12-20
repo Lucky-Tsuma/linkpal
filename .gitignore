@@ -61,3 +61,5 @@ Thumbs.db
 .gradle/buildOutputCleanup
 .gradle/vcs-1
 .gradle
+.gradle/6.5
+.gradle/checksums
