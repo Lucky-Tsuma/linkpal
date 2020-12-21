@@ -3,7 +3,6 @@ package com.lucky.fundiapp
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.Request
@@ -33,7 +32,6 @@ class Employer_Signup : AppCompatActivity() {
             checkUserInput()
             if(status) {registerEmployer()}
         }
-
     }
 
     private fun checkUserInput() {
@@ -89,7 +87,7 @@ class Employer_Signup : AppCompatActivity() {
 
         /*Checking phone number format and length*/
         if(status){
-            if(!(phone.length == 13) || !(phone.matches("\\+254(.*)".toRegex()))) {
+            if(phone.length != 10 || (!(phone.matches(Regex("07(.*)"))) && !(phone.matches(Regex("01(.*)"))))) {
                 Toast.makeText(applicationContext, "Phone number is invalid", Toast.LENGTH_SHORT).show()
                 employer_phone.setBackgroundColor(Color.RED)
                 status = false
