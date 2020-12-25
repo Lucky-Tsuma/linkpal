@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.lucky.fundiapp.SafeClickListener.Companion.setSafeOnClickListener
 import kotlinx.android.synthetic.main.activity_worker__signup.*
 
 class Worker_Signup : AppCompatActivity() {
@@ -21,7 +22,7 @@ class Worker_Signup : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_worker__signup)
 
-        button_next_step.setOnClickListener {
+        button_next_step.setSafeOnClickListener {
             checkUserInput()
             if(status){
                 val intent = Intent(this, Worker_Signup2:: class.java)

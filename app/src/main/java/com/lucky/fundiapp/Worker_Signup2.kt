@@ -16,6 +16,7 @@ import com.android.volley.Response
 import com.android.volley.VolleyLog
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.lucky.fundiapp.SafeClickListener.Companion.setSafeOnClickListener
 import kotlinx.android.synthetic.main.activity_worker__signup2.*
 import org.json.JSONException
 import org.json.JSONObject
@@ -66,7 +67,7 @@ class Worker_Signup2 : AppCompatActivity() {
             listview_job_field.visibility = View.GONE
         }
 
-        job_field.setOnClickListener {
+        job_field.setSafeOnClickListener {
             populateJobFieldMenu()
             listview_job_field.visibility = View.VISIBLE
         }
@@ -85,13 +86,13 @@ class Worker_Signup2 : AppCompatActivity() {
             listview_location.visibility = View.GONE
         }
 
-        location.setOnClickListener {
+        location.setSafeOnClickListener {
             populateLocationMenu()
             listview_location.visibility = View.VISIBLE
         }
 
         /*ON SIGN UP BUTTON*/
-        button_sign_up_worker.setOnClickListener {
+        button_sign_up_worker.setSafeOnClickListener {
             checkUserInput()
             if(status) {registerWorker()}
         }

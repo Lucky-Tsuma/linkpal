@@ -9,6 +9,7 @@ import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.lucky.fundiapp.SafeClickListener.Companion.setSafeOnClickListener
 import kotlinx.android.synthetic.main.activity_employer__signup.*
 import org.json.JSONObject
 
@@ -28,7 +29,7 @@ class Employer_Signup : AppCompatActivity() {
         setContentView(R.layout.activity_employer__signup)
 
 
-        button_sign_up_employer.setOnClickListener {
+        button_sign_up_employer.setSafeOnClickListener {
             checkUserInput()
             if(status) {registerEmployer()}
         }
