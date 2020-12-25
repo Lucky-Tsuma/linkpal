@@ -127,7 +127,13 @@ class Worker_Signup2 : AppCompatActivity() {
                 } catch (e: JSONException) {
                     e.printStackTrace()
                 }
-            }, Response.ErrorListener { error -> VolleyLog.e("Error: ", error.message) })
+            }, Response.ErrorListener { error -> error.printStackTrace()
+                if (error.toString().matches(Regex("(.*)NoConnectionError(.*)"))) {
+                    Toast.makeText(applicationContext, "Check your internet connection. Or try again later.", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(applicationContext, error.toString(), Toast.LENGTH_SHORT).show()
+                }
+            })
         jsonQueue.add(specialtyReq)
 
     }
@@ -161,7 +167,13 @@ class Worker_Signup2 : AppCompatActivity() {
                 e.printStackTrace()
             }
         },
-        Response.ErrorListener { error -> VolleyLog.e("Error: ", error.message) })
+        Response.ErrorListener { error -> error.printStackTrace()
+            if (error.toString().matches(Regex("(.*)NoConnectionError(.*)"))) {
+                Toast.makeText(applicationContext, "Check your internet connection. Or try again later.", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(applicationContext, error.toString(), Toast.LENGTH_SHORT).show()
+            }
+        })
 
     jsonQueue.add(locationReq)
 }
@@ -223,14 +235,18 @@ class Worker_Signup2 : AppCompatActivity() {
         }
 
         val req = JsonObjectRequest(Request.Method.POST, URLs.worker_register, worker,
-            Response.Listener { response ->  Toast.makeText(applicationContext, "Registration Successful. You may" +
+            Response.Listener { _ ->  Toast.makeText(applicationContext, "Registration Successful. You may" +
                     "log in to your account now", Toast.LENGTH_SHORT).show()
 
                 val intent = Intent(this, Login::class.java)
                 startActivity(intent)
             },
             Response.ErrorListener { error -> error.printStackTrace()
-                Toast.makeText(applicationContext, error.toString(), Toast.LENGTH_LONG).show()
+                if (error.toString().matches(Regex("(.*)NoConnectionError(.*)"))) {
+                    Toast.makeText(applicationContext, "Check your internet connection. Or try again later.", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(applicationContext, error.toString(), Toast.LENGTH_SHORT).show()
+                }
             })
 
         requestQueue.add(req)

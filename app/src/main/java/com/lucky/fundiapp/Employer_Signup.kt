@@ -142,7 +142,11 @@ class Employer_Signup : AppCompatActivity() {
                 startActivity(intent)
             },
             Response.ErrorListener { error -> error.printStackTrace()
-                Toast.makeText(applicationContext, error.toString(), Toast.LENGTH_LONG).show()
+                if (error.toString().matches(Regex("(.*)NoConnectionError(.*)"))) {
+                    Toast.makeText(applicationContext, "Check your internet connection. Or try again later.", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(applicationContext, error.toString(), Toast.LENGTH_SHORT).show()
+                }
             })
 
         requestQueue.add(req)
