@@ -1,5 +1,6 @@
 package com.lucky.fundiapp
 
+import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
 import android.icu.number.IntegerWidth
@@ -27,8 +28,9 @@ class Worker_Signup2 : AppCompatActivity() {
     private var status: Boolean = true
     private lateinit var userLocation: String
     private lateinit var userJobField: String
-    private lateinit var profileDescription: String
     private lateinit var jsonQueue: RequestQueue
+    val REQUEST_CODE = 100
+    private lateinit var profileDescription: String
 
     private lateinit var firstname: String
     private lateinit var lastname: String
@@ -52,6 +54,13 @@ class Worker_Signup2 : AppCompatActivity() {
         gender = intent.getStringExtra("gender").toString()
 
         jsonQueue = Volley.newRequestQueue(this)
+
+        /*ON PROFILE PICTURE*/
+        profile_pic.setSafeOnClickListener {
+            val intent = Intent(Intent.ACTION_PICK)
+            intent.type = "image/*"
+            startActivityForResult(intent, REQUEST_CODE)
+        }
 
         /*ON JOB FIELD*/
         listview_job_field.visibility = View.GONE
@@ -95,6 +104,13 @@ class Worker_Signup2 : AppCompatActivity() {
         button_sign_up_worker.setSafeOnClickListener {
             checkUserInput()
             if(status) {registerWorker()}
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE) {
+            profile_pic.setImageURI(data?.data)
         }
     }
 
