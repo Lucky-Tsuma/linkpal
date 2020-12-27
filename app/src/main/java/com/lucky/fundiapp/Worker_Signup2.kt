@@ -29,7 +29,7 @@ class Worker_Signup2 : AppCompatActivity() {
     private lateinit var userLocation: String
     private lateinit var userJobField: String
     private lateinit var jsonQueue: RequestQueue
-    val REQUEST_CODE = 100
+    private val REQUEST_CODE = 100
     private lateinit var profileDescription: String
 
     private lateinit var firstname: String
