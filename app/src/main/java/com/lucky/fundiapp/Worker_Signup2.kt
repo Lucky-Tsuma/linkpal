@@ -3,7 +3,6 @@ package com.lucky.fundiapp
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
-import android.icu.number.IntegerWidth
 import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
@@ -11,10 +10,10 @@ import android.widget.SimpleAdapter
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProviders
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
-import com.android.volley.VolleyLog
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.lucky.fundiapp.SafeClickListener.Companion.setSafeOnClickListener
@@ -29,8 +28,9 @@ class Worker_Signup2 : AppCompatActivity() {
     private lateinit var userLocation: String
     private lateinit var userJobField: String
     private lateinit var jsonQueue: RequestQueue
-    private val REQUEST_CODE = 100
+    private val requestCode = 100
     private lateinit var profileDescription: String
+    private lateinit var profilePicViewModel: PicViewModel
 
     private lateinit var firstname: String
     private lateinit var lastname: String
@@ -59,9 +59,13 @@ class Worker_Signup2 : AppCompatActivity() {
         profile_pic.setSafeOnClickListener {
             val intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"
-            startActivityForResult(intent, REQUEST_CODE)
+            startActivityForResult(intent, requestCode)
         }
-
+        /*Creating a ViewModel instance to help retain image in case of configuration changes*/
+        profilePicViewModel = ViewModelProviders.of(this).get(PicViewModel::class.java)
+        if(profilePicViewModel.getImage() != null) {
+            profile_pic.setImageDrawable(profilePicViewModel.getImage())
+        }
         /*ON JOB FIELD*/
         listview_job_field.visibility = View.GONE
 
@@ -109,9 +113,16 @@ class Worker_Signup2 : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE) {
+        if (resultCode == Activity.RESULT_OK && requestCode == requestCode) {
             profile_pic.setImageURI(data?.data)
         }
+    }
+
+   override fun onDestroy() {
+        super.onDestroy()
+        /*In case the system destroys this Activity, selected image on profile_pic will be retained using profilePicViewModel and
+        * reassigned during onCreate()*/
+        profilePicViewModel.setImage(profile_pic.drawable)
     }
 
     /*ON JOB FIELD*/
@@ -251,7 +262,7 @@ class Worker_Signup2 : AppCompatActivity() {
         }
 
         val req = JsonObjectRequest(Request.Method.POST, URLs.worker_register, worker,
-            Response.Listener { _ ->  Toast.makeText(applicationContext, "Registration Successful. You may" +
+            Response.Listener { _ ->  Toast.makeText(applicationContext, "Registration Successful. You may " +
                     "log in to your account now", Toast.LENGTH_SHORT).show()
 
                 val intent = Intent(this, Login::class.java)
