@@ -30,7 +30,7 @@ class Worker_Signup2 : AppCompatActivity() {
     private lateinit var jsonQueue: RequestQueue
     private val requestCode = 100
     private lateinit var profileDescription: String
-    private lateinit var profilePicViewModel: PicViewModel
+    private lateinit var profilePicViewModel: MyViewModel
 
     private lateinit var firstname: String
     private lateinit var lastname: String
@@ -62,7 +62,7 @@ class Worker_Signup2 : AppCompatActivity() {
             startActivityForResult(intent, requestCode)
         }
         /*Creating a ViewModel instance to help retain image in case of configuration changes*/
-        profilePicViewModel = ViewModelProviders.of(this).get(PicViewModel::class.java)
+        profilePicViewModel = ViewModelProviders.of(this).get(MyViewModel::class.java)
         if(profilePicViewModel.getImage() != null) {
             profile_pic.setImageDrawable(profilePicViewModel.getImage())
         }
