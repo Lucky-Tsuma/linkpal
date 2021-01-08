@@ -30,7 +30,7 @@ class Worker_Signup2 : AppCompatActivity() {
     private lateinit var jsonQueue: RequestQueue
     private val requestCode = 100
     private lateinit var profileDescription: String
-    private lateinit var profilePicViewModel: MyViewModel
+    private lateinit var workerViewModel: WorkerSignup2ViewModel
 
     private lateinit var firstname: String
     private lateinit var lastname: String
@@ -45,6 +45,7 @@ class Worker_Signup2 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_worker__signup2)
 
+        /*Getting data from previous activity*/
         val intent = intent
         firstname = intent.getStringExtra("firstname").toString()
         lastname = intent.getStringExtra("lastname").toString()
@@ -55,19 +56,26 @@ class Worker_Signup2 : AppCompatActivity() {
 
         jsonQueue = Volley.newRequestQueue(this)
 
+        /*Creating a ViewModel instance to help retain data in case the system destroys this activity*/
+        workerViewModel = ViewModelProviders.of(this).get(WorkerSignup2ViewModel::class.java)
+
         /*ON PROFILE PICTURE*/
         profile_pic.setSafeOnClickListener {
             val intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"
             startActivityForResult(intent, requestCode)
         }
-        /*Creating a ViewModel instance to help retain image in case of configuration changes*/
-        profilePicViewModel = ViewModelProviders.of(this).get(MyViewModel::class.java)
-        if(profilePicViewModel.getImage() != null) {
-            profile_pic.setImageDrawable(profilePicViewModel.getImage())
+
+        if(workerViewModel.getImage() != null) {
+            profile_pic.setImageDrawable(workerViewModel.getImage())
         }
         /*ON JOB FIELD*/
         listview_job_field.visibility = View.GONE
+
+        job_field.setSafeOnClickListener {
+            populateJobFieldMenu()
+            listview_job_field.visibility = View.VISIBLE
+        }
 
         listview_job_field.setOnItemClickListener { _, view, _, _ ->
             val selectedItem = view as LinearLayout
@@ -80,13 +88,21 @@ class Worker_Signup2 : AppCompatActivity() {
             listview_job_field.visibility = View.GONE
         }
 
-        job_field.setSafeOnClickListener {
-            populateJobFieldMenu()
-            listview_job_field.visibility = View.VISIBLE
+        if(workerViewModel.getJobField() != null) {
+            job_field.text = workerViewModel.getJobField()
+            userJobField = workerViewModel.getJobField()!!
+        }
+        if(workerViewModel.getJobField0() != null) {
+            userJobField0 = workerViewModel.getJobField0()
         }
 
         /*ON LOCATION*/
         listview_location.visibility = View.GONE
+
+        location.setSafeOnClickListener {
+            populateLocationMenu()
+            listview_location.visibility = View.VISIBLE
+        }
 
         listview_location.setOnItemClickListener { _, view, _, _ ->
             val selectedItem = view as LinearLayout
@@ -99,9 +115,12 @@ class Worker_Signup2 : AppCompatActivity() {
             listview_location.visibility = View.GONE
         }
 
-        location.setSafeOnClickListener {
-            populateLocationMenu()
-            listview_location.visibility = View.VISIBLE
+        if(workerViewModel.getLocation() != null) {
+            location.text = workerViewModel.getLocation()
+            userLocation = workerViewModel.getLocation()!!
+        }
+        if(workerViewModel.getLocation0() != null) {
+            userLocation0 = workerViewModel.getLocation0()
         }
 
         /*ON SIGN UP BUTTON*/
@@ -122,7 +141,20 @@ class Worker_Signup2 : AppCompatActivity() {
         super.onDestroy()
         /*In case the system destroys this Activity, selected image on profile_pic will be retained using profilePicViewModel and
         * reassigned during onCreate()*/
-        profilePicViewModel.setImage(profile_pic.drawable)
+       if (profile_pic.drawable != null){
+           workerViewModel.setImage(profile_pic.drawable)
+       }
+
+       if(job_field.text != null) {
+           workerViewModel.setJobField(job_field.text.toString())
+           workerViewModel.setJobField0(userJobField0!!)
+       }
+
+       if(location.text != null) {
+           workerViewModel.setLocation(location.text.toString())
+           workerViewModel.setLocation0(userLocation0!!)
+       }
+
     }
 
     /*ON JOB FIELD*/

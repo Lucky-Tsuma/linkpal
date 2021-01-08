@@ -5,8 +5,10 @@ import androidx.lifecycle.ViewModel
 
 class WorkerSignup2ViewModel : ViewModel() {
     private var image : Drawable? = null
-    private var someText : String? = null
-    private var someNumber : Int? = null
+    private var jobField : String? = null
+    private var jobField0 : Int? = null
+    private var location : String? = null
+    private var location0 : Int? = null
 
 
     fun getImage(): Drawable? = image
@@ -15,15 +17,29 @@ class WorkerSignup2ViewModel : ViewModel() {
         this.image = image
     }
 
-    fun getText() : String? = someText
+    fun getJobField() : String? = jobField
 
-    fun setText(someText: String) {
-        this.someText = someText
+    fun setJobField(jobField: String) {
+        this.jobField = jobField
     }
 
-    fun getNumber() : Int? = someNumber
+    fun getJobField0() : Int? = jobField0
 
-    fun setNumber(someText: Int) {
-        this.someNumber = someNumber
+    fun setJobField0(jobField0: Int) {
+        this.jobField0 = jobField0
     }
+
+    fun getLocation() : String? = location
+
+    fun setLocation(location: String) {
+        this.location = location
+    }
+
+    fun getLocation0() : Int? = location0
+
+    fun setLocation0(location0: Int) {
+        this.location0 = location0
+    }
+
+
 }
