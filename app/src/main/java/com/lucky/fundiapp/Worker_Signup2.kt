@@ -147,12 +147,16 @@ class Worker_Signup2 : AppCompatActivity() {
 
        if(job_field.text != null) {
            workerViewModel.setJobField(job_field.text.toString())
-           workerViewModel.setJobField0(userJobField0!!)
+           if(workerViewModel.getJobField0() != null) {
+               workerViewModel.setJobField0(userJobField0!!)
+           }
        }
 
        if(location.text != null) {
            workerViewModel.setLocation(location.text.toString())
-           workerViewModel.setLocation0(userLocation0!!)
+           if(workerViewModel.getLocation0() != null) {
+               workerViewModel.setLocation0(userLocation0!!)
+           }
        }
 
     }
