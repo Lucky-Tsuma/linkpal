@@ -54,7 +54,7 @@
     <!--Worker sign up page2-->
     <string name="job_field">Job field</string>
     <string name="location">Location</string>
-    <string name="description">Describe your profile(At least 50 characters)</string>
+    <string name="description">Describe your profile(At least 30 characters)</string>
     <string name="portfolio">My portfolio</string>
 
 </resources>
