@@ -20,9 +20,9 @@
             android:layout_gravity="center"
             android:text="@string/app_name"
             android:textColor="@color/fundi_text"
-            android:layout_marginBottom="50dp"
-            android:layout_marginTop="70dp"
-            android:textSize="60sp"/>
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="80dp"
+            android:textSize="55sp"/>
 
 
         <Button
@@ -33,7 +33,7 @@
             android:background="@drawable/border_white_button"
             android:text="@string/log_in"
             android:layout_gravity="center"
-            android:layout_marginBottom="30dp" />
+            android:layout_marginBottom="25dp" />
 
         <Button
             android:id="@+id/button_create_account"
@@ -43,7 +43,7 @@
             android:background="@drawable/border_white_button"
             android:text="@string/create_account"
             android:layout_gravity="center"
-            android:layout_marginBottom="50dp" />
+            android:layout_marginBottom="25dp" />
         <LinearLayout
             android:layout_gravity="center"
             android:layout_width="90dp"
