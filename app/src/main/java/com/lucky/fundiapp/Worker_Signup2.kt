@@ -1,14 +1,19 @@
 package com.lucky.fundiapp
 
 import android.app.Activity
+import android.app.Dialog
 import android.content.Intent
+import android.database.Cursor
 import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
+import android.provider.OpenableColumns
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.SimpleAdapter
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
 import com.android.volley.Request
@@ -20,7 +25,10 @@ import com.lucky.fundiapp.SafeClickListener.Companion.setSafeOnClickListener
 import kotlinx.android.synthetic.main.activity_worker__signup2.*
 import org.json.JSONException
 import org.json.JSONObject
+import java.io.File
+import java.io.IOException
 import java.util.*
+
 
 class Worker_Signup2 : AppCompatActivity() {
 
@@ -40,6 +48,9 @@ class Worker_Signup2 : AppCompatActivity() {
     private lateinit var gender: String
     private var userJobField0: Int? = null
     private var userLocation0: Int? = null
+
+    private var imageData: ByteArray? = null
+    private var uri: Uri? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,9 +72,9 @@ class Worker_Signup2 : AppCompatActivity() {
 
         /*ON PROFILE PICTURE*/
         profile_pic.setSafeOnClickListener {
-            val intent = Intent(Intent.ACTION_PICK)
-            intent.type = "image/*"
-            startActivityForResult(intent, requestCode)
+            val picIntent = Intent(Intent.ACTION_PICK)
+            picIntent.type = "image/*"
+            startActivityForResult(picIntent, requestCode)
         }
 
         if (workerViewModel.getImage() != null) {
@@ -127,7 +138,7 @@ class Worker_Signup2 : AppCompatActivity() {
         button_sign_up_worker.setSafeOnClickListener {
             checkUserInput()
             if (status) {
-                registerWorker()
+                uploadMultipart()
             }
         }
     }
@@ -135,7 +146,9 @@ class Worker_Signup2 : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK && requestCode == requestCode) {
-            profile_pic.setImageURI(data?.data)
+            uri = data?.data!!
+            profile_pic.setImageURI(uri)
+            createImageData(uri!!)
         }
     }
 
@@ -162,6 +175,7 @@ class Worker_Signup2 : AppCompatActivity() {
         }
 
     }
+
 
     /*ON JOB FIELD*/
     private fun populateJobFieldMenu() {
@@ -292,10 +306,10 @@ class Worker_Signup2 : AppCompatActivity() {
 
         /*check for length of profile description*/
         if (status) {
-            if (profileDescription.length < 50) {
+            if (profileDescription.length < 10) {
                 Toast.makeText(
                     applicationContext,
-                    "Profile description should be about 50 characters",
+                    "Profile description should be about 10 characters",
                     Toast.LENGTH_SHORT
                 ).show()
                 profile_description.setBackgroundColor(Color.RED)
@@ -306,49 +320,106 @@ class Worker_Signup2 : AppCompatActivity() {
     }
 
     /*SEND WORKER DATA TO SERVER*/
-    private fun registerWorker() {
-        val requestQueue = Volley.newRequestQueue(this)
-
-        val worker = JSONObject()
-
-        try {
-            worker.put("firstName", firstname)
-            worker.put("lastName", lastname)
-            worker.put("email", email)
-            worker.put("phone", phone)
-            worker.put("password", password)
-            worker.put("gender", gender)
-            worker.put("jobField", userJobField0)
-            worker.put("location", userLocation0)
-            worker.put("profileSummary", profileDescription)
-
-        } catch (e: Exception) {
-            e.printStackTrace()
+    private fun uploadMultipart() {
+        if (uri == null) {
+            Toast.makeText(
+                this,
+                "Please pick a Profile Image from storage and retry",
+                Toast.LENGTH_SHORT
+            ).show()
+        } else {
+            val uriString: String = uri.toString()
+            /*Constructor below creates a new File instance by converting the given file: URI into an abstract pathname.*/
+            val myFile = File(uriString)
+            var displayName: String?
+            /*If the uriString refers to a path in the phone's internal storage i.e not a memory card or other sec storage*/
+            if (uriString.startsWith("content://")) {
+                var cursor: Cursor? = null
+                try {
+                    cursor = this.contentResolver.query(uri!!, null, null, null, null)
+                    if (cursor != null && cursor.moveToFirst()) {
+                        displayName =
+                            cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME))
+                        uploadImage(displayName)
+                    }
+                } finally {
+                    cursor?.close()
+                }
+                /*uriString in this case refers to a path in the sec storage eg. Memory card*/
+            } else if (uriString.startsWith("file://")) {
+                displayName = myFile.name
+                uploadImage(displayName)
+            }
         }
+    }
 
-        val req = JsonObjectRequest(Request.Method.POST, URLs.worker_register, worker,
-            Response.Listener { _ ->
-                Toast.makeText(
-                    applicationContext, "Registration Successful. You may " +
-                            "log in to your account now", Toast.LENGTH_SHORT
-                ).show()
+    private fun uploadImage(imageName: String) {
+        imageData ?: return
 
-                val intent = Intent(this, Login::class.java)
-                startActivity(intent)
+        val dialog: Dialog = AlertDialog.Builder(this).setView(R.layout.loading).create()
+        dialog.show()
+
+        val request = object : VolleyFileUploadRequest(Method.POST, URLs.worker_register,
+            Response.Listener { response ->
+                dialog.dismiss()
+                val res = String(response.data)
+                /* Logging response from server to see what is returned from the backend*/
+                try {
+                    val obj = JSONObject(res)
+                    val msg: String = obj.getString("message")
+                    if (obj.getBoolean("error")) {
+                        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+                    } else {
+                        val adb: AlertDialog.Builder = AlertDialog.Builder(this)
+                        adb.setTitle("Notification").setMessage(msg).setCancelable(false)
+                        adb.setPositiveButton("OK") { dialogInterface, _ -> dialogInterface.dismiss() }
+                            .create().show()
+                    }
+                } catch (e: JSONException) {
+                    dialog.dismiss()
+                    e.printStackTrace()
+                    Toast.makeText(this, "Oops! An error occurred", Toast.LENGTH_SHORT).show()
+                }
             },
             Response.ErrorListener { error ->
-                error.printStackTrace()
-                if (error.toString().matches(Regex("(.*)NoConnectionError(.*)"))) {
-                    Toast.makeText(
-                        applicationContext,
-                        "Check your internet connection. Or try again later.",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                } else {
-                    Toast.makeText(applicationContext, error.toString(), Toast.LENGTH_SHORT).show()
+                dialog.dismiss()
+                Toast.makeText(applicationContext, error.toString(), Toast.LENGTH_SHORT).show()
+            }
+        ) {
+            override fun getParams(): MutableMap<String, String> {
+                val worker = HashMap<String, String>()
+                try {
+                    worker["firstName"] = firstname
+                    worker["lastName"] = lastname
+                    worker["email"] = email
+                    worker["phone"] = phone
+                    worker["password"] = password
+                    worker["gender"] = gender
+                    worker["jobField"] = userJobField0.toString()
+                    worker["location"] = userLocation0.toString()
+                    worker["profileSummary"] = profileDescription
+                    worker["imageName"] = imageName
+                } catch (e: Exception) {
+                    e.printStackTrace()
                 }
-            })
+                return worker
+            }
 
-        requestQueue.add(req)
+            override fun getByteData(): MutableMap<String, FileDataPart> {
+                val params = HashMap<String, FileDataPart>()
+                params["imageFile"] = FileDataPart("ProfilePic${email}", imageData!!, "")
+                return params
+            }
+        }/*VolleyFileUploadRequest(...) ends here*/
+        Volley.newRequestQueue(this).add(request)
+    }/*uploadImage() ends here*/
+
+    @Throws(IOException::class)
+    private fun createImageData(uri: Uri) {
+        val inputStream = contentResolver.openInputStream(uri)
+        inputStream?.buffered()?.use {
+            imageData = it.readBytes()
+        }
     }
 }
+
