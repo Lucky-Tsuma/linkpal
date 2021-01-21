@@ -3,6 +3,7 @@ package com.lucky.fundiapp
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.Request
@@ -135,8 +136,10 @@ class Employer_Signup : AppCompatActivity() {
         }
 
         val req = JsonObjectRequest(Request.Method.POST, URLs.emp_register, emp,
-            Response.Listener { _ ->  Toast.makeText(applicationContext, "Registration successful. You may log in" +
-                    "to your account now", Toast.LENGTH_SHORT).show()
+            Response.Listener {response->
+                /*Toast.makeText(applicationContext, "Registration successful. You may log in" +
+                    "to your account now", Toast.LENGTH_SHORT).show()*/
+                Toast.makeText(applicationContext, response.toString(), Toast.LENGTH_SHORT).show()
 
                 val intent = Intent(this, Login::class.java)
                 startActivity(intent)

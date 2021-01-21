@@ -363,7 +363,6 @@ class Worker_Signup2 : AppCompatActivity() {
             Response.Listener { response ->
                 dialog.dismiss()
                 val res = String(response.data)
-                /* Logging response from server to see what is returned from the backend*/
                 try {
                     val obj = JSONObject(res)
                     val msg: String = obj.getString("message")
