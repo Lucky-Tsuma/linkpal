@@ -10,5 +10,5 @@
     <color name="link">#4da6ff</color>
     <!--MainActivity-->
     <color name="MainActivity_background">#001a1a</color>
-    <color name="fundi_text">#4d4dff</color>
+    <color name="linkpal_text">#4d4dff</color>
 </resources>

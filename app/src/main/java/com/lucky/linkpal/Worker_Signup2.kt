@@ -1,4 +1,4 @@
-package com.lucky.fundiapp
+package com.lucky.linkpal
 
 import android.app.Activity
 import android.app.Dialog
@@ -21,7 +21,7 @@ import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-import com.lucky.fundiapp.SafeClickListener.Companion.setSafeOnClickListener
+import com.lucky.linkpal.SafeClickListener.Companion.setSafeOnClickListener
 import kotlinx.android.synthetic.main.activity_worker__signup2.*
 import org.json.JSONException
 import org.json.JSONObject
@@ -138,10 +138,10 @@ class Worker_Signup2 : AppCompatActivity() {
         button_sign_up_worker.setSafeOnClickListener {
             checkUserInput()
             if (status) {
-                uploadMultipart()
+                checkForImage()
             }
         }
-    }
+    }/*onCreate method ends here*/
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -316,22 +316,21 @@ class Worker_Signup2 : AppCompatActivity() {
                 status = false
             }
         }
-
     }
 
     /*SEND WORKER DATA TO SERVER*/
-    private fun uploadMultipart() {
+    private fun checkForImage() {
         if (uri == null) {
             Toast.makeText(
                 this,
-                "Please pick a Profile Image from storage and retry",
+                "Please pick a profile picture and retry",
                 Toast.LENGTH_SHORT
             ).show()
         } else {
             val uriString: String = uri.toString()
             /*Constructor below creates a new File instance by converting the given file: URI into an abstract pathname.*/
             val myFile = File(uriString)
-            var displayName: String?
+            val displayName: String?
             /*If the uriString refers to a path in the phone's internal storage i.e not a memory card or other sec storage*/
             if (uriString.startsWith("content://")) {
                 var cursor: Cursor? = null
@@ -340,7 +339,7 @@ class Worker_Signup2 : AppCompatActivity() {
                     if (cursor != null && cursor.moveToFirst()) {
                         displayName =
                             cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME))
-                        uploadImage(displayName)
+                        uploadMultipart(displayName)
                     }
                 } finally {
                     cursor?.close()
@@ -348,12 +347,12 @@ class Worker_Signup2 : AppCompatActivity() {
                 /*uriString in this case refers to a path in the sec storage eg. Memory card*/
             } else if (uriString.startsWith("file://")) {
                 displayName = myFile.name
-                uploadImage(displayName)
+                uploadMultipart(displayName)
             }
         }
     }
 
-    private fun uploadImage(imageName: String) {
+    private fun uploadMultipart(imageName: String) {
         imageData ?: return
 
         val dialog: Dialog = AlertDialog.Builder(this).setView(R.layout.loading).create()

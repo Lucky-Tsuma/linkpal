@@ -1,4 +1,4 @@
-package com.lucky.fundiapp
+package com.lucky.linkpal
 
 import android.graphics.drawable.Drawable
 import androidx.lifecycle.ViewModel
@@ -40,6 +40,5 @@ class WorkerSignup2ViewModel : ViewModel() {
     fun setLocation0(location0: Int) {
         this.location0 = location0
     }
-
 
 }

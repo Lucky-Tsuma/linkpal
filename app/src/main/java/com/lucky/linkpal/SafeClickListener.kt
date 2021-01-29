@@ -1,4 +1,4 @@
-package com.lucky.fundiapp
+package com.lucky.linkpal
 
 import android.os.SystemClock
 import android.view.View

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Fundi App</string>
+    <string name="app_name">linkpal</string>
     <string name="sign_up">Sign up</string>
 
     <!--MainActivity-->
@@ -19,7 +19,7 @@
     <string name="button_employer_login">Employer Login</string>
 
     <!--sign up page-->
-    <string name="welcome">Welcome to Fundi App</string>
+    <string name="welcome">Welcome to linkpal</string>
     <string name="choose_account_type">Select account type</string>
     <string name="account_employer">Create employer account</string>
     <string name="account_worker">Create worker account</string>
@@ -27,14 +27,14 @@
     <!--About page-->
     <string name="about_page_text">
         Find a wide market for your casual skills among businesses and homesteads within Mombasa. Are you proficient in plumbing,
-        gardening, painting, wiring, manicure and pedicure, photography among many other fields listed on our platform? Then Fundi App
+        gardening, painting, wiring, manicure and pedicure, photography among many other fields listed on our platform? Then linkpal
         is just for you. Create an account and start receiving job invitations or send job requests. You can, on the other hand,
         create an account to post jobs and employ from our talented team.
     </string>
 
     <!--Sign up globals-->
     <string name="sign_up_firstname">First Name</string>
-    <string name="sign_up_lastname">Lastname</string>
+    <string name="sign_up_lastname">Last Name</string>
     <string name="sign_up_email">example@gmail.com</string>
     <string name="sign_up_phone_number">07########/01########</string>
     <string name="sign_up_password">Password (At least 6 characters) </string>

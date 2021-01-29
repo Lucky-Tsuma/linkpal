@@ -1,16 +1,15 @@
-package com.lucky.fundiapp
+package com.lucky.linkpal
 
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-import com.lucky.fundiapp.SafeClickListener.Companion.setSafeOnClickListener
+import com.lucky.linkpal.SafeClickListener.Companion.setSafeOnClickListener
 import kotlinx.android.synthetic.main.activity_employer__signup.*
 import org.json.JSONObject
 
@@ -136,11 +135,9 @@ class Employer_Signup : AppCompatActivity() {
         }
 
         val req = JsonObjectRequest(Request.Method.POST, URLs.emp_register, emp,
-            Response.Listener {response->
-                /*Toast.makeText(applicationContext, "Registration successful. You may log in" +
-                    "to your account now", Toast.LENGTH_SHORT).show()*/
-                Toast.makeText(applicationContext, response.toString(), Toast.LENGTH_SHORT).show()
-
+            Response.Listener {_->
+                Toast.makeText(applicationContext, "Registration successful. You may log in" +
+                    "to your account now", Toast.LENGTH_SHORT).show()
                 val intent = Intent(this, Login::class.java)
                 startActivity(intent)
             },

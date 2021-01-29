@@ -1,11 +1,11 @@
-package com.lucky.fundiapp
+package com.lucky.linkpal
 
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.lucky.fundiapp.SafeClickListener.Companion.setSafeOnClickListener
+import com.lucky.linkpal.SafeClickListener.Companion.setSafeOnClickListener
 import kotlinx.android.synthetic.main.activity_login.*
 
 class Login : AppCompatActivity() {

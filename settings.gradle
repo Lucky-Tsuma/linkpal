@@ -1,2 +1,2 @@
 include ':app'
-rootProject.name='Fundi App'
+rootProject.name='linkpal'
