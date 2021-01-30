@@ -41,12 +41,17 @@ class Worker_Signup : AppCompatActivity() {
 
         /*reset in case there were problems with previous input*/
         status = true
-        worker_firstname.setBackgroundColor(Color.WHITE)
-        worker_lastname.setBackgroundColor(Color.WHITE)
-        worker_email.setBackgroundColor(Color.WHITE)
-        worker_phone.setBackgroundColor(Color.WHITE)
-        worker_password.setBackgroundColor(Color.WHITE)
-        worker_confirm_password.setBackgroundColor(Color.WHITE)
+        worker_firstname.setHintTextColor(Color.parseColor("#737373"))
+        worker_lastname.setHintTextColor(Color.parseColor("#737373"))
+        worker_email.setHintTextColor(Color.parseColor("#737373"))
+        worker_email.setTextColor(Color.BLACK)
+        worker_phone.setHintTextColor(Color.parseColor("#737373"))
+        worker_phone.setTextColor(Color.BLACK)
+        worker_password.setHintTextColor(Color.parseColor("#737373"))
+        worker_password.setTextColor(Color.BLACK)
+        worker_confirm_password.setHintTextColor(Color.parseColor("#737373"))
+        worker_confirm_password.setTextColor(Color.BLACK)
+
 
         /*Getting user input strings. Deleting whitespaces*/
         firstname = worker_firstname.text.toString().trim()
@@ -61,12 +66,12 @@ class Worker_Signup : AppCompatActivity() {
             password.isEmpty() || password2.isEmpty()) {
             Toast.makeText(applicationContext, "Please fill the highlighted fields", Toast.LENGTH_SHORT).show()
             status = false
-            if(firstname.isEmpty()) { worker_firstname.setBackgroundColor(Color.RED) }
-            if(lastname.isEmpty()) { worker_lastname.setBackgroundColor(Color.RED) }
-            if(email.isEmpty()) { worker_email.setBackgroundColor(Color.RED) }
-            if(phone.isEmpty()) { worker_phone.setBackgroundColor(Color.RED) }
-            if(password.isEmpty()) { worker_password.setBackgroundColor(Color.RED) }
-            if(password2.isEmpty()) { worker_confirm_password.setBackgroundColor(Color.RED) }
+            if(firstname.isEmpty()) { worker_firstname.setHintTextColor(Color.RED) }
+            if(lastname.isEmpty()) { worker_lastname.setHintTextColor(Color.RED) }
+            if(email.isEmpty()) { worker_email.setHintTextColor(Color.RED) }
+            if(phone.isEmpty()) { worker_phone.setHintTextColor(Color.RED) }
+            if(password.isEmpty()) { worker_password.setHintTextColor(Color.RED) }
+            if(password2.isEmpty()) { worker_confirm_password.setHintTextColor(Color.RED) }
         }
 
         /*Check for gender*/
@@ -84,7 +89,7 @@ class Worker_Signup : AppCompatActivity() {
             if(!(email.matches("(.*)@(.*)\\.(.*)".toRegex())) || email.length < 10
                 || email.startsWith("@") || email.endsWith("@")) {
                 Toast.makeText(applicationContext, "Invalid email address", Toast.LENGTH_SHORT).show()
-                worker_email.setBackgroundColor(Color.RED)
+                worker_email.setTextColor(Color.RED)
                 status = false
             }
         }
@@ -93,7 +98,7 @@ class Worker_Signup : AppCompatActivity() {
         if(status){
             if(phone.length != 10 || (!(phone.matches(Regex("07(.*)"))) && !(phone.matches(Regex("01(.*)"))))) {
                 Toast.makeText(applicationContext, "Phone number is invalid", Toast.LENGTH_SHORT).show()
-                worker_phone.setBackgroundColor(Color.RED)
+                worker_phone.setTextColor(Color.RED)
                 status = false
             }
         }
@@ -103,8 +108,8 @@ class Worker_Signup : AppCompatActivity() {
             if(password.length < 6 || password2.length < 6) {
                 Toast.makeText(applicationContext, "Password too short", Toast.LENGTH_SHORT).show()
                 status = false
-                if(password.length < 6) {worker_password.setBackgroundColor(Color.RED)}
-                if(password2.length < 6) {worker_confirm_password.setBackgroundColor(Color.RED)}
+                if(password.length < 6) {worker_password.setTextColor(Color.RED)}
+                if(password2.length < 6) {worker_confirm_password.setTextColor(Color.RED)}
             }
         }
 
@@ -113,8 +118,8 @@ class Worker_Signup : AppCompatActivity() {
             if(!(password.matches(Regex(password2)))) {
                 Toast.makeText(applicationContext, "Passwords do not match", Toast.LENGTH_SHORT).show()
                 status = false
-                worker_password.setBackgroundColor(Color.RED)
-                worker_confirm_password.setBackgroundColor(Color.RED)
+                worker_password.setTextColor(Color.RED)
+                worker_confirm_password.setTextColor(Color.RED)
             }
         }
     }/*check_user_input() ends here*/

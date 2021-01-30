@@ -24,7 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/welcome"
-                android:textColor="@color/white_shade"
+                android:textColor="@color/light_blue"
                 android:layout_marginLeft="15dp"
                 android:textSize="30sp"
                 android:layout_gravity="bottom"/>
@@ -43,7 +43,7 @@
             android:layout_width="115dp"
             android:layout_height="wrap_content"
             android:text="@string/account_employer"
-            android:textColor="@color/link"
+            android:textColor="@color/light_blue"
             android:background="@drawable/border_blue_button"
             android:layout_gravity="center"
             android:layout_marginBottom="20dp"/>
@@ -53,7 +53,7 @@
             android:layout_width="105dp"
             android:layout_height="wrap_content"
             android:text="@string/account_worker"
-            android:textColor="@color/link"
+            android:textColor="@color/light_blue"
             android:background="@drawable/border_blue_button"
             android:layout_gravity="center"/>
 

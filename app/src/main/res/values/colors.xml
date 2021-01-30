@@ -4,11 +4,8 @@
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#737373</color>
     <!--Globals-->
-    <color name="white_shade">#a3c2c2</color>
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
-    <color name="link">#4da6ff</color>
-    <!--MainActivity-->
-    <color name="MainActivity_background">#001a1a</color>
-    <color name="linkpal_text">#4d4dff</color>
+    <color name="light_blue">#4da6ff</color>
+
 </resources>

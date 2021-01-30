@@ -3,9 +3,7 @@
     <string name="sign_up">Sign up</string>
 
     <!--MainActivity-->
-    <string name="have_account">Already have an account?</string>
-    <string name="log_in">Log in to my account</string>
-    <string name="no_account">Do not have an account?</string>
+    <string name="log_in">Log in</string>
     <string name="create_account">Create new account</string>
     <string name="contact_us">Contact us</string>
     <string name="about">About us</string>
@@ -13,6 +11,7 @@
     <!--Log in page-->
     <string name="log_in_to_account">Login to your account</string>
     <string name="email_login">Enter your email address</string>
+    <string name="no_account">Do not have an account?</string>
     <string name="password_login">Password</string>
     <string name="forgot_password">Forgot password?</string>
     <string name="button_worker_login">Worker Login</string>
@@ -21,8 +20,8 @@
     <!--sign up page-->
     <string name="welcome">Welcome to linkpal</string>
     <string name="choose_account_type">Select account type</string>
-    <string name="account_employer">Create employer account</string>
-    <string name="account_worker">Create worker account</string>
+    <string name="account_employer">employer account</string>
+    <string name="account_worker">worker account</string>
 
     <!--About page-->
     <string name="about_page_text">

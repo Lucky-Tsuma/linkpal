@@ -274,9 +274,10 @@ class Worker_Signup2 : AppCompatActivity() {
     private fun checkUserInput() {
         /*reset in case there problems with previous user input*/
         status = true
-        location.setBackgroundColor(Color.WHITE)
-        job_field.setBackgroundColor(Color.WHITE)
-        profile_description.setBackgroundColor(Color.WHITE)
+        location.setHintTextColor(Color.parseColor("#737373"))
+        job_field.setHintTextColor(Color.parseColor("#737373"))
+        profile_description.setHintTextColor(Color.parseColor("#737373"))
+        profile_description.setTextColor(Color.BLACK)
 
         /*get user input Strings*/
         userLocation = location.text.toString()
@@ -293,13 +294,13 @@ class Worker_Signup2 : AppCompatActivity() {
                 ).show()
                 status = false
                 if (userLocation.isEmpty()) {
-                    location.setBackgroundColor(Color.RED)
+                    location.setHintTextColor(Color.RED)
                 }
                 if (userJobField.isEmpty()) {
-                    job_field.setBackgroundColor(Color.RED)
+                    job_field.setHintTextColor(Color.RED)
                 }
                 if (profileDescription.isEmpty()) {
-                    profile_description.setBackgroundColor(Color.RED)
+                    profile_description.setHintTextColor(Color.RED)
                 }
             }
         }
@@ -312,7 +313,7 @@ class Worker_Signup2 : AppCompatActivity() {
                     "Profile description should be about 10 characters",
                     Toast.LENGTH_SHORT
                 ).show()
-                profile_description.setBackgroundColor(Color.RED)
+                profile_description.setTextColor(Color.RED)
                 status = false
             }
         }
@@ -370,8 +371,11 @@ class Worker_Signup2 : AppCompatActivity() {
                     } else {
                         val adb: AlertDialog.Builder = AlertDialog.Builder(this)
                         adb.setTitle("Notification").setMessage(msg).setCancelable(false)
-                        adb.setPositiveButton("OK") { dialogInterface, _ -> dialogInterface.dismiss() }
-                            .create().show()
+                        Toast.makeText(applicationContext, msg, Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this, Login::class.java)
+                        startActivity(intent)
+                        /*adb.setPositiveButton("OK") { dialogInterface, _ -> dialogInterface.dismiss() }
+                            .create().show()*/
                     }
                 } catch (e: JSONException) {
                     dialog.dismiss()

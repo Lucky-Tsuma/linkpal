@@ -16,7 +16,7 @@
         android:padding="10dip"
         android:textSize="16dip"
         android:textStyle="bold"
-        android:background="@color/white_shade"
+        android:background="@color/light_blue"
         android:textColor="@color/black"/>
 
     </LinearLayout>

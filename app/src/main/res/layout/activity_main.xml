@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/MainActivity_background"
+    android:background="@color/white"
     tools:context=".MainActivity">
 
     <LinearLayout
@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/app_name"
-            android:textColor="@color/linkpal_text"
+            android:textColor="@color/light_blue"
             android:layout_marginBottom="30dp"
             android:layout_marginTop="80dp"
             android:textSize="55sp"/>
@@ -29,8 +29,8 @@
             android:id="@+id/button_log_in"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:textColor="@color/white_shade"
-            android:background="@drawable/border_white_button"
+            android:textColor="@color/light_blue"
+            android:background="@drawable/border_blue_button"
             android:text="@string/log_in"
             android:layout_gravity="center"
             android:layout_marginBottom="25dp" />
@@ -39,8 +39,8 @@
             android:id="@+id/button_create_account"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:textColor="@color/white_shade"
-            android:background="@drawable/border_white_button"
+            android:textColor="@color/light_blue"
+            android:background="@drawable/border_blue_button"
             android:text="@string/create_account"
             android:layout_gravity="center"
             android:layout_marginBottom="25dp" />
@@ -61,7 +61,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/about"
-                android:textColor="@color/white_shade"
+                android:textColor="@color/black"
                 android:layout_marginBottom="30dp"
                 android:textSize="15sp" />
         </LinearLayout>
@@ -83,7 +83,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/contact_us"
-                android:textColor="@color/white_shade"
+                android:textColor="@color/black"
                 android:textSize="15sp" />
 
         </LinearLayout>

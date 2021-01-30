@@ -27,6 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/sign_up_firstname"
+                android:text="Anonymous"
                 android:inputType="text"
                 android:padding="15dp"
                 android:layout_marginBottom="1dp"
@@ -38,6 +39,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/sign_up_lastname"
+                android:text="User"
                 android:inputType="text"
                 android:padding="15dp"
                 android:layout_marginBottom="1dp"
@@ -49,6 +51,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/sign_up_email"
+                android:text="anonymoususer@gmail.com"
                 android:inputType="textEmailAddress"
                 android:padding="15dp"
                 android:layout_marginBottom="1dp"
@@ -60,6 +63,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/sign_up_phone_number"
+                android:text="0111111111"
                 android:inputType="phone"
                 android:padding="15dp"
                 android:layout_marginBottom="1dp"
@@ -71,6 +75,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/sign_up_password"
+                android:text="password"
                 android:inputType="textPassword"
                 android:padding="15dp"
                 android:layout_marginBottom="1dp"
@@ -82,6 +87,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/sign_up_confirm_password"
+                android:text="password"
                 android:inputType="textPassword"
                 android:padding="15dp"
                 android:layout_marginBottom="1dp"
@@ -127,7 +133,7 @@
                 android:text="@string/sign_up"
                 android:layout_gravity="center"
                 android:layout_margin="20dp"
-                android:textColor="@color/link"/>
+                android:textColor="@color/light_blue"/>
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

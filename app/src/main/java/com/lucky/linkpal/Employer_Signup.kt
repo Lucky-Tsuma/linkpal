@@ -5,12 +5,11 @@ import android.graphics.Color
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.android.volley.Request
 import com.android.volley.Response
-import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.lucky.linkpal.SafeClickListener.Companion.setSafeOnClickListener
 import kotlinx.android.synthetic.main.activity_employer__signup.*
+import org.json.JSONException
 import org.json.JSONObject
 
 
@@ -38,12 +37,16 @@ class Employer_Signup : AppCompatActivity() {
     private fun checkUserInput() {
         /*reset in case there were problems with previous input*/
         status = true
-        employer_firstname.setBackgroundColor(Color.WHITE)
-        employer_lastname.setBackgroundColor(Color.WHITE)
-        employer_email.setBackgroundColor(Color.WHITE)
-        employer_phone.setBackgroundColor(Color.WHITE)
-        employer_password.setBackgroundColor(Color.WHITE)
-        employer_confirm_password.setBackgroundColor(Color.WHITE)
+        employer_firstname.setHintTextColor(Color.parseColor("#737373"))
+        employer_lastname.setHintTextColor(Color.parseColor("#737373"))
+        employer_email.setHintTextColor(Color.parseColor("#737373"))
+        employer_email.setTextColor(Color.BLACK)
+        employer_phone.setHintTextColor(Color.parseColor("#737373"))
+        employer_phone.setTextColor(Color.BLACK)
+        employer_password.setHintTextColor(Color.parseColor("#737373"))
+        employer_password.setTextColor(Color.BLACK)
+        employer_confirm_password.setHintTextColor(Color.parseColor("#737373"))
+        employer_confirm_password.setTextColor(Color.BLACK)
 
         /*Getting user input strings. Deleting whitespaces*/
         firstname = employer_firstname.text.toString().trim()
@@ -58,12 +61,12 @@ class Employer_Signup : AppCompatActivity() {
             password.isEmpty() || password2.isEmpty()) {
             Toast.makeText(applicationContext, "Please fill the highlighted fields", Toast.LENGTH_SHORT).show()
             status = false
-            if(firstname.isEmpty()) { employer_firstname.setBackgroundColor(Color.RED) }
-            if(lastname.isEmpty()) { employer_lastname.setBackgroundColor(Color.RED) }
-            if(email.isEmpty()) { employer_email.setBackgroundColor(Color.RED) }
-            if(phone.isEmpty()) { employer_phone.setBackgroundColor(Color.RED) }
-            if(password.isEmpty()) { employer_password.setBackgroundColor(Color.RED) }
-            if(password2.isEmpty()) { employer_confirm_password.setBackgroundColor(Color.RED) }
+            if(firstname.isEmpty()) { employer_firstname.setHintTextColor(Color.RED) }
+            if(lastname.isEmpty()) { employer_lastname.setHintTextColor(Color.RED) }
+            if(email.isEmpty()) { employer_email.setHintTextColor(Color.RED) }
+            if(phone.isEmpty()) { employer_phone.setHintTextColor(Color.RED) }
+            if(password.isEmpty()) { employer_password.setHintTextColor(Color.RED) }
+            if(password2.isEmpty()) { employer_confirm_password.setHintTextColor(Color.RED) }
         }
 
         /*Check for gender*/
@@ -81,7 +84,7 @@ class Employer_Signup : AppCompatActivity() {
             if(!(email.matches("(.*)@(.*)\\.(.*)".toRegex())) || email.length < 10
                 || email.startsWith("@") || email.endsWith("@")) {
                 Toast.makeText(applicationContext, "Invalid email address", Toast.LENGTH_SHORT).show()
-                employer_email.setBackgroundColor(Color.RED)
+                employer_email.setTextColor(Color.RED)
                 status = false
             }
         }
@@ -90,7 +93,7 @@ class Employer_Signup : AppCompatActivity() {
         if(status){
             if(phone.length != 10 || (!(phone.matches(Regex("07(.*)"))) && !(phone.matches(Regex("01(.*)"))))) {
                 Toast.makeText(applicationContext, "Phone number is invalid", Toast.LENGTH_SHORT).show()
-                employer_phone.setBackgroundColor(Color.RED)
+                employer_phone.setTextColor(Color.RED)
                 status = false
             }
         }
@@ -100,8 +103,8 @@ class Employer_Signup : AppCompatActivity() {
             if(password.length < 6 || password2.length < 6) {
                 Toast.makeText(applicationContext, "Password too short", Toast.LENGTH_SHORT).show()
                 status = false
-                if(password.length < 6) {employer_password.setBackgroundColor(Color.RED)}
-                if(password2.length < 6) {employer_confirm_password.setBackgroundColor(Color.RED)}
+                if(password.length < 6) {employer_password.setTextColor(Color.RED)}
+                if(password2.length < 6) {employer_confirm_password.setTextColor(Color.RED)}
             }
         }
 
@@ -110,46 +113,60 @@ class Employer_Signup : AppCompatActivity() {
             if(!(password.matches(Regex(password2)))) {
                 Toast.makeText(applicationContext, "Passwords do not match", Toast.LENGTH_SHORT).show()
                 status = false
-                employer_password.setBackgroundColor(Color.RED)
-                employer_confirm_password.setBackgroundColor(Color.RED)
+                employer_password.setTextColor(Color.RED)
+                employer_confirm_password.setTextColor(Color.RED)
             }
         }
     }/*check_user_input() ends here*/
     
     /*SEND EMPLOYER DATA TO SERVER*/
     private fun registerEmployer() {
-        val requestQueue = Volley.newRequestQueue(this)
+        val request = object : VolleyFileUploadRequest(Method.POST, URLs.emp_register,
+            Response.Listener { response ->
 
-        val emp = JSONObject()
+                val res = String(response.data)
 
-        try {
-            emp.put("firstName", firstname)
-            emp.put("lastName", lastname)
-            emp.put("email", email)
-            emp.put("phone", phone)
-            emp.put("password", password)
-            emp.put("gender", gender)
+                try {
+                    val obj = JSONObject(res)
 
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-
-        val req = JsonObjectRequest(Request.Method.POST, URLs.emp_register, emp,
-            Response.Listener {_->
-                Toast.makeText(applicationContext, "Registration successful. You may log in" +
-                    "to your account now", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, Login::class.java)
-                startActivity(intent)
+                    val msg : String = obj.getString("message")
+                    val error = obj.getBoolean("error")
+                    if (!error) {
+                        Toast.makeText(applicationContext, msg, Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this, Login::class.java)
+                        startActivity(intent)
+                    } else {
+                        Toast.makeText(applicationContext, msg, Toast.LENGTH_SHORT).show()
+                    }
+                } catch (e: JSONException) {
+                    Toast.makeText(this, "Oops! An error occurred", Toast.LENGTH_SHORT).show()
+                }
             },
-            Response.ErrorListener { error -> error.printStackTrace()
+            Response.ErrorListener { error ->
                 if (error.toString().matches(Regex("(.*)NoConnectionError(.*)"))) {
                     Toast.makeText(applicationContext, "Check your internet connection. Or try again later.", Toast.LENGTH_SHORT).show()
                 } else {
                     Toast.makeText(applicationContext, error.toString(), Toast.LENGTH_SHORT).show()
                 }
-            })
-
-        requestQueue.add(req)
+            }
+        ) {
+            /*to post data using volley, we create a key-value pair, then with the getParams() we return the HashMap to the request object
+            * for posting*/
+            override fun getParams(): MutableMap<String, String> {
+                val emp = HashMap<String, String>()
+                try {
+                    emp["firstName"] = firstname
+                    emp["lastName"] = lastname
+                    emp["email"] = email
+                    emp["phone"] = phone
+                    emp["password"] = password
+                    emp["gender"] = gender
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+                return emp
+            }
+        }
+        Volley.newRequestQueue(this).add(request)
     }
-
 }

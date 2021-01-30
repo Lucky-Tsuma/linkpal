@@ -33,8 +33,10 @@ class Login : AppCompatActivity() {
 
         /*reset in case there was previous wrong input*/
         status = true
-        email_login.setBackgroundColor(Color.WHITE)
-        password_login.setBackgroundColor(Color.WHITE)
+        email_login.setHintTextColor(Color.parseColor("#737373"))
+        email_login.setTextColor(Color.BLACK)
+        password_login.setHintTextColor(Color.parseColor("#737373"))
+        password_login.setTextColor(Color.BLACK)
 
         /*getting user input string, deleting whitespaces as well*/
         val email: String = email_login.text.toString().trim()
@@ -44,8 +46,8 @@ class Login : AppCompatActivity() {
         if(email.isEmpty() || password.isEmpty() ) {
             Toast.makeText(applicationContext, "Please fill the highlighted fields", Toast.LENGTH_SHORT).show()
             status = false
-            if(email.isEmpty()) {email_login.setBackgroundColor(Color.RED)}
-            if(password.isEmpty()) {password_login.setBackgroundColor(Color.RED)}
+            if(email.isEmpty()) {email_login.setHintTextColor(Color.RED)}
+            if(password.isEmpty()) {password_login.setHintTextColor(Color.RED) ; password_login.setTextColor(Color.RED)}
         }
 
         /*Checking email format and length*/
@@ -53,7 +55,7 @@ class Login : AppCompatActivity() {
             if(!(email.matches("(.*)@(.*)\\.(.*)".toRegex())) || email.length < 10 ||
                 email.startsWith("@") || email.endsWith("@")) {
                 Toast.makeText(applicationContext, "Invalid email address", Toast.LENGTH_SHORT).show()
-                email_login.setBackgroundColor(Color.RED)
+                email_login.setTextColor(Color.RED)
                 status = false
             }
         }
@@ -62,7 +64,7 @@ class Login : AppCompatActivity() {
         if(status) {
             if(password.length < 6) {
                 Toast.makeText(applicationContext, "Password too short", Toast.LENGTH_SHORT).show()
-                password_login.setBackgroundColor(Color.RED)
+                password_login.setTextColor(Color.RED)
                 status = false
             }
         }
