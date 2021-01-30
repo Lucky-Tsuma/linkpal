@@ -100,7 +100,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="40dp"
                     android:hint="@string/description"
-                    android:text="###############"
                     android:inputType="textMultiLine"
                     android:gravity="center"
                     android:padding="15dp"
