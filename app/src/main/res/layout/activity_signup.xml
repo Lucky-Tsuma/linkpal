@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/welcome"
                 android:textColor="@color/light_blue"
-                android:layout_marginLeft="15dp"
+                android:layout_marginLeft="25dp"
                 android:textSize="30sp"
                 android:layout_gravity="bottom"/>
         </LinearLayout>

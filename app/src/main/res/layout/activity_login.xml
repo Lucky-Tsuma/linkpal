@@ -25,7 +25,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:layout_marginLeft="15dp"
+                android:layout_marginLeft="25dp"
                 android:text="@string/log_in_to_account"
                 android:textColor="@color/light_blue"
                 android:textSize="30sp" />
@@ -67,7 +67,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginBottom="25dp">
+            android:layout_marginBottom="15dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
