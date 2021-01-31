@@ -20,11 +20,7 @@ class Login : AppCompatActivity() {
             startActivity(intent)
         }
 
-        button_employer_login.setSafeOnClickListener {
-            checkUserInput()
-        }
-
-        button_worker_login.setSafeOnClickListener {
+        button_user_login.setSafeOnClickListener {
             checkUserInput()
         }
     }

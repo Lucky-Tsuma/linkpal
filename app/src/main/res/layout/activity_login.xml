@@ -85,22 +85,13 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/button_worker_login"
+            android:id="@+id/button_user_login"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
             android:background="@drawable/border_blue_button"
             android:text="@string/button_worker_login"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="20dp"
-            android:textColor="@color/light_blue"/>
-
-        <Button
-            android:id="@+id/button_employer_login"
-            android:layout_width="110dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/border_blue_button"
-            android:text="@string/button_employer_login"
-            android:layout_gravity="center_horizontal"
             android:textColor="@color/light_blue"/>
 
     </LinearLayout>

@@ -367,15 +367,15 @@ class Worker_Signup2 : AppCompatActivity() {
                     val obj = JSONObject(res)
                     val msg: String = obj.getString("message")
                     if (obj.getBoolean("error")) {
-                        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+//                        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, res, Toast.LENGTH_SHORT).show()
+
                     } else {
                         val adb: AlertDialog.Builder = AlertDialog.Builder(this)
                         adb.setTitle("Notification").setMessage(msg).setCancelable(false)
                         Toast.makeText(applicationContext, msg, Toast.LENGTH_SHORT).show()
                         val intent = Intent(this, Login::class.java)
                         startActivity(intent)
-                        /*adb.setPositiveButton("OK") { dialogInterface, _ -> dialogInterface.dismiss() }
-                            .create().show()*/
                     }
                 } catch (e: JSONException) {
                     dialog.dismiss()

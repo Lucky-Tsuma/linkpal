@@ -14,8 +14,7 @@
     <string name="no_account">Do not have an account?</string>
     <string name="password_login">Password</string>
     <string name="forgot_password">Forgot password?</string>
-    <string name="button_worker_login">Worker Login</string>
-    <string name="button_employer_login">Employer Login</string>
+    <string name="button_worker_login">Log in</string>
 
     <!--sign up page-->
     <string name="welcome">Welcome to linkpal</string>
