@@ -18,9 +18,9 @@
 
     <!--sign up page-->
     <string name="welcome">Welcome to linkpal</string>
-    <string name="choose_account_type">Select account type</string>
-    <string name="account_employer">employer account</string>
-    <string name="account_worker">worker account</string>
+    <string name="choose_account_type">What would you like to do</string>
+    <string name="account_employer">hire</string>
+    <string name="account_worker">find a job</string>
 
     <!--About page-->
     <string name="about_page_text">

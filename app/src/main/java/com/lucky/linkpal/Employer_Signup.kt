@@ -3,6 +3,7 @@ package com.lucky.linkpal
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.Response
@@ -121,7 +122,7 @@ class Employer_Signup : AppCompatActivity() {
     
     /*SEND EMPLOYER DATA TO SERVER*/
     private fun registerEmployer() {
-        val request = object : VolleyFileUploadRequest(Method.POST, URLs.emp_register,
+        val request = object : VolleyFileUploadRequest(Method.POST, URLs.user_register,
             Response.Listener { response ->
 
                 val res = String(response.data)

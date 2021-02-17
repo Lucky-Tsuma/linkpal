@@ -8,6 +8,7 @@ import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.provider.OpenableColumns
+import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.SimpleAdapter
@@ -359,7 +360,7 @@ class Worker_Signup2 : AppCompatActivity() {
         val dialog: Dialog = AlertDialog.Builder(this).setView(R.layout.loading).create()
         dialog.show()
 
-        val request = object : VolleyFileUploadRequest(Method.POST, URLs.worker_register,
+        val request = object : VolleyFileUploadRequest(Method.POST, URLs.user_register,
             Response.Listener { response ->
                 dialog.dismiss()
                 val res = String(response.data)
@@ -367,9 +368,7 @@ class Worker_Signup2 : AppCompatActivity() {
                     val obj = JSONObject(res)
                     val msg: String = obj.getString("message")
                     if (obj.getBoolean("error")) {
-//                        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
-                        Toast.makeText(this, res, Toast.LENGTH_SHORT).show()
-
+                        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
                     } else {
                         val adb: AlertDialog.Builder = AlertDialog.Builder(this)
                         adb.setTitle("Notification").setMessage(msg).setCancelable(false)
@@ -409,7 +408,7 @@ class Worker_Signup2 : AppCompatActivity() {
 
             override fun getByteData(): MutableMap<String, FileDataPart> {
                 val params = HashMap<String, FileDataPart>()
-                params["imageFile"] = FileDataPart("ProfilePic${email}", imageData!!, "")
+                params["imageFile"] = FileDataPart(email, imageData!!, "")
                 return params
             }
         }/*VolleyFileUploadRequest(...) ends here*/

@@ -12,12 +12,12 @@ class Signup : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)
 
-        button_account_employer.setSafeOnClickListener {
+        button_hire.setSafeOnClickListener {
             val intent = Intent(this, Employer_Signup::class.java)
             startActivity(intent)
         }
 
-        button_account_worker.setSafeOnClickListener {
+        button_find_job.setSafeOnClickListener {
             val intent = Intent(this, Worker_Signup::class.java)
             startActivity(intent)
         }

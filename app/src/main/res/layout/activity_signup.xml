@@ -39,8 +39,8 @@
             android:layout_marginBottom="20dp"/>
 
         <Button
-            android:id="@+id/button_account_employer"
-            android:layout_width="115dp"
+            android:id="@+id/button_hire"
+            android:layout_width="105dp"
             android:layout_height="wrap_content"
             android:text="@string/account_employer"
             android:textColor="@color/light_blue"
@@ -49,7 +49,7 @@
             android:layout_marginBottom="20dp"/>
 
         <Button
-            android:id="@+id/button_account_worker"
+            android:id="@+id/button_find_job"
             android:layout_width="105dp"
             android:layout_height="wrap_content"
             android:text="@string/account_worker"

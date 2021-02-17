@@ -41,8 +41,8 @@
                 android:textColor="@color/black"/>
 
             <Button
-                android:id="@+id/button_account_employer"
-                android:layout_width="115dp"
+                android:id="@+id/button_hire"
+                android:layout_width="105dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="20dp"
@@ -51,7 +51,7 @@
                 android:textColor="@color/light_blue"/>
 
             <Button
-                android:id="@+id/button_account_worker"
+                android:id="@+id/button_find_job"
                 android:layout_width="105dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
