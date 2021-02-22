@@ -16,5 +16,5 @@
         android:padding="8dp"
         android:textSize="22sp"
         android:textColor="@color/black"
-        android:text="Loading..." />
+        android:text="@string/loading" />
 </LinearLayout>

@@ -28,7 +28,8 @@
                 android:layout_marginLeft="25dp"
                 android:text="@string/log_in_to_account"
                 android:textColor="@color/light_blue"
-                android:textSize="30sp" />
+                android:textSize="30sp"
+                android:layout_marginStart="25dp" />
         </LinearLayout>
 
         <EditText

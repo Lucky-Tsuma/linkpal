@@ -31,7 +31,8 @@
                 android:padding="15dp"
                 android:layout_marginBottom="1dp"
                 android:textColor="@color/black"
-                android:textColorHint="@color/colorAccent" />
+                android:textColorHint="@color/colorAccent"
+                android:autofillHints="" />
 
             <EditText
                 android:id="@+id/employer_lastname"
@@ -42,7 +43,8 @@
                 android:padding="15dp"
                 android:layout_marginBottom="1dp"
                 android:textColor="@color/black"
-                android:textColorHint="@color/colorAccent" />
+                android:textColorHint="@color/colorAccent"
+                android:autofillHints=""/>
 
             <EditText
                 android:id="@+id/employer_email"
@@ -99,7 +101,8 @@
                     android:layout_marginRight="10dp"
                     android:padding="20dp"
                     android:text="@string/gender"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:layout_marginEnd="10dp" />
 
                 <RadioGroup
                     android:layout_width="match_parent"
