@@ -30,7 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
-                android:background="@drawable/profile_pic_icon"
+                android:background="@drawable/ic_profile_pic"
                 android:contentDescription="@string/profile_picture_description"
                 android:scaleType="fitXY" />
 
@@ -55,7 +55,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:background="@drawable/carret_down" />
+                        android:background="@drawable/ic_carret_down" />
 
                     <TextView
                         android:id="@+id/job_field"
@@ -80,7 +80,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:background="@drawable/carret_down" />
+                        android:background="@drawable/ic_carret_down" />
 
 
                     <TextView
