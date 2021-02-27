@@ -54,5 +54,17 @@
     <string name="location">Location</string>
     <string name="description">Describe your profile(At least 30 characters)</string>
     <string name="portfolio">My portfolio</string>
+    <string name="profile_picture_description">Profile Picture</string>
 
+    <!--Employer Homepage-->
+    <string name="title_activity_employer__homepage">Employer_Homepage</string>
+
+    <!--Worker Homepage-->
+    <string name="title_activity_worker__homepage">Worker_Homepage</string>
+
+    <!--Loading-->
+    <string name="loading">Loading…</string>
+
+    <!--Autofill hints-->
+    <string name="email_autofill">\@gmail.com</string>
 </resources>

@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, Signup::class.java)
             startActivity(intent)
         }
-        
+
         about.setSafeOnClickListener {
             val intent = Intent(this, About::class.java)
             startActivity(intent)

@@ -3,18 +3,18 @@ package com.lucky.linkpal
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.Response
 import com.android.volley.toolbox.Volley
 import com.lucky.linkpal.SafeClickListener.Companion.setSafeOnClickListener
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_main.view.*
 import org.json.JSONException
 import org.json.JSONObject
 
 class Login : AppCompatActivity() {
-    private  var  status: Boolean = true
+    private var status: Boolean = true
     private lateinit var email: String
     private lateinit var password: String
 
@@ -29,7 +29,7 @@ class Login : AppCompatActivity() {
 
         button_user_login.setSafeOnClickListener {
             checkUserInput()
-            if(status){
+            if (status) {
                 loginUser()
             }
         }
@@ -49,17 +49,21 @@ class Login : AppCompatActivity() {
         password = password_login.text.toString().trim()
 
         /*Check whether any of the fields is not filled*/
-        if(email.isEmpty() || password.isEmpty() ) {
+        if (email.isEmpty() || password.isEmpty()) {
             Toast.makeText(applicationContext, "Please fill the highlighted fields", Toast.LENGTH_SHORT).show()
             status = false
-            if(email.isEmpty()) {email_login.setHintTextColor(Color.RED)}
-            if(password.isEmpty()) {password_login.setHintTextColor(Color.RED) ; password_login.setTextColor(Color.RED)}
+            if (email.isEmpty()) {
+                email_login.setHintTextColor(Color.RED)
+            }
+            if (password.isEmpty()) {
+                password_login.setHintTextColor(Color.RED); password_login.setTextColor(Color.RED)
+            }
         }
 
         /*Checking email format and length*/
-        if(status){
-            if(!(email.matches("(.*)@(.*)\\.(.*)".toRegex())) || email.length < 10 ||
-                email.startsWith("@") || email.endsWith("@")) {
+        if (status) {
+            if (!(email.matches("(.*)@(.*)\\.(.*)".toRegex())) || email.length < 10 ||
+                    email.startsWith("@") || email.endsWith("@")) {
                 Toast.makeText(applicationContext, "Invalid email address", Toast.LENGTH_SHORT).show()
                 email_login.setTextColor(Color.RED)
                 status = false
@@ -67,8 +71,8 @@ class Login : AppCompatActivity() {
         }
 
         /*Checking for password length*/
-        if(status) {
-            if(password.length < 6) {
+        if (status) {
+            if (password.length < 6) {
                 Toast.makeText(applicationContext, "Password too short", Toast.LENGTH_SHORT).show()
                 password_login.setTextColor(Color.RED)
                 status = false
@@ -83,15 +87,15 @@ class Login : AppCompatActivity() {
                     try {
                         val obj = JSONObject(res)
 
-                        val msg : String = obj.getString("message")
+                        val msg: String = obj.getString("message")
                         val error = obj.getBoolean("error")
                         if (!error) {
                             val userType: String = obj.getString("userType")
-                            if(userType == "employer") {
+                            if (userType == "employer") {
                                 Toast.makeText(applicationContext, msg, Toast.LENGTH_SHORT).show()
                                 val intentEmployer = Intent(this, Employer_Homepage::class.java)
                                 startActivity(intentEmployer)
-                            }else {
+                            } else {
                                 Toast.makeText(applicationContext, msg, Toast.LENGTH_SHORT).show()
                                 val intentWorker = Intent(this, Worker_Homepage::class.java)
                                 startActivity(intentWorker)

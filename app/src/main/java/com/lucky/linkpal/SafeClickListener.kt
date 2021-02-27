@@ -7,12 +7,13 @@ class SafeClickListener(private var defaultInterval: Int = 1000, private val onS
 
     private var lastTimeClicked: Long = 0;
     override fun onClick(v: View) {
-        if(SystemClock.elapsedRealtime() - lastTimeClicked < defaultInterval) {
+        if (SystemClock.elapsedRealtime() - lastTimeClicked < defaultInterval) {
             return
         }
         lastTimeClicked = SystemClock.elapsedRealtime()
         onSafeClick(v)
     }
+
     companion object {
         fun View.setSafeOnClickListener(onSafeClick: (View) -> Unit) {
             val safeClickListener = SafeClickListener {

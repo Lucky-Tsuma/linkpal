@@ -8,7 +8,6 @@ import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.provider.OpenableColumns
-import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.SimpleAdapter
@@ -182,45 +181,45 @@ class Worker_Signup2 : AppCompatActivity() {
     private fun populateJobFieldMenu() {
 
         val specialtyReq = JsonObjectRequest(Request.Method.GET, URLs.specialty_get, null,
-            Response.Listener { response ->
-                try {
-                    val specialtyList = ArrayList<HashMap<String, String>>()
+                Response.Listener { response ->
+                    try {
+                        val specialtyList = ArrayList<HashMap<String, String>>()
 
-                    val jsonArray = response.getJSONArray("specialty")
+                        val jsonArray = response.getJSONArray("specialty")
 
-                    for (i in 0 until jsonArray.length()) {
-                        val specialty = jsonArray.getJSONObject(i)
-                        val id = specialty.getString("specialty_id")
-                        val name = specialty.getString("name")
+                        for (i in 0 until jsonArray.length()) {
+                            val specialty = jsonArray.getJSONObject(i)
+                            val id = specialty.getString("specialty_id")
+                            val name = specialty.getString("name")
 
-                        val mapSpecialty = HashMap<String, String>()
+                            val mapSpecialty = HashMap<String, String>()
 
-                        mapSpecialty["specialty_id"] = id
-                        mapSpecialty["name"] = name
+                            mapSpecialty["specialty_id"] = id
+                            mapSpecialty["name"] = name
 
-                        specialtyList.add(mapSpecialty)
+                            specialtyList.add(mapSpecialty)
+                        }
+                        val adapterSpecialty = SimpleAdapter(
+                                this, specialtyList, R.layout.activity_listview_jobfield,
+                                arrayOf("specialty_id", "name"), intArrayOf(R.id.specialty_id, R.id.name)
+                        )
+                        listview_job_field.adapter = adapterSpecialty
+
+                    } catch (e: JSONException) {
+                        e.printStackTrace()
                     }
-                    val adapterSpecialty = SimpleAdapter(
-                        this, specialtyList, R.layout.activity_listview_jobfield,
-                        arrayOf("specialty_id", "name"), intArrayOf(R.id.specialty_id, R.id.name)
-                    )
-                    listview_job_field.adapter = adapterSpecialty
-
-                } catch (e: JSONException) {
-                    e.printStackTrace()
-                }
-            }, Response.ErrorListener { error ->
-                error.printStackTrace()
-                if (error.toString().matches(Regex("(.*)NoConnectionError(.*)"))) {
-                    Toast.makeText(
+                }, Response.ErrorListener { error ->
+            error.printStackTrace()
+            if (error.toString().matches(Regex("(.*)NoConnectionError(.*)"))) {
+                Toast.makeText(
                         applicationContext,
                         "Check your internet connection. Or try again later.",
                         Toast.LENGTH_SHORT
-                    ).show()
-                } else {
-                    Toast.makeText(applicationContext, error.toString(), Toast.LENGTH_SHORT).show()
-                }
-            })
+                ).show()
+            } else {
+                Toast.makeText(applicationContext, error.toString(), Toast.LENGTH_SHORT).show()
+            }
+        })
         jsonQueue.add(specialtyReq)
 
     }
@@ -229,44 +228,44 @@ class Worker_Signup2 : AppCompatActivity() {
     private fun populateLocationMenu() {
 
         val locationReq = JsonObjectRequest(Request.Method.GET, URLs.location_get, null,
-            Response.Listener { response ->
-                try {
-                    val locationList = ArrayList<HashMap<String, String>>()
-                    val jsonArray = response.getJSONArray("location")
+                Response.Listener { response ->
+                    try {
+                        val locationList = ArrayList<HashMap<String, String>>()
+                        val jsonArray = response.getJSONArray("location")
 
-                    for (i in 0 until jsonArray.length()) {
-                        val location = jsonArray.getJSONObject(i)
-                        val id = location.getString("location_id")
-                        val name = location.getString("name")
+                        for (i in 0 until jsonArray.length()) {
+                            val location = jsonArray.getJSONObject(i)
+                            val id = location.getString("location_id")
+                            val name = location.getString("name")
 
-                        val locationMap = HashMap<String, String>()
-                        locationMap["location_id"] = id
-                        locationMap["name"] = name
+                            val locationMap = HashMap<String, String>()
+                            locationMap["location_id"] = id
+                            locationMap["name"] = name
 
-                        locationList.add(locationMap)
+                            locationList.add(locationMap)
+                        }
+
+                        val adapterLocation = SimpleAdapter(
+                                this, locationList, R.layout.activity_listview_location,
+                                arrayOf("location_id", "name"), intArrayOf(R.id.location_id, R.id.name)
+                        )
+                        listview_location.adapter = adapterLocation
+                    } catch (e: JSONException) {
+                        e.printStackTrace()
                     }
-
-                    val adapterLocation = SimpleAdapter(
-                        this, locationList, R.layout.activity_listview_location,
-                        arrayOf("location_id", "name"), intArrayOf(R.id.location_id, R.id.name)
-                    )
-                    listview_location.adapter = adapterLocation
-                } catch (e: JSONException) {
-                    e.printStackTrace()
-                }
-            },
-            Response.ErrorListener { error ->
-                error.printStackTrace()
-                if (error.toString().matches(Regex("(.*)NoConnectionError(.*)"))) {
-                    Toast.makeText(
-                        applicationContext,
-                        "Check your internet connection. Or try again later.",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                } else {
-                    Toast.makeText(applicationContext, error.toString(), Toast.LENGTH_SHORT).show()
-                }
-            })
+                },
+                Response.ErrorListener { error ->
+                    error.printStackTrace()
+                    if (error.toString().matches(Regex("(.*)NoConnectionError(.*)"))) {
+                        Toast.makeText(
+                                applicationContext,
+                                "Check your internet connection. Or try again later.",
+                                Toast.LENGTH_SHORT
+                        ).show()
+                    } else {
+                        Toast.makeText(applicationContext, error.toString(), Toast.LENGTH_SHORT).show()
+                    }
+                })
 
         jsonQueue.add(locationReq)
     }
@@ -289,9 +288,9 @@ class Worker_Signup2 : AppCompatActivity() {
         if (status) {
             if (userLocation.isEmpty() || userJobField.isEmpty() || profileDescription.isEmpty()) {
                 Toast.makeText(
-                    applicationContext,
-                    "Please fill the highlighted fields",
-                    Toast.LENGTH_SHORT
+                        applicationContext,
+                        "Please fill the highlighted fields",
+                        Toast.LENGTH_SHORT
                 ).show()
                 status = false
                 if (userLocation.isEmpty()) {
@@ -310,9 +309,9 @@ class Worker_Signup2 : AppCompatActivity() {
         if (status) {
             if (profileDescription.length < 10) {
                 Toast.makeText(
-                    applicationContext,
-                    "Profile description should be about 10 characters",
-                    Toast.LENGTH_SHORT
+                        applicationContext,
+                        "Profile description should be about 10 characters",
+                        Toast.LENGTH_SHORT
                 ).show()
                 profile_description.setTextColor(Color.RED)
                 status = false
@@ -324,9 +323,9 @@ class Worker_Signup2 : AppCompatActivity() {
     private fun checkForImage() {
         if (uri == null) {
             Toast.makeText(
-                this,
-                "Please pick a profile picture and retry",
-                Toast.LENGTH_SHORT
+                    this,
+                    "Please pick a profile picture and retry",
+                    Toast.LENGTH_SHORT
             ).show()
         } else {
             val uriString: String = uri.toString()
@@ -340,7 +339,7 @@ class Worker_Signup2 : AppCompatActivity() {
                     cursor = this.contentResolver.query(uri!!, null, null, null, null)
                     if (cursor != null && cursor.moveToFirst()) {
                         displayName =
-                            cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME))
+                                cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME))
                         uploadMultipart(displayName)
                     }
                 } finally {
@@ -361,31 +360,31 @@ class Worker_Signup2 : AppCompatActivity() {
         dialog.show()
 
         val request = object : VolleyFileUploadRequest(Method.POST, URLs.user_register,
-            Response.Listener { response ->
-                dialog.dismiss()
-                val res = String(response.data)
-                try {
-                    val obj = JSONObject(res)
-                    val msg: String = obj.getString("message")
-                    if (obj.getBoolean("error")) {
-                        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
-                    } else {
-                        val adb: AlertDialog.Builder = AlertDialog.Builder(this)
-                        adb.setTitle("Notification").setMessage(msg).setCancelable(false)
-                        Toast.makeText(applicationContext, msg, Toast.LENGTH_SHORT).show()
-                        val intent = Intent(this, Login::class.java)
-                        startActivity(intent)
-                    }
-                } catch (e: JSONException) {
+                Response.Listener { response ->
                     dialog.dismiss()
-                    e.printStackTrace()
-                    Toast.makeText(this, "Oops! An error occurred", Toast.LENGTH_SHORT).show()
+                    val res = String(response.data)
+                    try {
+                        val obj = JSONObject(res)
+                        val msg: String = obj.getString("message")
+                        if (obj.getBoolean("error")) {
+                            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+                        } else {
+                            val adb: AlertDialog.Builder = AlertDialog.Builder(this)
+                            adb.setTitle("Notification").setMessage(msg).setCancelable(false)
+                            Toast.makeText(applicationContext, msg, Toast.LENGTH_SHORT).show()
+                            val intent = Intent(this, Login::class.java)
+                            startActivity(intent)
+                        }
+                    } catch (e: JSONException) {
+                        dialog.dismiss()
+                        e.printStackTrace()
+                        Toast.makeText(this, "Oops! An error occurred", Toast.LENGTH_SHORT).show()
+                    }
+                },
+                Response.ErrorListener { error ->
+                    dialog.dismiss()
+                    Toast.makeText(applicationContext, error.toString(), Toast.LENGTH_SHORT).show()
                 }
-            },
-            Response.ErrorListener { error ->
-                dialog.dismiss()
-                Toast.makeText(applicationContext, error.toString(), Toast.LENGTH_SHORT).show()
-            }
         ) {
             override fun getParams(): MutableMap<String, String> {
                 val worker = HashMap<String, String>()

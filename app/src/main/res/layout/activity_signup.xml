@@ -15,47 +15,49 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="150dp"
-            android:background="@drawable/image"
-            android:layout_marginBottom="25dp">
+            android:layout_marginBottom="25dp"
+            android:background="@drawable/image">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="25dp"
                 android:text="@string/welcome"
                 android:textColor="@color/light_blue"
-                android:layout_marginLeft="25dp"
-                android:textSize="30sp"
-                android:layout_gravity="bottom"/>
+                android:textSize="30sp" />
         </LinearLayout>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/choose_account_type"
-            android:textColor="@color/black"
+            android:layout_marginBottom="20dp"
             android:gravity="center"
-            android:layout_marginBottom="20dp"/>
+            android:text="@string/choose_account_type"
+            android:textColor="@color/black" />
 
         <Button
             android:id="@+id/button_hire"
             android:layout_width="105dp"
             android:layout_height="wrap_content"
-            android:text="@string/account_employer"
-            android:textColor="@color/light_blue"
-            android:background="@drawable/border_blue_button"
             android:layout_gravity="center"
-            android:layout_marginBottom="20dp"/>
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/border_blue_button"
+            android:text="@string/account_employer"
+            android:textColor="@color/light_blue" />
 
         <Button
             android:id="@+id/button_find_job"
             android:layout_width="105dp"
             android:layout_height="wrap_content"
-            android:text="@string/account_worker"
-            android:textColor="@color/light_blue"
+            android:layout_gravity="center"
             android:background="@drawable/border_blue_button"
-            android:layout_gravity="center"/>
+            android:text="@string/account_worker"
+            android:textColor="@color/light_blue" />
 
     </LinearLayout>
 
