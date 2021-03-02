@@ -12,6 +12,6 @@ class JobRequestsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_employer_home, container, false)
+        return inflater.inflate(R.layout.fragment_job_requests, container, false)
     }
 }

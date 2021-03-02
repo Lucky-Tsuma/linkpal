@@ -1,4 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
 
+        <item
+            android:id="@+id/worker_home"
+            android:icon="@drawable/ic_home"
+            android:title="@string/home" />
+
+        <item
+            android:id="@+id/worker_profile"
+            android:icon="@drawable/ic_profile"
+            android:title="@string/profile" />
+
+        <item
+            android:id="@+id/portfolio"
+            android:icon="@drawable/ic_folder"
+            android:title="@string/portfolio" />
+
+        <item
+            android:id="@+id/pending_requests"
+            android:icon="@drawable/ic_pending"
+            android:title="@string/pending_requests" />
+
+        <item
+            android:id="@+id/jobs_invited"
+            android:icon="@drawable/ic_job_requests"
+            android:title="@string/jobs_invited" />
+
+        <item
+            android:id="@+id/search"
+            android:icon="@drawable/ic_search"
+            android:title="@string/search" />
+    </group>
+    <item
+        android:id="@+id/log_out"
+        android:icon="@drawable/ic_logout"
+        android:title="@string/logout" />
 </menu>

@@ -56,15 +56,32 @@
     <string name="portfolio">My portfolio</string>
     <string name="profile_picture_description">Profile Picture</string>
 
-    <!--Employer Homepage-->
-    <string name="title_activity_employer__homepage">Employer_Homepage</string>
+    <!--Homepage Globals-->
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="home">Home</string>
 
-    <!--Worker Homepage-->
-    <string name="title_activity_worker__homepage">Worker_Homepage</string>
+    <string name="profile">My Profile</string>
+    <string name="search">Search linkpal</string>
+    <string name="logout">Logout</string>
+
+    <!--Drawer Employer Menu-->
+    <string name="upgrade_account">Upgrade Account</string>
+    <string name="job_requests">Job Requests</string>
+    <string name="job_invites">Job Invites(Outgoing)</string>
+
+
+    <!--Drawer Nav Header-->
+    <string name="user_profile_pic">User profile picture</string>
+    <string name="temp_username">Sample Username</string>
+    <string name="temp_useremail">samplemail@gmail.com</string>
+
+    <!--Drawer Worker Menu-->
+    <string name="pending_requests">Pending Requests</string>
+    <string name="jobs_invited">Jobs Invited</string>
 
     <!--Loading-->
     <string name="loading">Loading…</string>
 
-    <!--Autofill hints-->
-    <string name="email_autofill">\@gmail.com</string>
+
 </resources>

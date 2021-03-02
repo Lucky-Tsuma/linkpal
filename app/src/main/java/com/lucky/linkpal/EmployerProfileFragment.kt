@@ -12,6 +12,6 @@ class EmployerProfileFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_worker_profile, container, false)
+        return inflater.inflate(R.layout.fragment_employer_profile, container, false)
     }
 }

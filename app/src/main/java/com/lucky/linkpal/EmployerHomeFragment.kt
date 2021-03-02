@@ -12,6 +12,6 @@ class EmployerHomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_worker_home, container, false)
+        return inflater.inflate(R.layout.fragment_employer_home, container, false)
     }
 }

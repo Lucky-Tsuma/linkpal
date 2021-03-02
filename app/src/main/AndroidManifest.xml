@@ -3,7 +3,7 @@
     package="com.lucky.linkpal">
     <!-- Internet permissions -->
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- Permission to read external storage -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
@@ -15,10 +15,10 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".Worker_Homepage"
-            android:label="@string/title_activity_worker__homepage" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Employer_Homepage"
-            android:label="@string/title_activity_employer__homepage" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Employer_Signup"
             android:label="Employer sign up" />
