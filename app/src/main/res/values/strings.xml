@@ -64,6 +64,8 @@
     <string name="profile">My Profile</string>
     <string name="search">Search linkpal</string>
     <string name="logout">Logout</string>
+    <string name="post_a_job">Post a job</string>
+    <string name="desc_post_a_job">Button to post a job</string>
 
     <!--Drawer Employer Menu-->
     <string name="upgrade_account">Upgrade Account</string>
