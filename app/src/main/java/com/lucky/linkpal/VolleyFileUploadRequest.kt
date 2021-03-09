@@ -5,8 +5,13 @@ import com.android.volley.toolbox.HttpHeaderParser
 import java.io.*
 import java.lang.Integer.min
 
-open class VolleyFileUploadRequest(method: Int, url: String, listener: Response.Listener<NetworkResponse>, errorListener: Response.ErrorListener) :
-        Request<NetworkResponse>(method, url, errorListener) {
+open class VolleyFileUploadRequest(
+    method: Int,
+    url: String,
+    listener: Response.Listener<NetworkResponse>,
+    errorListener: Response.ErrorListener
+) :
+    Request<NetworkResponse>(method, url, errorListener) {
     private var responseListener: Response.Listener<NetworkResponse>? = null
 
     init {
@@ -20,10 +25,10 @@ open class VolleyFileUploadRequest(method: Int, url: String, listener: Response.
 
 
     override fun getHeaders(): MutableMap<String, String> =
-            when (headers) {
-                null -> super.getHeaders()
-                else -> headers!!.toMutableMap()
-            }
+        when (headers) {
+            null -> super.getHeaders()
+            else -> headers!!.toMutableMap()
+        }
 
     override fun getBodyContentType() = "multipart/form-data;boundary=$boundary"
 
@@ -72,7 +77,11 @@ open class VolleyFileUploadRequest(method: Int, url: String, listener: Response.
     }
 
     @Throws(IOException::class)
-    private fun processParams(dataOutputStream: DataOutputStream, params: Map<String, String>, encoding: String) {
+    private fun processParams(
+        dataOutputStream: DataOutputStream,
+        params: Map<String, String>,
+        encoding: String
+    ) {
         try {
             params.forEach {
                 dataOutputStream.writeBytes(divider + boundary + ending)
@@ -81,7 +90,10 @@ open class VolleyFileUploadRequest(method: Int, url: String, listener: Response.
                 dataOutputStream.writeBytes(it.value + ending)
             }
         } catch (e: UnsupportedEncodingException) {
-            throw RuntimeException("Unsupported encoding not supported: $encoding with error: ${e.message}", e)
+            throw RuntimeException(
+                "Unsupported encoding not supported: $encoding with error: ${e.message}",
+                e
+            )
         }
     }
 

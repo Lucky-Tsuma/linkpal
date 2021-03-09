@@ -17,13 +17,13 @@
         android:id="@+id/upload_doc_pic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:background="@color/colorPrimary"
         android:clickable="true"
         android:contentDescription="@string/desc_post_a_job"
         android:src="@drawable/ic_add"
-        app:backgroundTint="@color/colorPrimary"
-        android:layout_alignParentEnd="true" />
+        app:backgroundTint="@color/colorPrimary" />
 
 </RelativeLayout>
