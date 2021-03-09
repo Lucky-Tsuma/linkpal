@@ -63,8 +63,13 @@ class Worker_Signup : AppCompatActivity() {
 
         /*check whether any of the fields is not filled*/
         if (firstname.isEmpty() || lastname.isEmpty() || email.isEmpty() || phone.isEmpty() ||
-                password.isEmpty() || password2.isEmpty()) {
-            Toast.makeText(applicationContext, "Please fill the highlighted fields", Toast.LENGTH_SHORT).show()
+            password.isEmpty() || password2.isEmpty()
+        ) {
+            Toast.makeText(
+                applicationContext,
+                "Please fill the highlighted fields",
+                Toast.LENGTH_SHORT
+            ).show()
             status = false
             if (firstname.isEmpty()) {
                 worker_firstname.setHintTextColor(Color.RED)
@@ -89,7 +94,8 @@ class Worker_Signup : AppCompatActivity() {
         /*Check for gender*/
         if (status) {
             if (!(gender_male_worker.isChecked || gender_female_worker.isChecked)) {
-                Toast.makeText(applicationContext, "Please select gender", Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, "Please select gender", Toast.LENGTH_SHORT)
+                    .show()
                 status = false
             } else {
                 if (gender_male_worker.isChecked) gender = "M" else gender = "F"
@@ -99,8 +105,10 @@ class Worker_Signup : AppCompatActivity() {
         /*Checking email format and length*/
         if (status) {
             if (!(email.matches("(.*)@(.*)\\.(.*)".toRegex())) || email.length < 10
-                    || email.startsWith("@") || email.endsWith("@")) {
-                Toast.makeText(applicationContext, "Invalid email address", Toast.LENGTH_SHORT).show()
+                || email.startsWith("@") || email.endsWith("@")
+            ) {
+                Toast.makeText(applicationContext, "Invalid email address", Toast.LENGTH_SHORT)
+                    .show()
                 worker_email.setTextColor(Color.RED)
                 status = false
             }
@@ -109,7 +117,8 @@ class Worker_Signup : AppCompatActivity() {
         /*Checking phone number format and length*/
         if (status) {
             if (phone.length != 10 || (!(phone.matches(Regex("07(.*)"))) && !(phone.matches(Regex("01(.*)"))))) {
-                Toast.makeText(applicationContext, "Phone number is invalid", Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, "Phone number is invalid", Toast.LENGTH_SHORT)
+                    .show()
                 worker_phone.setTextColor(Color.RED)
                 status = false
             }
@@ -132,7 +141,8 @@ class Worker_Signup : AppCompatActivity() {
         /*Checking whether passwords match*/
         if (status) {
             if (!(password.matches(Regex(password2)))) {
-                Toast.makeText(applicationContext, "Passwords do not match", Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, "Passwords do not match", Toast.LENGTH_SHORT)
+                    .show()
                 status = false
                 worker_password.setTextColor(Color.RED)
                 worker_confirm_password.setTextColor(Color.RED)
