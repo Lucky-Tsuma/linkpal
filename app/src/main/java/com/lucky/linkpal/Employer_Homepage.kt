@@ -7,13 +7,21 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_employer__homepage.*
-import kotlinx.android.synthetic.main.activity_worker__homepage.*
+import kotlinx.android.synthetic.main.nav_drawer_header_employer.view.*
 
 class Employer_Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+    private lateinit var firstname: String
+    private lateinit var lastname: String
+    private lateinit var email: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_employer__homepage)
+
+        val intent = intent
+        email = intent.getStringExtra("email").toString()
+        firstname = intent.getStringExtra("firstname").toString()
+        lastname = intent.getStringExtra("lastname").toString()
 
         setSupportActionBar(toolbar_employer)/*We got rid of the default action bar, noew we setting a toolbar instead*/
 
@@ -25,6 +33,11 @@ class Employer_Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSe
         toggle.syncState()
 
         nav_view_employer.setNavigationItemSelectedListener(this)
+
+        /*setting user information on nav header*/
+        val header = nav_view_employer.getHeaderView(0)
+        header.nav_username.text = "${firstname} ${lastname}"
+        header.useremail.text = email
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()

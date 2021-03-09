@@ -7,11 +7,21 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_worker__homepage.*
+import kotlinx.android.synthetic.main.nav_drawer_header_worker.view.*
 
 class Worker_Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+    private lateinit var firstname: String
+    private lateinit var lastname: String
+    private lateinit var email: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_worker__homepage)
+
+        val intent = intent
+        email = intent.getStringExtra("email").toString()
+        firstname = intent.getStringExtra("firstname").toString()
+        lastname = intent.getStringExtra("lastname").toString()
 
         setSupportActionBar(toolbar_worker)
 
@@ -27,6 +37,11 @@ class Worker_Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSele
 
         /*To listen to click events on the navigation view, we first have to reference to it. As below*/
         nav_view_worker.setNavigationItemSelectedListener(this)
+
+        /*setting user information on nav header*/
+        val header = nav_view_worker.getHeaderView(0)
+        header.nav_username.text = "${firstname} ${lastname}"
+        header.useremail.text = email
 
         /*So the activity opens to the home fragment by default. And the home fragment will be restored only in case of a first configuration change*/
         if (savedInstanceState == null) {
