@@ -30,7 +30,9 @@ class Employer_Signup : AppCompatActivity() {
 
         button_sign_up_employer.setSafeOnClickListener {
             checkUserInput()
-            if(status) {registerEmployer()}
+            if (status) {
+                registerEmployer()
+            }
         }
     }
 
@@ -57,68 +59,94 @@ class Employer_Signup : AppCompatActivity() {
         var password2: String = employer_confirm_password.text.toString().trim()
 
         /*check whether any of the fields is not filled*/
-        if(firstname.isEmpty() || lastname.isEmpty() || email.isEmpty() || phone.isEmpty() ||
-            password.isEmpty() || password2.isEmpty()) {
-            Toast.makeText(applicationContext, "Please fill the highlighted fields", Toast.LENGTH_SHORT).show()
+        if (firstname.isEmpty() || lastname.isEmpty() || email.isEmpty() || phone.isEmpty() ||
+            password.isEmpty() || password2.isEmpty()
+        ) {
+            Toast.makeText(
+                applicationContext,
+                "Please fill the highlighted fields",
+                Toast.LENGTH_SHORT
+            ).show()
             status = false
-            if(firstname.isEmpty()) { employer_firstname.setHintTextColor(Color.RED) }
-            if(lastname.isEmpty()) { employer_lastname.setHintTextColor(Color.RED) }
-            if(email.isEmpty()) { employer_email.setHintTextColor(Color.RED) }
-            if(phone.isEmpty()) { employer_phone.setHintTextColor(Color.RED) }
-            if(password.isEmpty()) { employer_password.setHintTextColor(Color.RED) }
-            if(password2.isEmpty()) { employer_confirm_password.setHintTextColor(Color.RED) }
+            if (firstname.isEmpty()) {
+                employer_firstname.setHintTextColor(Color.RED)
+            }
+            if (lastname.isEmpty()) {
+                employer_lastname.setHintTextColor(Color.RED)
+            }
+            if (email.isEmpty()) {
+                employer_email.setHintTextColor(Color.RED)
+            }
+            if (phone.isEmpty()) {
+                employer_phone.setHintTextColor(Color.RED)
+            }
+            if (password.isEmpty()) {
+                employer_password.setHintTextColor(Color.RED)
+            }
+            if (password2.isEmpty()) {
+                employer_confirm_password.setHintTextColor(Color.RED)
+            }
         }
 
         /*Check for gender*/
-        if(status) {
-            if(!(gender_male_emp.isChecked || gender_female_emp.isChecked)){
-                Toast.makeText(applicationContext, "Please select gender", Toast.LENGTH_SHORT).show()
+        if (status) {
+            if (!(gender_male_emp.isChecked || gender_female_emp.isChecked)) {
+                Toast.makeText(applicationContext, "Please select gender", Toast.LENGTH_SHORT)
+                    .show()
                 status = false
             } else {
-                if(gender_male_emp.isChecked) gender = "M" else gender = "F"
+                if (gender_male_emp.isChecked) gender = "M" else gender = "F"
             }
         }
 
         /*Checking email format and length*/
-        if(status) {
-            if(!(email.matches("(.*)@(.*)\\.(.*)".toRegex())) || email.length < 10
-                || email.startsWith("@") || email.endsWith("@")) {
-                Toast.makeText(applicationContext, "Invalid email address", Toast.LENGTH_SHORT).show()
+        if (status) {
+            if (!(email.matches("(.*)@(.*)\\.(.*)".toRegex())) || email.length < 10
+                || email.startsWith("@") || email.endsWith("@")
+            ) {
+                Toast.makeText(applicationContext, "Invalid email address", Toast.LENGTH_SHORT)
+                    .show()
                 employer_email.setTextColor(Color.RED)
                 status = false
             }
         }
 
         /*Checking phone number format and length*/
-        if(status){
-            if(phone.length != 10 || (!(phone.matches(Regex("07(.*)"))) && !(phone.matches(Regex("01(.*)"))))) {
-                Toast.makeText(applicationContext, "Phone number is invalid", Toast.LENGTH_SHORT).show()
+        if (status) {
+            if (phone.length != 10 || (!(phone.matches(Regex("07(.*)"))) && !(phone.matches(Regex("01(.*)"))))) {
+                Toast.makeText(applicationContext, "Phone number is invalid", Toast.LENGTH_SHORT)
+                    .show()
                 employer_phone.setTextColor(Color.RED)
                 status = false
             }
         }
 
         /*Checking for password length*/
-        if(status) {
-            if(password.length < 6 || password2.length < 6) {
+        if (status) {
+            if (password.length < 6 || password2.length < 6) {
                 Toast.makeText(applicationContext, "Password too short", Toast.LENGTH_SHORT).show()
                 status = false
-                if(password.length < 6) {employer_password.setTextColor(Color.RED)}
-                if(password2.length < 6) {employer_confirm_password.setTextColor(Color.RED)}
+                if (password.length < 6) {
+                    employer_password.setTextColor(Color.RED)
+                }
+                if (password2.length < 6) {
+                    employer_confirm_password.setTextColor(Color.RED)
+                }
             }
         }
 
         /*Checking whether passwords match*/
-        if(status) {
-            if(!(password.matches(Regex(password2)))) {
-                Toast.makeText(applicationContext, "Passwords do not match", Toast.LENGTH_SHORT).show()
+        if (status) {
+            if (!(password.matches(Regex(password2)))) {
+                Toast.makeText(applicationContext, "Passwords do not match", Toast.LENGTH_SHORT)
+                    .show()
                 status = false
                 employer_password.setTextColor(Color.RED)
                 employer_confirm_password.setTextColor(Color.RED)
             }
         }
     }/*check_user_input() ends here*/
-    
+
     /*SEND EMPLOYER DATA TO SERVER*/
     private fun registerEmployer() {
         val request = object : VolleyFileUploadRequest(Method.POST, URLs.user_register,
@@ -129,7 +157,7 @@ class Employer_Signup : AppCompatActivity() {
                 try {
                     val obj = JSONObject(res)
 
-                    val msg : String = obj.getString("message")
+                    val msg: String = obj.getString("message")
                     val error = obj.getBoolean("error")
                     if (!error) {
                         Toast.makeText(applicationContext, msg, Toast.LENGTH_SHORT).show()
@@ -144,7 +172,11 @@ class Employer_Signup : AppCompatActivity() {
             },
             Response.ErrorListener { error ->
                 if (error.toString().matches(Regex("(.*)NoConnectionError(.*)"))) {
-                    Toast.makeText(applicationContext, "Check your internet connection. Or try again later.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        applicationContext,
+                        "Check your internet connection. Or try again later.",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 } else {
                     Toast.makeText(applicationContext, error.toString(), Toast.LENGTH_SHORT).show()
                 }
