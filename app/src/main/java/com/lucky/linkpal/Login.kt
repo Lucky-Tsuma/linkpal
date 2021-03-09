@@ -3,7 +3,6 @@ package com.lucky.linkpal
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.Response
@@ -19,6 +18,7 @@ class Login : AppCompatActivity() {
     private lateinit var password: String
     private lateinit var firstname: String
     private lateinit var lastname: String
+    private lateinit var profile_pic: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -109,18 +109,20 @@ class Login : AppCompatActivity() {
                             intentEmployer.putExtra("lastname", lastname)
                             startActivity(intentEmployer)
                         } else {
+                            profile_pic = obj.getString("profile_pic")
+
                             Toast.makeText(applicationContext, msg, Toast.LENGTH_SHORT).show()
                             val intentWorker = Intent(this, Worker_Homepage::class.java)
                             intentWorker.putExtra("email", email)
                             intentWorker.putExtra("firstname", firstname)
                             intentWorker.putExtra("lastname", lastname)
+                            intentWorker.putExtra("profile_pic", profile_pic)
                             startActivity(intentWorker)
                         }
                     } else {
                         Toast.makeText(applicationContext, msg, Toast.LENGTH_SHORT).show()
                     }
                 } catch (e: JSONException) {
-                    Log.e("LUCKY_DEBUG", res)
                     Toast.makeText(this, "Oops! An error occurred", Toast.LENGTH_SHORT).show()
                 }
             },

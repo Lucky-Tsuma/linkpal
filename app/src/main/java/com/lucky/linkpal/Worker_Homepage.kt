@@ -13,6 +13,7 @@ class Worker_Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSele
     private lateinit var firstname: String
     private lateinit var lastname: String
     private lateinit var email: String
+    private lateinit var profile_pic: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
