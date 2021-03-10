@@ -5,6 +5,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
+import com.bumptech.glide.Glide
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_worker__homepage.*
 import kotlinx.android.synthetic.main.nav_drawer_header_worker.view.*
@@ -23,6 +24,7 @@ class Worker_Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSele
         email = intent.getStringExtra("email").toString()
         firstname = intent.getStringExtra("firstname").toString()
         lastname = intent.getStringExtra("lastname").toString()
+        profile_pic = intent.getStringExtra("profile_pic").toString()
 
         setSupportActionBar(toolbar_worker)
 
@@ -43,6 +45,7 @@ class Worker_Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSele
         val header = nav_view_worker.getHeaderView(0)
         header.nav_username.text = "${firstname} ${lastname}"
         header.useremail.text = email
+        Glide.with(this).load(URLs.root_url+profile_pic).into(header.user_profile_pic)
 
         /*So the activity opens to the home fragment by default. And the home fragment will be restored only in case of a first configuration change*/
         if (savedInstanceState == null) {
