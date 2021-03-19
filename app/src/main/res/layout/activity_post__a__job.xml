@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".Post_A_Job">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/txtView_job_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="8dp"
+                android:layout_weight="0.5"
+                android:drawableStart="@drawable/ic_carret_down"
+                android:drawableLeft="@drawable/ic_carret_down"
+                android:gravity="center"
+                android:hint="@string/job_type"
+                android:textColor="@color/black"
+                android:textColorHint="@color/colorAccent"
+                android:textSize="16sp"
+                app:drawableLeftCompat="@drawable/ic_carret_down"
+                app:drawableStartCompat="@drawable/ic_carret_down" />
+
+            <TextView
+                android:id="@+id/txtView_job_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="8dp"
+                android:layout_weight="0.5"
+                android:drawableLeft="@drawable/ic_carret_down"
+                android:gravity="center"
+                android:hint="@string/job_location"
+                android:textColor="@color/black"
+                android:textColorHint="@color/colorAccent"
+                android:textSize="16sp"
+                app:drawableStartCompat="@drawable/ic_carret_down" />
+
+            <EditText
+                android:id="@+id/editTxt_job_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="2dp"
+                android:layout_weight="6"
+                android:gravity="center"
+                android:hint="@string/job_description"
+                android:importantForAutofill="no"
+                android:inputType="textMultiLine"
+                android:textColor="@color/black"
+                android:textColorHint="@color/colorAccent" />
+
+            <EditText
+                android:id="@+id/editTxt_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="2dp"
+                android:layout_weight="0.5"
+                android:gravity="center"
+                android:hint="@string/amount"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                android:textColor="@color/black"
+                android:textColorHint="@color/colorAccent" />
+
+            <Button
+                android:id="@+id/button_post"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.3"
+                android:background="@drawable/border_blue_button"
+                android:text="@string/post"
+                android:textColor="@color/light_blue" />
+        </LinearLayout>
+    </ScrollView>
+
+    <ListView
+        android:id="@+id/list_location"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:choiceMode="singleChoice"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ListView
+        android:id="@+id/list_job_type"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
