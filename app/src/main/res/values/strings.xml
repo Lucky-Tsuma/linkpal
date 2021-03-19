@@ -85,5 +85,11 @@
     <!--Loading-->
     <string name="loading">Loading…</string>
 
+    <!--Post a job-->
+    <string name="job_type">Job type</string>
+    <string name="job_location">Job situated at</string>
+    <string name="job_description">Briefly give us the details of the job you want done</string>
+    <string name="amount">Amount in Ksh</string>
+    <string name="post">submit post</string>
 
 </resources>

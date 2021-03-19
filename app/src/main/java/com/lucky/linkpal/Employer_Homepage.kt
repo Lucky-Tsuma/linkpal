@@ -1,7 +1,11 @@
 package com.lucky.linkpal
 
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
@@ -10,18 +14,16 @@ import kotlinx.android.synthetic.main.activity_employer__homepage.*
 import kotlinx.android.synthetic.main.nav_drawer_header_employer.view.*
 
 class Employer_Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
-    private lateinit var firstname: String
-    private lateinit var lastname: String
-    private lateinit var email: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_employer__homepage)
 
-        val intent = intent
-        email = intent.getStringExtra("email").toString()
-        firstname = intent.getStringExtra("firstname").toString()
-        lastname = intent.getStringExtra("lastname").toString()
+        val sh: SharedPreferences = getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
+        val firstname = sh.getString("firstname", null)
+        val lastname = sh.getString("lastname", null)
+        val email = sh.getString("email", null)
+        val user_id = sh.getInt("user_id", 0)
 
         setSupportActionBar(toolbar_employer)/*We got rid of the default action bar, noew we setting a toolbar instead*/
 
@@ -36,7 +38,7 @@ class Employer_Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
         /*setting user information on nav header*/
         val header = nav_view_employer.getHeaderView(0)
-        header.nav_username.text = "${firstname} ${lastname}"
+        header.nav_username.text = "$firstname $lastname"
         header.useremail.text = email
 
         if (savedInstanceState == null) {
@@ -45,7 +47,19 @@ class Employer_Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSe
             nav_view_employer.setCheckedItem(R.id.employer_home)
             toolbar_employer.title = "Your Posts"
         }
+    }
 
+    override fun onResume() {
+        super.onResume()
+        val sh: SharedPreferences = getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
+        val firstname = sh.getString("firstname", null)
+        val lastname = sh.getString("lastname", null)
+        val email = sh.getString("email", null)
+
+        /*setting user information on nav header*/
+        val header = nav_view_employer.getHeaderView(0)
+        header.nav_username.text = "$firstname $lastname"
+        header.useremail.text = email
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -83,6 +97,16 @@ class Employer_Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSe
                     .replace(R.id.fragment_container_employer, JobInvitesFragment())
                     .commit()
                 toolbar_employer.title = "Job Invites"
+            }
+            R.id.log_out -> {
+                val sh: SharedPreferences = getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
+                val editor: SharedPreferences.Editor = sh.edit()
+                editor.clear()
+                editor.apply()
+
+                Toast.makeText(this, "You have been logged out", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, Login::class.java)
+                startActivity(intent)
             }
         }
 
