@@ -7,6 +7,7 @@ class URLs {
         const val specialty_get = "${root_url}/get_specialty.php"
         const val location_get = "${root_url}/get_location.php"
         const val login = "${root_url}/login.php"
+        const val post_job = "${root_url}/post_job.php"
     }
 }
 
