@@ -1,6 +1,7 @@
 package com.lucky.linkpal
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
 import android.widget.Toast
@@ -16,9 +17,6 @@ class Login : AppCompatActivity() {
     private var status: Boolean = true
     private lateinit var email: String
     private lateinit var password: String
-    private lateinit var firstname: String
-    private lateinit var lastname: String
-    private lateinit var profile_pic: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -99,24 +97,39 @@ class Login : AppCompatActivity() {
                     val msg: String = obj.getString("message")
                     if (!error) {
                         val userType: String = obj.getString("userType")
-                        firstname = obj.getString("firstname")
-                        lastname = obj.getString("lastname")
+                        val user_id = obj.getInt("user_id")
+                        val firstname = obj.getString("firstname")
+                        val lastname = obj.getString("lastname")
                         if (userType == "employer") {
                             Toast.makeText(applicationContext, msg, Toast.LENGTH_SHORT).show()
+
+                            val sh: SharedPreferences =
+                                getSharedPreferences("sharedPref", MODE_PRIVATE)
+                            val editor: SharedPreferences.Editor = sh.edit()
+                            editor.putInt("user_id", user_id)
+                            editor.putString("firstname", firstname)
+                            editor.putString("lastname", lastname)
+                            editor.putString("email", email)
+                            editor.apply()
+
                             val intentEmployer = Intent(this, Employer_Homepage::class.java)
-                            intentEmployer.putExtra("email", email)
-                            intentEmployer.putExtra("firstname", firstname)
-                            intentEmployer.putExtra("lastname", lastname)
                             startActivity(intentEmployer)
                         } else {
-                            profile_pic = obj.getString("profile_pic")
+                            val profile_pic = obj.getString("profile_pic")
 
                             Toast.makeText(applicationContext, msg, Toast.LENGTH_SHORT).show()
+
+                            val sh: SharedPreferences =
+                                getSharedPreferences("sharedPref", MODE_PRIVATE)
+                            val editor: SharedPreferences.Editor = sh.edit()
+                            editor.putInt("user_id", user_id)
+                            editor.putString("firstname", firstname)
+                            editor.putString("lastname", lastname)
+                            editor.putString("email", email)
+                            editor.putString("profile_pic", profile_pic)
+                            editor.apply()
+
                             val intentWorker = Intent(this, Worker_Homepage::class.java)
-                            intentWorker.putExtra("email", email)
-                            intentWorker.putExtra("firstname", firstname)
-                            intentWorker.putExtra("lastname", lastname)
-                            intentWorker.putExtra("profile_pic", profile_pic)
                             startActivity(intentWorker)
                         }
                     } else {

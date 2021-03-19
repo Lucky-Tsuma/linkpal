@@ -1,7 +1,11 @@
 package com.lucky.linkpal
 
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
@@ -11,20 +15,18 @@ import kotlinx.android.synthetic.main.activity_worker__homepage.*
 import kotlinx.android.synthetic.main.nav_drawer_header_worker.view.*
 
 class Worker_Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
-    private lateinit var firstname: String
-    private lateinit var lastname: String
-    private lateinit var email: String
-    private lateinit var profile_pic: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_worker__homepage)
 
-        val intent = intent
-        email = intent.getStringExtra("email").toString()
-        firstname = intent.getStringExtra("firstname").toString()
-        lastname = intent.getStringExtra("lastname").toString()
-        profile_pic = intent.getStringExtra("profile_pic").toString()
+        val sh: SharedPreferences = getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
+        val user_id = sh.getInt("user_id", 0)
+        val firstname = sh.getString("firstname", null)
+        val lastname = sh.getString("lastname", null)
+        val email = sh.getString("email", null)
+        val profile_pic = sh.getString("profile_pic", null)
+
 
         setSupportActionBar(toolbar_worker)
 
@@ -43,9 +45,9 @@ class Worker_Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSele
 
         /*setting user information on nav header*/
         val header = nav_view_worker.getHeaderView(0)
-        header.nav_username.text = "${firstname} ${lastname}"
+        header.nav_username.text = "$firstname $lastname"
         header.useremail.text = email
-        Glide.with(this).load(URLs.root_url+profile_pic).into(header.user_profile_pic)
+        Glide.with(this).load(URLs.root_url + profile_pic).into(header.user_profile_pic)
 
         /*So the activity opens to the home fragment by default. And the home fragment will be restored only in case of a first configuration change*/
         if (savedInstanceState == null) {
@@ -84,6 +86,16 @@ class Worker_Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSele
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.fragment_container_worker, JobsInvitedFragment()).commit()
                 toolbar_worker.title = "Jobs Invited"
+            }
+            R.id.log_out -> {
+                val sh: SharedPreferences = getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
+                val editor: SharedPreferences.Editor = sh.edit()
+                editor.clear()
+                editor.apply()
+
+                Toast.makeText(this, "You have been logged out", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, Login::class.java)
+                startActivity(intent)
             }
         }
         drawer_layout_worker.closeDrawer(GravityCompat.START)
