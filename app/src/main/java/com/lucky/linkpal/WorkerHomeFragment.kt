@@ -13,10 +13,8 @@ import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-import kotlinx.android.synthetic.main.fragment_employer_home.*
 import kotlinx.android.synthetic.main.fragment_worker_home.*
 import org.json.JSONException
-import org.json.JSONObject
 
 class WorkerHomeFragment : Fragment() {
     private var user_id: Int? = null

@@ -7,7 +7,10 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
 
-class Available_Job_Adapter(private var context: Context, private var list: MutableList<Available_Job>): BaseAdapter() {
+class Available_Job_Adapter(
+    private var context: Context,
+    private var list: MutableList<Available_Job>
+) : BaseAdapter() {
     override fun getView(position: Int, view: View?, parent: ViewGroup?): View {
         val mView: View? =
             LayoutInflater.from(context).inflate(R.layout.list_available_jobs, parent, false)
@@ -24,8 +27,8 @@ class Available_Job_Adapter(private var context: Context, private var list: Muta
         job_title.text = list[position].job_specialty
         job_location.text = list[position].job_location
         job_summary.text = list[position].job_description
-        amount.text = list[position].amount+"/="
-        posted_by.text = list[position].firstname +" "+ list[position].lastname
+        amount.text = list[position].amount + "/="
+        posted_by.text = list[position].firstname + " " + list[position].lastname
         post_date.text = list[position].post_date
 
         return mView

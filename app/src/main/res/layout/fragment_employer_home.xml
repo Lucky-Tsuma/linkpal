@@ -8,29 +8,28 @@
     <ListView
         android:id="@+id/list_view_job_posts"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </ListView>
+        android:layout_height="wrap_content" />
 
     <TextView
         android:id="@+id/txtView_havent_posted"
-        android:text="@string/no_post"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:visibility="gone"/>
+        android:text="@string/no_post"
+        android:visibility="gone" />
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/btn_post_a_job"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:clickable="true"
         android:contentDescription="@string/desc_post_a_job"
+        android:focusable="true"
         android:text="@string/post_a_job"
         android:textColor="@color/white"
-        app:backgroundTint="@color/colorPrimary"
-        android:focusable="true"
-        android:layout_alignParentEnd="true" />
+        app:backgroundTint="@color/colorPrimary" />
 
 </RelativeLayout>

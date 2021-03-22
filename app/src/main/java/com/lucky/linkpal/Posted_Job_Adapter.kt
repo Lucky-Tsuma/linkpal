@@ -7,7 +7,8 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
 
-class Posted_Job_Adapter(private var context: Context, private var list: MutableList<Posted_Job>): BaseAdapter() {
+class Posted_Job_Adapter(private var context: Context, private var list: MutableList<Posted_Job>) :
+    BaseAdapter() {
 
     override fun getView(position: Int, view: View?, parent: ViewGroup?): View {
         val mView: View? =
