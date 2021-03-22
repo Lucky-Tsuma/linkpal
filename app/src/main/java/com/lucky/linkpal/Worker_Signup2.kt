@@ -190,7 +190,7 @@ class Worker_Signup2 : AppCompatActivity() {
                     for (i in 0 until jsonArray.length()) {
                         val specialty = jsonArray.getJSONObject(i)
                         val id = specialty.getString("specialty_id")
-                        val name = specialty.getString("name")
+                        val name = specialty.getString("specialty_name")
 
                         val mapSpecialty = HashMap<String, String>()
 
@@ -236,7 +236,7 @@ class Worker_Signup2 : AppCompatActivity() {
                     for (i in 0 until jsonArray.length()) {
                         val location = jsonArray.getJSONObject(i)
                         val id = location.getString("location_id")
-                        val name = location.getString("name")
+                        val name = location.getString("location_name")
 
                         val locationMap = HashMap<String, String>()
                         locationMap["location_id"] = id

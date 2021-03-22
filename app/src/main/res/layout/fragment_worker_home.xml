@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <ListView
+        android:id="@+id/list_view_available_jobs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </ListView>
+
     <TextView
+        android:id="@+id/txtView_no_jobs"
+        android:text="@string/no_jobs"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:text="There are no jobs available yet"
-        android:textColor="@color/black"
-        android:textSize="16sp" />
+        android:visibility="gone"/>
 
-</LinearLayout>
+</RelativeLayout>

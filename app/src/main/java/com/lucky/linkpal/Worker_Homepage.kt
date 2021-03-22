@@ -21,7 +21,7 @@ class Worker_Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSele
         setContentView(R.layout.activity_worker__homepage)
 
         val sh: SharedPreferences = getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
-        val user_id = sh.getInt("user_id", 0)
+//        val user_id = sh.getInt("user_id", 0)
         val firstname = sh.getString("firstname", null)
         val lastname = sh.getString("lastname", null)
         val email = sh.getString("email", null)

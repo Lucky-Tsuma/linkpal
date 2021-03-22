@@ -23,7 +23,7 @@ class Employer_Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSe
         val firstname = sh.getString("firstname", null)
         val lastname = sh.getString("lastname", null)
         val email = sh.getString("email", null)
-        val user_id = sh.getInt("user_id", 0)
+//        val user_id = sh.getInt("user_id", 0)
 
         setSupportActionBar(toolbar_employer)/*We got rid of the default action bar, noew we setting a toolbar instead*/
 

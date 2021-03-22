@@ -11,12 +11,14 @@ import android.widget.SimpleAdapter
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.lucky.linkpal.SafeClickListener.Companion.setSafeOnClickListener
+import kotlinx.android.synthetic.main.activity_employer__homepage.*
 import kotlinx.android.synthetic.main.activity_post__a__job.*
 import org.json.JSONException
 import org.json.JSONObject
@@ -81,6 +83,7 @@ class Post_A_Job : AppCompatActivity() {
                 postJob()
             }
         }
+
     }
 
     /*ON JOB TYPE*/
@@ -97,7 +100,7 @@ class Post_A_Job : AppCompatActivity() {
                     for (i in 0 until jsonArray.length()) {
                         val specialty = jsonArray.getJSONObject(i)
                         val id = specialty.getString("specialty_id")
-                        val name = specialty.getString("name")
+                        val name = specialty.getString("specialty_name")
 
                         val mapSpecialty = HashMap<String, String>()
 
@@ -144,7 +147,7 @@ class Post_A_Job : AppCompatActivity() {
                     for (i in 0 until jsonArray.length()) {
                         val location = jsonArray.getJSONObject(i)
                         val id = location.getString("location_id")
-                        val name = location.getString("name")
+                        val name = location.getString("location_name")
 
                         val locationMap = HashMap<String, String>()
                         locationMap["location_id"] = id
@@ -293,5 +296,11 @@ class Post_A_Job : AppCompatActivity() {
             }
         }
         Volley.newRequestQueue(this).add(request)
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val intent = Intent(this, Employer_Homepage::class.java)
+        startActivity(intent)
     }
 }

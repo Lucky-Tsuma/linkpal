@@ -5,19 +5,19 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
+    <ListView
+        android:id="@+id/list_view_job_posts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </ListView>
+
+    <TextView
+        android:id="@+id/txtView_havent_posted"
+        android:text="@string/no_post"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="You have not posted any jobs yet"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
-    </LinearLayout>
+        android:gravity="center"
+        android:visibility="gone"/>
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/btn_post_a_job"
@@ -29,6 +29,8 @@
         android:contentDescription="@string/desc_post_a_job"
         android:text="@string/post_a_job"
         android:textColor="@color/white"
-        app:backgroundTint="@color/colorPrimary" />
+        app:backgroundTint="@color/colorPrimary"
+        android:focusable="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>
