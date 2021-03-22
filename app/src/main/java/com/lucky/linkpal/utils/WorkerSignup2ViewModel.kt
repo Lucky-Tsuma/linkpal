@@ -1,4 +1,4 @@
-package com.lucky.linkpal
+package com.lucky.linkpal.utils
 
 import android.graphics.drawable.Drawable
 import androidx.lifecycle.ViewModel

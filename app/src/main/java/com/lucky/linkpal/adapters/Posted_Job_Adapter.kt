@@ -1,4 +1,4 @@
-package com.lucky.linkpal
+package com.lucky.linkpal.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
+import com.lucky.linkpal.data_classes.Posted_Job
+import com.lucky.linkpal.R
 
 class Posted_Job_Adapter(private var context: Context, private var list: MutableList<Posted_Job>) :
     BaseAdapter() {

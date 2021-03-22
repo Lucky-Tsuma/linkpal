@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import com.bumptech.glide.Glide
 import com.google.android.material.navigation.NavigationView
+import com.lucky.linkpal.fragments.*
+import com.lucky.linkpal.utils.URLs
 import kotlinx.android.synthetic.main.activity_worker__homepage.*
 import kotlinx.android.synthetic.main.nav_drawer_header_worker.view.*
 
@@ -52,7 +54,9 @@ class Worker_Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSele
         /*So the activity opens to the home fragment by default. And the home fragment will be restored only in case of a first configuration change*/
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container_worker, WorkerHomeFragment()).commit()
+                .replace(R.id.fragment_container_worker,
+                    WorkerHomeFragment()
+                ).commit()
             nav_view_worker.setCheckedItem(R.id.worker_home)
             toolbar_worker.title = "Available Jobs"
         }
@@ -63,28 +67,38 @@ class Worker_Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSele
         when (item.itemId) {
             R.id.worker_home -> {
                 supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container_worker, WorkerHomeFragment())
+                    .replace(R.id.fragment_container_worker,
+                        WorkerHomeFragment()
+                    )
                     .commit()
                 toolbar_worker.title = "Available Jobs"
             }
             R.id.worker_profile -> {
                 supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container_worker, WorkerProfileFragment()).commit()
+                    .replace(R.id.fragment_container_worker,
+                        WorkerProfileFragment()
+                    ).commit()
                 toolbar_worker.title = "Profile"
             }
             R.id.portfolio -> {
                 supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container_worker, PortfolioFragment()).commit()
+                    .replace(R.id.fragment_container_worker,
+                        PortfolioFragment()
+                    ).commit()
                 toolbar_worker.title = "Portfolio"
             }
             R.id.pending_requests -> {
                 supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container_worker, PendingRequestsFragment()).commit()
+                    .replace(R.id.fragment_container_worker,
+                        PendingRequestsFragment()
+                    ).commit()
                 toolbar_worker.title = "Pending Requests"
             }
             R.id.jobs_invited -> {
                 supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container_worker, JobsInvitedFragment()).commit()
+                    .replace(R.id.fragment_container_worker,
+                        JobsInvitedFragment()
+                    ).commit()
                 toolbar_worker.title = "Jobs Invited"
             }
             R.id.log_out -> {

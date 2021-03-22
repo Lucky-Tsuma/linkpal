@@ -8,7 +8,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.Response
 import com.android.volley.toolbox.Volley
-import com.lucky.linkpal.SafeClickListener.Companion.setSafeOnClickListener
+import com.lucky.linkpal.utils.SafeClickListener.Companion.setSafeOnClickListener
+import com.lucky.linkpal.utils.URLs
+import com.lucky.linkpal.utils.VolleyFileUploadRequest
 import kotlinx.android.synthetic.main.activity_login.*
 import org.json.JSONException
 import org.json.JSONObject

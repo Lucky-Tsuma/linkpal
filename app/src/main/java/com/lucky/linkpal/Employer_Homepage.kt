@@ -10,6 +10,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import com.google.android.material.navigation.NavigationView
+import com.lucky.linkpal.fragments.*
 import kotlinx.android.synthetic.main.activity_employer__homepage.*
 import kotlinx.android.synthetic.main.nav_drawer_header_employer.view.*
 
@@ -43,7 +44,9 @@ class Employer_Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container_employer, EmployerHomeFragment()).commit()
+                .replace(R.id.fragment_container_employer,
+                    EmployerHomeFragment()
+                ).commit()
             nav_view_employer.setCheckedItem(R.id.employer_home)
             toolbar_employer.title = "Your Posts"
         }
@@ -66,35 +69,45 @@ class Employer_Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSe
         when (item.itemId) {
             R.id.employer_home -> {
                 supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container_employer, EmployerHomeFragment())
+                    .replace(R.id.fragment_container_employer,
+                        EmployerHomeFragment()
+                    )
                     .commit()
                 toolbar_employer.title = "Your Posts"
             }
 
             R.id.employer_profile -> {
                 supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container_employer, EmployerProfileFragment())
+                    .replace(R.id.fragment_container_employer,
+                        EmployerProfileFragment()
+                    )
                     .commit()
                 toolbar_employer.title = "Profile"
             }
 
             R.id.upgrade_account -> {
                 supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container_employer, UpgradeAccountFragment())
+                    .replace(R.id.fragment_container_employer,
+                        UpgradeAccountFragment()
+                    )
                     .commit()
                 toolbar_employer.title = "Upgrade Account"
             }
 
             R.id.job_requests -> {
                 supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container_employer, JobRequestsFragment())
+                    .replace(R.id.fragment_container_employer,
+                        JobRequestsFragment()
+                    )
                     .commit()
                 toolbar_employer.title = "Job Requests"
             }
 
             R.id.job_invites -> {
                 supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container_employer, JobInvitesFragment())
+                    .replace(R.id.fragment_container_employer,
+                        JobInvitesFragment()
+                    )
                     .commit()
                 toolbar_employer.title = "Job Invites"
             }

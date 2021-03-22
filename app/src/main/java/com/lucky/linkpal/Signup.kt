@@ -3,7 +3,7 @@ package com.lucky.linkpal
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.lucky.linkpal.SafeClickListener.Companion.setSafeOnClickListener
+import com.lucky.linkpal.utils.SafeClickListener.Companion.setSafeOnClickListener
 import kotlinx.android.synthetic.main.activity_signup.*
 
 class Signup : AppCompatActivity() {

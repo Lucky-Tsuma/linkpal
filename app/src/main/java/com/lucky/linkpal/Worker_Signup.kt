@@ -5,7 +5,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.lucky.linkpal.SafeClickListener.Companion.setSafeOnClickListener
+import com.lucky.linkpal.utils.SafeClickListener.Companion.setSafeOnClickListener
 import kotlinx.android.synthetic.main.activity_worker__signup.*
 
 class Worker_Signup : AppCompatActivity() {

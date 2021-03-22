@@ -1,4 +1,4 @@
-package com.lucky.linkpal
+package com.lucky.linkpal.data_classes
 
 class Available_Job(
     var job_id: Int,

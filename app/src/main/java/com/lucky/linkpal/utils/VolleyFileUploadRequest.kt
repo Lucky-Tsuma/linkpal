@@ -1,4 +1,4 @@
-package com.lucky.linkpal
+package com.lucky.linkpal.utils
 
 import com.android.volley.*
 import com.android.volley.toolbox.HttpHeaderParser

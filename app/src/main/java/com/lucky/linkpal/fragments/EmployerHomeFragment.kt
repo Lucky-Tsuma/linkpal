@@ -1,4 +1,4 @@
-package com.lucky.linkpal
+package com.lucky.linkpal.fragments
 
 import android.content.Context
 import android.content.Intent
@@ -11,7 +11,13 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.android.volley.Response
 import com.android.volley.toolbox.Volley
-import com.lucky.linkpal.SafeClickListener.Companion.setSafeOnClickListener
+import com.lucky.linkpal.Post_A_Job
+import com.lucky.linkpal.data_classes.Posted_Job
+import com.lucky.linkpal.adapters.Posted_Job_Adapter
+import com.lucky.linkpal.R
+import com.lucky.linkpal.utils.SafeClickListener.Companion.setSafeOnClickListener
+import com.lucky.linkpal.utils.URLs
+import com.lucky.linkpal.utils.VolleyFileUploadRequest
 import kotlinx.android.synthetic.main.fragment_employer_home.*
 import kotlinx.android.synthetic.main.fragment_employer_home.view.*
 import org.json.JSONException
@@ -72,7 +78,11 @@ class EmployerHomeFragment : Fragment() {
                                 )
                             )
                         }
-                        val jobs_adapter = Posted_Job_Adapter(context!!, jobs)
+                        val jobs_adapter =
+                            Posted_Job_Adapter(
+                                context!!,
+                                jobs
+                            )
                         list_view_job_posts.adapter = jobs_adapter
 
                     } catch (e: JSONException) {

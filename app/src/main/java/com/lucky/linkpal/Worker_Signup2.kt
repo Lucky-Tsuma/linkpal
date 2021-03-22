@@ -21,7 +21,11 @@ import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-import com.lucky.linkpal.SafeClickListener.Companion.setSafeOnClickListener
+import com.lucky.linkpal.utils.SafeClickListener.Companion.setSafeOnClickListener
+import com.lucky.linkpal.utils.FileDataPart
+import com.lucky.linkpal.utils.URLs
+import com.lucky.linkpal.utils.VolleyFileUploadRequest
+import com.lucky.linkpal.utils.WorkerSignup2ViewModel
 import kotlinx.android.synthetic.main.activity_worker__signup2.*
 import org.json.JSONException
 import org.json.JSONObject
@@ -407,7 +411,8 @@ class Worker_Signup2 : AppCompatActivity() {
 
             override fun getByteData(): MutableMap<String, FileDataPart> {
                 val params = HashMap<String, FileDataPart>()
-                params["imageFile"] = FileDataPart(email, imageData!!, "")
+                params["imageFile"] =
+                    FileDataPart(email, imageData!!, "")
                 return params
             }
         }/*VolleyFileUploadRequest(...) ends here*/

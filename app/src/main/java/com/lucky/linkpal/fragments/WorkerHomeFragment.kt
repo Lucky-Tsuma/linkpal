@@ -1,4 +1,4 @@
-package com.lucky.linkpal
+package com.lucky.linkpal.fragments
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -13,6 +13,10 @@ import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.lucky.linkpal.data_classes.Available_Job
+import com.lucky.linkpal.adapters.Available_Job_Adapter
+import com.lucky.linkpal.R
+import com.lucky.linkpal.utils.URLs
 import kotlinx.android.synthetic.main.fragment_worker_home.*
 import org.json.JSONException
 
@@ -73,7 +77,11 @@ class WorkerHomeFragment : Fragment() {
                                 )
                             )
                         }
-                        val jobs_adapter = Available_Job_Adapter(context!!, jobs)
+                        val jobs_adapter =
+                            Available_Job_Adapter(
+                                context!!,
+                                jobs
+                            )
                         list_view_available_jobs.adapter = jobs_adapter
 
                     } catch (e: JSONException) {
