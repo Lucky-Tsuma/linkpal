@@ -8,6 +8,8 @@ class URLs {
         const val location_get = "${root_url}/get_location.php"
         const val login = "${root_url}/login.php"
         const val post_job = "${root_url}/post_job.php"
+        const val employer_job_posts = "${root_url}/employer_job_posts.php"
+        const val available_jobs = "${root_url}/available_jobs.php"
     }
 }
 

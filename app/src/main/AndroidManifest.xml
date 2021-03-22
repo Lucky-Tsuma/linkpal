@@ -15,12 +15,14 @@
         <activity
             android:name=".Post_A_Job"
             android:label="Post new job"
-            android:noHistory="true"/>
+            android:noHistory="true" />
         <activity
             android:name=".Worker_Homepage"
+            android:noHistory="true"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Employer_Homepage"
+            android:noHistory="true"
             android:theme="@style/MyMaterialTheme.NoActionBar" />
         <activity
             android:name=".Employer_Signup"

@@ -92,4 +92,10 @@
     <string name="amount">Amount in Ksh</string>
     <string name="post">submit post</string>
 
+    <!--posted jobs-->
+    <string name="delete_post">delete</string>
+    <string name="no_post">You have not posted any jobs yet. Jobs you post will appear here.</string>
+    <string name="apply">apply</string>
+    <string name="no_jobs">There are no jobs available.</string>
+
 </resources>
