@@ -1,6 +1,7 @@
 package com.lucky.linkpal
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.lucky.linkpal.utils.SafeClickListener.Companion.setSafeOnClickListener
@@ -25,6 +26,20 @@ class MainActivity : AppCompatActivity() {
         about.setSafeOnClickListener {
             val intent = Intent(this, About::class.java)
             startActivity(intent)
+        }
+
+        contact_us.setSafeOnClickListener {
+            val mails = arrayOf("linkpal97@gmail.com")
+            val mailIntent = Intent(Intent.ACTION_SEND)
+            mailIntent.data = Uri.parse("mailto")
+            mailIntent.type = "*/*"
+            mailIntent.putExtra(Intent.EXTRA_EMAIL, mails)
+            mailIntent.putExtra(Intent.EXTRA_SUBJECT, "Linkpal support")
+            mailIntent.putExtra(Intent.EXTRA_TEXT, "")
+
+            if (mailIntent.resolveActivity(getPackageManager()) != null) {
+                startActivity(mailIntent);
+            }
         }
     }
 }
