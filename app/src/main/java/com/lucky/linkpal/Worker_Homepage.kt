@@ -29,7 +29,7 @@ class Worker_Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSele
         val email = sh.getString("email", null)
         val profile_pic = sh.getString("profile_pic", null)
 
-
+        toolbar_worker.title = "Available Jobs"
         setSupportActionBar(toolbar_worker)
 
         val toggle = ActionBarDrawerToggle(
@@ -54,20 +54,20 @@ class Worker_Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSele
         /*So the activity opens to the home fragment by default. And the home fragment will be restored only in case of a first configuration change*/
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container_worker,
+                .replace(
+                    R.id.fragment_container_worker,
                     WorkerHomeFragment()
                 ).commit()
             nav_view_worker.setCheckedItem(R.id.worker_home)
-            toolbar_worker.title = "Available Jobs"
         }
-
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.worker_home -> {
                 supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container_worker,
+                    .replace(
+                        R.id.fragment_container_worker,
                         WorkerHomeFragment()
                     )
                     .commit()
@@ -75,28 +75,32 @@ class Worker_Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSele
             }
             R.id.worker_profile -> {
                 supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container_worker,
+                    .replace(
+                        R.id.fragment_container_worker,
                         WorkerProfileFragment()
                     ).commit()
                 toolbar_worker.title = "Profile"
             }
             R.id.portfolio -> {
                 supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container_worker,
+                    .replace(
+                        R.id.fragment_container_worker,
                         PortfolioFragment()
                     ).commit()
                 toolbar_worker.title = "Portfolio"
             }
             R.id.pending_requests -> {
                 supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container_worker,
+                    .replace(
+                        R.id.fragment_container_worker,
                         PendingRequestsFragment()
                     ).commit()
                 toolbar_worker.title = "Pending Requests"
             }
             R.id.jobs_invited -> {
                 supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container_worker,
+                    .replace(
+                        R.id.fragment_container_worker,
                         JobsInvitedFragment()
                     ).commit()
                 toolbar_worker.title = "Jobs Invited"

@@ -13,9 +13,9 @@ import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-import com.lucky.linkpal.data_classes.Available_Job
-import com.lucky.linkpal.adapters.Available_Job_Adapter
 import com.lucky.linkpal.R
+import com.lucky.linkpal.adapters.Available_Job_Adapter
+import com.lucky.linkpal.data_classes.Available_Job
 import com.lucky.linkpal.utils.URLs
 import kotlinx.android.synthetic.main.fragment_worker_home.*
 import org.json.JSONException
@@ -56,7 +56,8 @@ class WorkerHomeFragment : Fragment() {
                         val jsonArray = response.getJSONArray("available_job")
                         for (i in 0 until jsonArray.length()) {
                             val job = jsonArray.getJSONObject(i)
-                            val job_id = job.getString("job_id").toInt()
+
+                            val job_id = job.getString("job_id")
                             val firstname = job.getString("firstname")
                             val lastname = job.getString("lastname")
                             val job_description = job.getString("job_description")
@@ -64,6 +65,7 @@ class WorkerHomeFragment : Fragment() {
                             val post_date = job.getString("post_date")
                             val job_specialty = job.getString("job_specialty")
                             val job_location = job.getString("job_location")
+                            val employer_email = job.getString("employer_email")
                             jobs.add(
                                 Available_Job(
                                     job_id,
@@ -73,15 +75,12 @@ class WorkerHomeFragment : Fragment() {
                                     amount,
                                     post_date,
                                     job_specialty,
-                                    job_location
+                                    job_location,
+                                    employer_email
                                 )
                             )
                         }
-                        val jobs_adapter =
-                            Available_Job_Adapter(
-                                context!!,
-                                jobs
-                            )
+                        val jobs_adapter = Available_Job_Adapter(context!!, jobs)
                         list_view_available_jobs.adapter = jobs_adapter
 
                     } catch (e: JSONException) {
@@ -105,4 +104,5 @@ class WorkerHomeFragment : Fragment() {
             })
         jsonQueue.add(availableJobsReq)
     }
+
 }

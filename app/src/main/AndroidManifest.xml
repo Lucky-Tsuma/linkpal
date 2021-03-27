@@ -18,11 +18,9 @@
             android:noHistory="true" />
         <activity
             android:name=".Worker_Homepage"
-            android:noHistory="true"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Employer_Homepage"
-            android:noHistory="true"
             android:theme="@style/MyMaterialTheme.NoActionBar" />
         <activity
             android:name=".Employer_Signup"

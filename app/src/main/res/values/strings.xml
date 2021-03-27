@@ -2,6 +2,8 @@
     <string name="app_name">linkpal</string>
     <string name="sign_up">Sign up</string>
 
+    <string name="placeholder">placeholder</string>
+
     <!--MainActivity-->
     <string name="log_in">Log in</string>
     <string name="create_account">Create new account</string>
@@ -93,9 +95,15 @@
     <string name="post">submit post</string>
 
     <!--posted jobs-->
-    <string name="delete_post">delete</string>
+    <string name="delete">delete</string>
     <string name="no_post">You have not posted any jobs yet. Jobs you post will appear here.</string>
     <string name="apply">apply</string>
     <string name="no_jobs">There are no jobs available.</string>
+
+    <!--Job requests-->
+    <string name="no_pending_requests">You have not applied for any jobs yet.</string>
+    <string name="no_job_requests">There have been no requests on the jobs you posted yet.</string>
+    <string name="recruit">recruit</string>
+    <string name="decline">decline</string>
 
 </resources>

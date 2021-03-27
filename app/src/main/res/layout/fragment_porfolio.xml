@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:text="Upload pictures and documents here."
+        android:text="@string/placeholder"
         android:textColor="@color/black"
         android:textSize="16sp" />
 
@@ -24,6 +24,7 @@
         android:clickable="true"
         android:contentDescription="@string/desc_post_a_job"
         android:src="@drawable/ic_add"
-        app:backgroundTint="@color/colorPrimary" />
+        app:backgroundTint="@color/colorPrimary"
+        android:focusable="true" />
 
 </RelativeLayout>

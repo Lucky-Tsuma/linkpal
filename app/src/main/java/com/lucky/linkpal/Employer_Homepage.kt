@@ -11,14 +11,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import com.google.android.material.navigation.NavigationView
 import com.lucky.linkpal.fragments.*
-import kotlinx.android.synthetic.main.activity_employer__homepage.*
+import kotlinx.android.synthetic.main.activity_employer_homepage.*
 import kotlinx.android.synthetic.main.nav_drawer_header_employer.view.*
 
 class Employer_Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_employer__homepage)
+        setContentView(R.layout.activity_employer_homepage)
 
         val sh: SharedPreferences = getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
         val firstname = sh.getString("firstname", null)
@@ -26,6 +26,7 @@ class Employer_Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSe
         val email = sh.getString("email", null)
 //        val user_id = sh.getInt("user_id", 0)
 
+        toolbar_employer.title = "Your Posts"
         setSupportActionBar(toolbar_employer)/*We got rid of the default action bar, noew we setting a toolbar instead*/
 
         val toggle = ActionBarDrawerToggle(
@@ -44,11 +45,11 @@ class Employer_Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container_employer,
+                .replace(
+                    R.id.fragment_container_employer,
                     EmployerHomeFragment()
                 ).commit()
             nav_view_employer.setCheckedItem(R.id.employer_home)
-            toolbar_employer.title = "Your Posts"
         }
     }
 
@@ -69,7 +70,8 @@ class Employer_Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSe
         when (item.itemId) {
             R.id.employer_home -> {
                 supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container_employer,
+                    .replace(
+                        R.id.fragment_container_employer,
                         EmployerHomeFragment()
                     )
                     .commit()
@@ -78,7 +80,8 @@ class Employer_Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
             R.id.employer_profile -> {
                 supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container_employer,
+                    .replace(
+                        R.id.fragment_container_employer,
                         EmployerProfileFragment()
                     )
                     .commit()
@@ -87,7 +90,8 @@ class Employer_Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
             R.id.upgrade_account -> {
                 supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container_employer,
+                    .replace(
+                        R.id.fragment_container_employer,
                         UpgradeAccountFragment()
                     )
                     .commit()
@@ -96,7 +100,8 @@ class Employer_Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
             R.id.job_requests -> {
                 supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container_employer,
+                    .replace(
+                        R.id.fragment_container_employer,
                         JobRequestsFragment()
                     )
                     .commit()
@@ -105,7 +110,8 @@ class Employer_Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
             R.id.job_invites -> {
                 supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container_employer,
+                    .replace(
+                        R.id.fragment_container_employer,
                         JobInvitesFragment()
                     )
                     .commit()

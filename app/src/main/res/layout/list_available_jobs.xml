@@ -15,10 +15,11 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_weight="0"
+            android:text=""
             android:visibility="gone" />
 
         <TextView
-            android:id="@+id/user_id"
+            android:id="@+id/employer_email"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_weight="0"
@@ -30,7 +31,7 @@
             android:layout_height="match_parent"
             android:layout_weight="3"
             android:gravity="center"
-            android:text="job_title"
+            android:text="@string/placeholder"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -40,7 +41,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="job location"
+            android:text="@string/placeholder"
             android:textColor="@color/light_blue"
             android:textSize="16sp"
             android:textStyle="bold|italic" />
@@ -58,7 +59,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="3.5"
-            android:text="This is a sample job summary. "
+            android:text="@string/placeholder"
             android:textColor="@color/black"
             android:textSize="16sp" />
 
@@ -87,7 +88,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="2500/="
+            android:text="@string/placeholder"
             android:textSize="16sp"
             android:textStyle="bold|italic" />
 
@@ -102,7 +103,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Firstname Lastname"
+                android:text="@string/placeholder"
                 android:textSize="16sp"
                 android:textStyle="bold|italic" />
 
@@ -111,7 +112,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="19 March 2021"
+                android:text="@string/placeholder"
                 android:textSize="16sp"
                 android:textStyle="bold|italic" />
 
