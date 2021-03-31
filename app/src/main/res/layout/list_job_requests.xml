@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -12,6 +13,14 @@
 
         <TextView
             android:id="@+id/job_id"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="0"
+            android:text=""
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/email"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_weight="0"
@@ -80,27 +89,33 @@
         android:layout_weight="2"
         android:orientation="horizontal">
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/button_recruit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_gravity="center"
             android:layout_marginRight="8dp"
-            android:background="@drawable/border_blue_button"
+            android:layout_weight="1"
             android:text="@string/recruit"
             android:textColor="@color/light_blue"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            app:backgroundTint="@color/white"
+            app:cornerRadius="10dp"
+            app:strokeColor="@color/light_blue" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/button_decline"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            android:background="@drawable/red_button"
+            android:layout_weight="1"
             android:text="@string/decline"
             android:textColor="@color/white"
             android:textSize="16sp"
-            android:layout_marginStart="8dp" />
+            app:backgroundTint="@color/red"
+            app:cornerRadius="10dp"
+            app:strokeColor="@color/red" />
     </LinearLayout>
 </LinearLayout>

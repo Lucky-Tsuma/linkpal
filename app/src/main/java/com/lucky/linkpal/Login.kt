@@ -102,6 +102,7 @@ class Login : AppCompatActivity() {
                         val user_id = obj.getInt("user_id")
                         val firstname = obj.getString("firstname")
                         val lastname = obj.getString("lastname")
+                        val phone_number = obj.getString("phone_number")
                         if (userType == "employer") {
                             Toast.makeText(applicationContext, msg, Toast.LENGTH_SHORT).show()
 
@@ -111,6 +112,7 @@ class Login : AppCompatActivity() {
                             editor.putInt("user_id", user_id)
                             editor.putString("firstname", firstname)
                             editor.putString("lastname", lastname)
+                            editor.putString("phone_number", phone_number)
                             editor.putString("email", email)
                             editor.apply()
 
@@ -127,6 +129,7 @@ class Login : AppCompatActivity() {
                             editor.putInt("user_id", user_id)
                             editor.putString("firstname", firstname)
                             editor.putString("lastname", lastname)
+                            editor.putString("phone_number", phone_number)
                             editor.putString("email", email)
                             editor.putString("profile_pic", profile_pic)
                             editor.apply()

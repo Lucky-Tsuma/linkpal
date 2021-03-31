@@ -59,6 +59,7 @@ class JobRequestsFragment : Fragment() {
                             val job_title = job.getString("job_title")
                             val job_location = job.getString("job_location")
                             val request_date = job.getString("request_date")
+                            val email = job.getString("email")
                             job_requests.add(
                                 Job_Request(
                                     job_id,
@@ -67,7 +68,8 @@ class JobRequestsFragment : Fragment() {
                                     lastname,
                                     job_title,
                                     job_location,
-                                    request_date
+                                    request_date,
+                                    email
                                 )
                             )
                         }

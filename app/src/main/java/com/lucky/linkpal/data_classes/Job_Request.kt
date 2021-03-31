@@ -7,5 +7,6 @@ class Job_Request(
     var lastname: String,
     var job_title: String,
     var job_location: String,
-    var request_date: String
+    var request_date: String,
+    var email: String
 )

@@ -12,12 +12,10 @@ import com.android.volley.Response
 import com.android.volley.toolbox.Volley
 import com.lucky.linkpal.R
 import com.lucky.linkpal.adapters.Adapter_Pending_Requests
-import com.lucky.linkpal.data_classes.Job_Request
 import com.lucky.linkpal.data_classes.Pending_Request
 import com.lucky.linkpal.utils.URLs
 import com.lucky.linkpal.utils.VolleyFileUploadRequest
 import kotlinx.android.synthetic.main.fragment_pending_requests.*
-import kotlinx.android.synthetic.main.list_pending_requests.*
 import org.json.JSONException
 import org.json.JSONObject
 

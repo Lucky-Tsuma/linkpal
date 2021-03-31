@@ -13,6 +13,9 @@ class URLs {
         const val apply_job = "$root_url/apply_job.php"
         const val job_requests = "$root_url/job_requests.php"
         const val pending_requests = "$root_url/pending_requests.php"
+        const val delete_job  = "$root_url/delete_job.php"
+        const val delete_job_request = "$root_url/delete_job_request.php"
+        const val recruit = "$root_url/recruit.php"
     }
 }
 

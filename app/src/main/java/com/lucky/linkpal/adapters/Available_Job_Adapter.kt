@@ -2,7 +2,6 @@ package com.lucky.linkpal.adapters
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -115,7 +114,6 @@ class Available_Job_Adapter(
                         Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
                     }
                 } catch (e: JSONException) {
-                    Log.e("LTM_DEBUG", res)
                     Toast.makeText(context, "Oops! An error occurred", Toast.LENGTH_SHORT).show()
                 }
             },
