@@ -180,7 +180,6 @@ class Worker_Signup2 : AppCompatActivity() {
 
     }
 
-
     /*ON JOB FIELD*/
     private fun populateJobFieldMenu() {
 
