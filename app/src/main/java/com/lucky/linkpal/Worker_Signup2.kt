@@ -21,8 +21,8 @@ import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-import com.lucky.linkpal.utils.SafeClickListener.Companion.setSafeOnClickListener
 import com.lucky.linkpal.utils.FileDataPart
+import com.lucky.linkpal.utils.SafeClickListener.Companion.setSafeOnClickListener
 import com.lucky.linkpal.utils.URLs
 import com.lucky.linkpal.utils.VolleyFileUploadRequest
 import com.lucky.linkpal.utils.WorkerSignup2ViewModel
