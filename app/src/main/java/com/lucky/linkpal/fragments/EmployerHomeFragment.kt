@@ -12,9 +12,9 @@ import androidx.fragment.app.Fragment
 import com.android.volley.Response
 import com.android.volley.toolbox.Volley
 import com.lucky.linkpal.Post_A_Job
-import com.lucky.linkpal.data_classes.Posted_Job
-import com.lucky.linkpal.adapters.Posted_Job_Adapter
 import com.lucky.linkpal.R
+import com.lucky.linkpal.adapters.Posted_Job_Adapter
+import com.lucky.linkpal.data_classes.Posted_Job
 import com.lucky.linkpal.utils.SafeClickListener.Companion.setSafeOnClickListener
 import com.lucky.linkpal.utils.URLs
 import com.lucky.linkpal.utils.VolleyFileUploadRequest
