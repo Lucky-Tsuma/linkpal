@@ -10,7 +10,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.android.volley.Request
 import com.android.volley.RequestQueue
-import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.lucky.linkpal.R
@@ -45,7 +44,7 @@ class WorkerHomeFragment : Fragment() {
 
         val availableJobsReq = JsonObjectRequest(
             Request.Method.GET, URLs.available_jobs, null,
-            Response.Listener { response ->
+            { response ->
 
                 jobs = mutableListOf()
 
@@ -90,7 +89,7 @@ class WorkerHomeFragment : Fragment() {
                 } else {
                     txtView_no_jobs.visibility = View.VISIBLE
                 }
-            }, Response.ErrorListener { error ->
+            }, { error ->
                 error.printStackTrace()
                 if (error.toString().matches(Regex("(.*)NoConnectionError(.*)"))) {
                     Toast.makeText(

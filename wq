@@ -1,0 +1,40 @@
+[1mdiff --git a/app/src/main/java/com/lucky/linkpal/Worker_Signup2.kt b/app/src/main/java/com/lucky/linkpal/Worker_Signup2.kt[m
+[1mindex 21aae8c..582c796 100644[m
+[1m--- a/app/src/main/java/com/lucky/linkpal/Worker_Signup2.kt[m
+[1m+++ b/app/src/main/java/com/lucky/linkpal/Worker_Signup2.kt[m
+[36m@@ -184,7 +184,7 @@[m [mclass Worker_Signup2 : AppCompatActivity() {[m
+     private fun populateJobFieldMenu() {[m
+ [m
+         val specialtyReq = JsonObjectRequest(Request.Method.GET, URLs.specialty_get, null,[m
+[31m-            Response.Listener { response ->[m
+[32m+[m[32m            { response ->[m
+                 try {[m
+                     val specialtyList = ArrayList<HashMap<String, String>>()[m
+ [m
+[36m@@ -211,7 +211,7 @@[m [mclass Worker_Signup2 : AppCompatActivity() {[m
+                 } catch (e: JSONException) {[m
+                     e.printStackTrace()[m
+                 }[m
+[31m-            }, Response.ErrorListener { error ->[m
+[32m+[m[32m            }, { error ->[m
+                 error.printStackTrace()[m
+                 if (error.toString().matches(Regex("(.*)NoConnectionError(.*)"))) {[m
+                     Toast.makeText([m
+[36m@@ -231,7 +231,7 @@[m [mclass Worker_Signup2 : AppCompatActivity() {[m
+     private fun populateLocationMenu() {[m
+ [m
+         val locationReq = JsonObjectRequest(Request.Method.GET, URLs.location_get, null,[m
+[31m-            Response.Listener { response ->[m
+[32m+[m[32m            { response ->[m
+                 try {[m
+                     val locationList = ArrayList<HashMap<String, String>>()[m
+                     val jsonArray = response.getJSONArray("location")[m
+[36m@@ -257,7 +257,7 @@[m [mclass Worker_Signup2 : AppCompatActivity() {[m
+                     e.printStackTrace()[m
+                 }[m
+             },[m
+[31m-            Response.ErrorListener { error ->[m
+[32m+[m[32m            { error ->[m
+                 error.printStackTrace()[m
+                 if (error.toString().matches(Regex("(.*)NoConnectionError(.*)"))) {[m
+                     Toast.makeText([m
