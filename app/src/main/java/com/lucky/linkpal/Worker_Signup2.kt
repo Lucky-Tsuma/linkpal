@@ -34,7 +34,7 @@ import java.io.IOException
 import java.util.*
 
 
-class Worker_Signup2 : AppCompatActivity() {
+class  Worker_Signup2 : AppCompatActivity() {
 
     private var status: Boolean = true
     private lateinit var userLocation: String

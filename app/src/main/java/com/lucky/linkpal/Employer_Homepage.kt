@@ -27,7 +27,7 @@ class Employer_Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSe
 //        val user_id = sh.getInt("user_id", 0)
 
         toolbar_employer.title = "Your Posts"
-        setSupportActionBar(toolbar_employer)/*We got rid of the default action bar, noew we setting a toolbar instead*/
+        setSupportActionBar(toolbar_employer)/*We got rid of the default action bar, now we setting a toolbar instead*/
 
         val toggle = ActionBarDrawerToggle(
             this, drawer_layout_employer, toolbar_employer,
@@ -51,7 +51,7 @@ class Employer_Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSe
                 ).commit()
             nav_view_employer.setCheckedItem(R.id.employer_home)
         }
-    }
+    }/*onCreate method ends*/
 
     override fun onResume() {
         super.onResume()
