@@ -31,8 +31,6 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="8dp"
                 android:layout_weight="0.5"
-                android:drawableStart="@drawable/ic_carret_down"
-                android:drawableLeft="@drawable/ic_carret_down"
                 android:gravity="center"
                 android:hint="@string/job_type"
                 android:textColor="@color/black"
@@ -48,13 +46,13 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="8dp"
                 android:layout_weight="0.5"
-                android:drawableLeft="@drawable/ic_carret_down"
                 android:gravity="center"
                 android:hint="@string/job_location"
                 android:textColor="@color/black"
                 android:textColorHint="@color/colorAccent"
                 android:textSize="16sp"
-                app:drawableStartCompat="@drawable/ic_carret_down" />
+                app:drawableStartCompat="@drawable/ic_carret_down"
+                app:drawableLeftCompat="@drawable/ic_carret_down" />
 
             <EditText
                 android:id="@+id/editTxt_job_description"

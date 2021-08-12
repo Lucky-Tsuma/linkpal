@@ -47,8 +47,8 @@
     <string name="employer_sign_up_label">Employer sign up</string>
 
     <!--Worker sign_up page-->
-    <string name="worker_sign_up_label">Step 1/2</string>
-    <string name="worker_sign_up_label2">Step 2/2</string>
+    <string name="worker_sign_up_label">Step 1 / 2</string>
+    <string name="worker_sign_up_label2">Step 2 / 2</string>
     <string name="next_step">Next step</string>
 
     <!--Worker sign up page2-->
@@ -63,6 +63,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="home">Home</string>
 
+    <string name="username">%1$s  %2$s</string><!--placeholders for the 1st and 2nd string  %[argument_index$]format_specifier-->
     <string name="profile">My Profile</string>
     <string name="search">Search linkpal</string>
     <string name="logout">Logout</string>

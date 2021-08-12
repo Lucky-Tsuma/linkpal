@@ -33,7 +33,7 @@ class EmployerHomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val sh: SharedPreferences =
-            activity!!.getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
+            requireActivity().getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
         user_id = sh.getInt("user_id", 0)
 
         showPostedJobs()
@@ -80,7 +80,7 @@ class EmployerHomeFragment : Fragment() {
                         }
                         val jobs_adapter =
                             Posted_Job_Adapter(
-                                context!!,
+                                requireContext(),
                                 jobs
                             )
                         list_view_job_posts.adapter = jobs_adapter

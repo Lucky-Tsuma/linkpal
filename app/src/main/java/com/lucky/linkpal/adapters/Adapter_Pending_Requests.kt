@@ -26,7 +26,7 @@ class Adapter_Pending_Requests(
     val sh: SharedPreferences = context.getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
     val user_id = sh.getInt("user_id", 0)
 
-    override fun getView(position: Int, view: View?, parent: ViewGroup?): View? {
+    override fun getView(position: Int, view: View?, parent: ViewGroup?): View {
         val mView: View? =
             LayoutInflater.from(context).inflate(R.layout.list_pending_requests, parent, false)
 

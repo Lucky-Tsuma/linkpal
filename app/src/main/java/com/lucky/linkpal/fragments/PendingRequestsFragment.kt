@@ -29,7 +29,7 @@ class PendingRequestsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val sh: SharedPreferences =
-            activity!!.getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
+            requireActivity().getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
         user_id = sh.getInt("user_id", 0)
 
         showPendingRequests()
@@ -69,7 +69,7 @@ class PendingRequestsFragment : Fragment() {
                         }
                         val pending_requests_adapter =
                             Adapter_Pending_Requests(
-                                context!!,
+                                requireContext(),
                                 pending_requests
                             )
                         list_view_pending_requests.adapter = pending_requests_adapter

@@ -47,7 +47,7 @@ class Worker_Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSele
 
         /*setting user information on nav header*/
         val header = nav_view_worker.getHeaderView(0)
-        header.nav_username.text = "$firstname $lastname"
+        header.nav_username.text = getString(R.string.username, "$firstname", "$lastname")
         header.useremail.text = email
         Glide.with(this).load(URLs.root_url + profile_pic).into(header.user_profile_pic)
 

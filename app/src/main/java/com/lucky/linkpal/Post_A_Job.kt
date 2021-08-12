@@ -91,7 +91,7 @@ class Post_A_Job : AppCompatActivity() {
 
         val specialtyReq = JsonObjectRequest(
             Request.Method.GET, URLs.specialty_get, null,
-            Response.Listener { response ->
+            { response ->
                 try {
                     val specialtyList = ArrayList<HashMap<String, String>>()
 
@@ -118,7 +118,7 @@ class Post_A_Job : AppCompatActivity() {
                 } catch (e: JSONException) {
                     e.printStackTrace()
                 }
-            }, Response.ErrorListener { error ->
+            }, { error ->
                 error.printStackTrace()
                 if (error.toString().matches(Regex("(.*)NoConnectionError(.*)"))) {
                     Toast.makeText(
@@ -139,7 +139,7 @@ class Post_A_Job : AppCompatActivity() {
 
         val locationReq = JsonObjectRequest(
             Request.Method.GET, URLs.location_get, null,
-            Response.Listener { response ->
+            { response ->
                 try {
                     val locationList = ArrayList<HashMap<String, String>>()
                     val jsonArray = response.getJSONArray("location")
@@ -165,7 +165,7 @@ class Post_A_Job : AppCompatActivity() {
                     e.printStackTrace()
                 }
             },
-            Response.ErrorListener { error ->
+            { error ->
                 error.printStackTrace()
                 if (error.toString().matches(Regex("(.*)NoConnectionError(.*)"))) {
                     Toast.makeText(

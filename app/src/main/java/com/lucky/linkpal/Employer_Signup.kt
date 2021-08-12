@@ -58,7 +58,7 @@ class Employer_Signup : AppCompatActivity() {
         email = employer_email.text.toString().trim()
         phone = employer_phone.text.toString().trim()
         password = employer_password.text.toString().trim()
-        var password2: String = employer_confirm_password.text.toString().trim()
+        val password2: String = employer_confirm_password.text.toString().trim()
 
         /*check whether any of the fields is not filled*/
         if (firstname.isEmpty() || lastname.isEmpty() || email.isEmpty() || phone.isEmpty() ||

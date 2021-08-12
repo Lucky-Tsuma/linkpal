@@ -13,6 +13,7 @@ import android.widget.LinearLayout
 import android.widget.SimpleAdapter
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
@@ -34,13 +35,12 @@ import java.io.IOException
 import java.util.*
 
 
-class  Worker_Signup2 : AppCompatActivity() {
+class Worker_Signup2 : AppCompatActivity() {
 
     private var status: Boolean = true
     private lateinit var userLocation: String
     private lateinit var userJobField: String
     private lateinit var jsonQueue: RequestQueue
-    private val requestCode = 100
     private lateinit var profileDescription: String
     private lateinit var workerViewModel: WorkerSignup2ViewModel
 
@@ -78,7 +78,7 @@ class  Worker_Signup2 : AppCompatActivity() {
         profile_pic.setSafeOnClickListener {
             val picIntent = Intent(Intent.ACTION_PICK)
             picIntent.type = "image/*"
-            startActivityForResult(picIntent, requestCode)
+            resultLauncher.launch(picIntent)
         }
 
         if (workerViewModel.getImage() != null) {
@@ -147,14 +147,16 @@ class  Worker_Signup2 : AppCompatActivity() {
         }
     }/*onCreate method ends here*/
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK && requestCode == requestCode) {
-            uri = data?.data!!
-            profile_pic.setImageURI(uri)
-            createImageData(uri!!)
+    private var resultLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val data: Intent? = result.data
+                uri = data?.data!!
+                profile_pic.setImageURI(uri)
+                createImageData(uri!!)
+            }
         }
-    }
+
 
     override fun onDestroy() {
         super.onDestroy()

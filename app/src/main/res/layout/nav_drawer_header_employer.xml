@@ -5,6 +5,7 @@
     android:background="@color/colorPrimary"
     android:gravity="center"
     android:orientation="vertical"
+    android:paddingStart="16dp"
     android:paddingLeft="16dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 

@@ -37,8 +37,8 @@ class MainActivity : AppCompatActivity() {
             mailIntent.putExtra(Intent.EXTRA_SUBJECT, "Linkpal support")
             mailIntent.putExtra(Intent.EXTRA_TEXT, "")
 
-            if (mailIntent.resolveActivity(getPackageManager()) != null) {
-                startActivity(mailIntent);
+            if (mailIntent.resolveActivity(packageManager) != null) {
+                startActivity(mailIntent)
             }
         }
     }

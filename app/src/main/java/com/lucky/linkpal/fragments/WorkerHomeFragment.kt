@@ -79,7 +79,7 @@ class WorkerHomeFragment : Fragment() {
                                 )
                             )
                         }
-                        val jobs_adapter = Available_Job_Adapter(context!!, jobs)
+                        val jobs_adapter = Available_Job_Adapter(requireContext(), jobs)
                         list_view_available_jobs.adapter = jobs_adapter
 
                     } catch (e: JSONException) {

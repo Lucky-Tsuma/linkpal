@@ -31,7 +31,7 @@ class Adapter_Job_Requests(
     private lateinit var worker_id: String
     private lateinit var message: String
 
-    override fun getView(position: Int, view: View?, parent: ViewGroup?): View? {
+    override fun getView(position: Int, view: View?, parent: ViewGroup?): View {
         val mView: View? =
             LayoutInflater.from(context).inflate(R.layout.list_job_requests, parent, false)
 

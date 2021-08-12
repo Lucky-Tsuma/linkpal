@@ -40,7 +40,7 @@ class Employer_Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
         /*setting user information on nav header*/
         val header = nav_view_employer.getHeaderView(0)
-        header.nav_username.text = "$firstname $lastname"
+        header.nav_username.text = getString(R.string.username, "$firstname", "$lastname")
         header.useremail.text = email
 
         if (savedInstanceState == null) {
@@ -62,7 +62,7 @@ class Employer_Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
         /*setting user information on nav header*/
         val header = nav_view_employer.getHeaderView(0)
-        header.nav_username.text = "$firstname $lastname"
+        header.nav_username.text = getString(R.string.username, "$firstname", "$lastname")
         header.useremail.text = email
     }
 

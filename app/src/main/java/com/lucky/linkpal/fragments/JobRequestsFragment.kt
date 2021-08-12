@@ -29,7 +29,7 @@ class JobRequestsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val sh: SharedPreferences =
-            activity!!.getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
+            requireActivity().getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
         employer_id = sh.getInt("user_id", 0)
 
         showJobRequests()
@@ -75,7 +75,7 @@ class JobRequestsFragment : Fragment() {
                         }
                         val job_requests_adapter =
                             Adapter_Job_Requests(
-                                context!!,
+                                requireContext(),
                                 job_requests
                             )
                         list_view_job_requests.adapter = job_requests_adapter
