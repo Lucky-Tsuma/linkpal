@@ -186,7 +186,7 @@ class Worker_Signup2 : AppCompatActivity() {
     private fun populateJobFieldMenu() {
 
         val specialtyReq = JsonObjectRequest(Request.Method.GET, URLs.specialty_get, null,
-            { response ->
+            /*Lambda returning a type Response.Listener*/{ response ->
                 try {
                     val specialtyList = ArrayList<HashMap<String, String>>()
 
@@ -213,7 +213,7 @@ class Worker_Signup2 : AppCompatActivity() {
                 } catch (e: JSONException) {
                     e.printStackTrace()
                 }
-            }, { error ->
+            }, /*Lambda returning type Response.ErrorListener*/{ error ->
                 error.printStackTrace()
                 if (error.toString().matches(Regex("(.*)NoConnectionError(.*)"))) {
                     Toast.makeText(
