@@ -12,7 +12,7 @@
 
     <!--Log in page-->
     <string name="log_in_to_account">Login to your account</string>
-    <string name="email_login">Enter your email address</string>
+    <string name="phone_login">Phone number</string>
     <string name="no_account">Do not have an account?</string>
     <string name="password_login">Password</string>
     <string name="forgot_password">Forgot password?</string>
