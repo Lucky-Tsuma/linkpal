@@ -3,6 +3,7 @@
     <string name="sign_up">Sign up</string>
 
     <string name="placeholder">placeholder</string>
+    <string name="phone">Phone number</string>
 
     <!--MainActivity-->
     <string name="log_in">Log in</string>
@@ -12,7 +13,6 @@
 
     <!--Log in page-->
     <string name="log_in_to_account">Login to your account</string>
-    <string name="phone_login">Phone number</string>
     <string name="no_account">Do not have an account?</string>
     <string name="password_login">Password</string>
     <string name="forgot_password">Forgot password?</string>
@@ -36,7 +36,6 @@
     <string name="sign_up_firstname">First Name</string>
     <string name="sign_up_lastname">Last Name</string>
     <string name="sign_up_email">example@gmail.com</string>
-    <string name="sign_up_phone_number">07########/01########</string>
     <string name="sign_up_password">Password (At least 6 characters) </string>
     <string name="sign_up_confirm_password">Confirm password</string>
     <string name="gender">Gender</string>
