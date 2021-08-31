@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.Response
 import com.android.volley.toolbox.Volley
+import com.lucky.linkpal.utils.REGEX
 import com.lucky.linkpal.utils.SafeClickListener.Companion.setSafeOnClickListener
 import com.lucky.linkpal.utils.URLs
 import com.lucky.linkpal.utils.VolleyFileUploadRequest
@@ -24,19 +25,6 @@ class Employer_Signup : AppCompatActivity() {
     private lateinit var phone_number: String
     private lateinit var password: String
     private lateinit var gender: String
-
-    private val PASSWORD_PATTERN =
-        Pattern.compile(
-            "^" +
-                    "(?=.*[0-9])" +
-                    "(?=.*[a-zA-Z])" +
-                    "(?=\\S+$)" +
-                    ".{6,}" +
-                    "$"
-        )
-
-    private val PHONE_PATTERN1 = Pattern.compile("^(07|01).*[0-9]")
-    private val PHONE_PATTERN2 = Pattern.compile("^(\\+254).*[0-9]")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,16 +68,16 @@ class Employer_Signup : AppCompatActivity() {
         return if (phone_number.isEmpty()) {
             employer_phone.error = "Cannot be empty"
             false
-        } else if (!PHONE_PATTERN1.matcher(phone_number).matches() && !PHONE_PATTERN2.matcher(
+        } else if (!REGEX.PHONE_PATTERN1.matcher(phone_number).matches() && !REGEX.PHONE_PATTERN2.matcher(
                 phone_number
             ).matches()
         ) {
             employer_phone.error = "Invalid input"
             false
-        } else if (PHONE_PATTERN1.matcher(phone_number).matches() && phone_number.length != 10) {
+        } else if (REGEX.PHONE_PATTERN1.matcher(phone_number).matches() && phone_number.length != 10) {
             employer_phone.error = "Invalid input"
             false
-        } else if (PHONE_PATTERN2.matcher(phone_number).matches() && phone_number.length != 13) {
+        } else if (REGEX.PHONE_PATTERN2.matcher(phone_number).matches() && phone_number.length != 13) {
             employer_phone.error = "Invalid input"
             false
         } else {
@@ -107,7 +95,7 @@ class Employer_Signup : AppCompatActivity() {
         return if (password.isEmpty()) {
             employer_password.error = "Cannot be empty"
             false
-        } else if (!PASSWORD_PATTERN.matcher(password).matches()) {
+        } else if (!REGEX.PASSWORD_PATTERN.matcher(password).matches()) {
             employer_password.error = "Invalid password format"
             Toast.makeText(
                 applicationContext,
@@ -118,7 +106,7 @@ class Employer_Signup : AppCompatActivity() {
         } else if (password2.isEmpty()) {
             employer_confirm_password.error = "Cannot be empty"
             false
-        } else if (!PASSWORD_PATTERN.matcher(password2).matches()) {
+        } else if (!REGEX.PASSWORD_PATTERN.matcher(password2).matches()) {
             employer_confirm_password.error = "Invalid password format"
             Toast.makeText(
                 applicationContext,

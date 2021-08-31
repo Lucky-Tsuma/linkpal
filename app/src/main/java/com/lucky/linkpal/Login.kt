@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.Response
 import com.android.volley.toolbox.Volley
+import com.lucky.linkpal.utils.REGEX
 import com.lucky.linkpal.utils.SafeClickListener.Companion.setSafeOnClickListener
 import com.lucky.linkpal.utils.URLs
 import com.lucky.linkpal.utils.VolleyFileUploadRequest
@@ -18,20 +19,6 @@ import java.util.regex.Pattern
 class Login : AppCompatActivity() {
     private lateinit var phone_number: String
     private lateinit var password: String
-
-    private val PASSWORD_PATTERN =
-        Pattern.compile(
-            "^" +
-                    "(?=.*[0-9])" +
-                    "(?=.*[a-zA-Z])" +
-                    "(?=\\S+$)" +
-                    ".{6,}" +
-                    "$"
-        )
-
-    private val PHONE_PATTERN1 = Pattern.compile("^(07|01).*[0-9]")
-    private val PHONE_PATTERN2 = Pattern.compile("^(\\+254).*[0-9]")
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,16 +43,16 @@ class Login : AppCompatActivity() {
         return if (phone_number.isEmpty()) {
             phone_login.error = "Cannot be empty"
             false
-        } else if (!PHONE_PATTERN1.matcher(phone_number).matches() && !PHONE_PATTERN2.matcher(
+        } else if (!REGEX.PHONE_PATTERN1.matcher(phone_number).matches() && !REGEX.PHONE_PATTERN2.matcher(
                 phone_number
             ).matches()
         ) {
             phone_login.error = "Invalid input"
             false
-        } else if (PHONE_PATTERN1.matcher(phone_number).matches() && phone_number.length != 10) {
+        } else if (REGEX.PHONE_PATTERN1.matcher(phone_number).matches() && phone_number.length != 10) {
             phone_login.error = "Invalid input"
             false
-        } else if (PHONE_PATTERN2.matcher(phone_number).matches() && phone_number.length != 13) {
+        } else if (REGEX.PHONE_PATTERN2.matcher(phone_number).matches() && phone_number.length != 13) {
             phone_login.error = "Invalid input"
             false
         } else {
@@ -80,7 +67,7 @@ class Login : AppCompatActivity() {
         return if (password.isEmpty()) {
             password_login.error = "Failed, cannot be empty"
             false
-        } else if (!PASSWORD_PATTERN.matcher(password).matches()) {
+        } else if (!REGEX.PASSWORD_PATTERN.matcher(password).matches()) {
             password_login.error = "Invalid password format."
             false
         } else {
