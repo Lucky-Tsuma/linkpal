@@ -54,7 +54,7 @@ class Login : AppCompatActivity() {
         phone_number = phone_login.editText?.text.toString().trim()
 
         return if (phone_number.isEmpty()) {
-            phone_login.error = "Failed, cannot be empty"
+            phone_login.error = "Cannot be empty"
             false
         } else if (!PHONE_PATTERN1.matcher(phone_number).matches() && !PHONE_PATTERN2.matcher(
                 phone_number
