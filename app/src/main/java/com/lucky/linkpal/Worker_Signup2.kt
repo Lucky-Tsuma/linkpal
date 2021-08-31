@@ -38,7 +38,8 @@ import java.util.*
 class Worker_Signup2 : AppCompatActivity() {
 
     private var status: Boolean = true
-    private lateinit var userLocation: String
+    private lateinit var longitude: String
+    private lateinit var latitude: String
     private lateinit var userJobField: String
     private lateinit var jsonQueue: RequestQueue
     private lateinit var profileDescription: String
@@ -46,12 +47,10 @@ class Worker_Signup2 : AppCompatActivity() {
 
     private lateinit var firstname: String
     private lateinit var lastname: String
-    private lateinit var email: String
     private lateinit var phone: String
     private lateinit var password: String
     private lateinit var gender: String
     private var userJobField0: Int? = null
-    private var userLocation0: Int? = null
 
     private var imageData: ByteArray? = null
     private var uri: Uri? = null
@@ -64,7 +63,6 @@ class Worker_Signup2 : AppCompatActivity() {
         val intent = intent
         firstname = intent.getStringExtra("firstname").toString()
         lastname = intent.getStringExtra("lastname").toString()
-        email = intent.getStringExtra("email").toString()
         phone = intent.getStringExtra("phone").toString()
         password = intent.getStringExtra("password").toString()
         gender = intent.getStringExtra("gender").toString()
@@ -111,33 +109,6 @@ class Worker_Signup2 : AppCompatActivity() {
             userJobField0 = workerViewModel.getJobField0()
         }
 
-        /*ON LOCATION*/
-        listview_location.visibility = View.GONE
-
-        location.setSafeOnClickListener {
-            populateLocationMenu()
-            listview_location.visibility = View.VISIBLE
-        }
-
-        listview_location.setOnItemClickListener { _, view, _, _ ->
-            val selectedItem = view as LinearLayout
-            val textViewLocation = selectedItem.getChildAt(1) as TextView
-            val textViewLocation0 = selectedItem.getChildAt(0) as TextView
-            val stringLocation = textViewLocation.text.toString()
-            val stringLocation0 = textViewLocation0.text.toString()
-            location.text = stringLocation
-            userLocation0 = stringLocation0.toInt()/*A key we will send to database*/
-            listview_location.visibility = View.GONE
-        }
-
-        if (workerViewModel.getLocation() != null) {
-            location.text = workerViewModel.getLocation()
-            userLocation = workerViewModel.getLocation()!!
-        }
-        if (workerViewModel.getLocation0() != null) {
-            userLocation0 = workerViewModel.getLocation0()
-        }
-
         /*ON SIGN UP BUTTON*/
         button_sign_up_worker.setSafeOnClickListener {
             checkUserInput()
@@ -170,13 +141,6 @@ class Worker_Signup2 : AppCompatActivity() {
             workerViewModel.setJobField(job_field.text.toString())
             if (workerViewModel.getJobField0() != null) {
                 workerViewModel.setJobField0(userJobField0!!)
-            }
-        }
-
-        if (location.text != null) {
-            workerViewModel.setLocation(location.text.toString())
-            if (workerViewModel.getLocation0() != null) {
-                workerViewModel.setLocation0(userLocation0!!)
             }
         }
 
@@ -229,83 +193,31 @@ class Worker_Signup2 : AppCompatActivity() {
 
     }
 
-    /*ON LOCATION*/
-    private fun populateLocationMenu() {
-
-        val locationReq = JsonObjectRequest(Request.Method.GET, URLs.location_get, null,
-            { response ->
-                try {
-                    val locationList = ArrayList<HashMap<String, String>>()
-                    val jsonArray = response.getJSONArray("location")
-
-                    for (i in 0 until jsonArray.length()) {
-                        val location = jsonArray.getJSONObject(i)
-                        val id = location.getString("location_id")
-                        val name = location.getString("location_name")
-
-                        val locationMap = HashMap<String, String>()
-                        locationMap["location_id"] = id
-                        locationMap["name"] = name
-
-                        locationList.add(locationMap)
-                    }
-
-                    val adapterLocation = SimpleAdapter(
-                        this, locationList, R.layout.activity_listview_location,
-                        arrayOf("location_id", "name"), intArrayOf(R.id.location_id, R.id.name)
-                    )
-                    listview_location.adapter = adapterLocation
-                } catch (e: JSONException) {
-                    e.printStackTrace()
-                }
-            },
-            { error ->
-                error.printStackTrace()
-                if (error.toString().matches(Regex("(.*)NoConnectionError(.*)"))) {
-                    Toast.makeText(
-                        applicationContext,
-                        "Check your internet connection. Or try again later.",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                } else {
-                    Toast.makeText(applicationContext, error.toString(), Toast.LENGTH_SHORT).show()
-                }
-            })
-
-        jsonQueue.add(locationReq)
-    }
-
     /*ON SIGN UP BUTTON*/
     private fun checkUserInput() {
         /*reset in case there problems with previous user input*/
         status = true
-        location.setHintTextColor(Color.parseColor("#737373"))
         job_field.setHintTextColor(Color.parseColor("#737373"))
-        profile_description.setHintTextColor(Color.parseColor("#737373"))
-        profile_description.setTextColor(Color.BLACK)
+        profile_description.error = null
 
         /*get user input Strings*/
-        userLocation = location.text.toString()
         userJobField = job_field.text.toString()
-        profileDescription = profile_description.text.toString().trim()
+        profileDescription = profile_description.editText.toString().trim()
 
         /*check for an empty field*/
         if (status) {
-            if (userLocation.isEmpty() || userJobField.isEmpty() || profileDescription.isEmpty()) {
-                Toast.makeText(
-                    applicationContext,
-                    "Please fill the highlighted fields",
-                    Toast.LENGTH_SHORT
-                ).show()
+            if (userJobField.isEmpty() || profileDescription.isEmpty()) {
                 status = false
-                if (userLocation.isEmpty()) {
-                    location.setHintTextColor(Color.RED)
-                }
                 if (userJobField.isEmpty()) {
+                    Toast.makeText(
+                        applicationContext,
+                        "Please fill the highlighted field",
+                        Toast.LENGTH_SHORT
+                    ).show()
                     job_field.setHintTextColor(Color.RED)
                 }
                 if (profileDescription.isEmpty()) {
-                    profile_description.setHintTextColor(Color.RED)
+                    profile_description.error = "Cannot be empty"
                 }
             }
         }
@@ -313,12 +225,7 @@ class Worker_Signup2 : AppCompatActivity() {
         /*check for length of profile description*/
         if (status) {
             if (profileDescription.length < 10) {
-                Toast.makeText(
-                    applicationContext,
-                    "Profile description should be about 10 characters",
-                    Toast.LENGTH_SHORT
-                ).show()
-                profile_description.setTextColor(Color.RED)
+                profile_description.error = "Description too short (10 characters minimum)."
                 status = false
             }
         }
@@ -396,12 +303,12 @@ class Worker_Signup2 : AppCompatActivity() {
                 try {
                     worker["firstName"] = firstname
                     worker["lastName"] = lastname
-                    worker["email"] = email
                     worker["phone"] = phone
                     worker["password"] = password
                     worker["gender"] = gender
                     worker["jobField"] = userJobField0.toString()
-                    worker["location"] = userLocation0.toString()
+                    worker["longitude"] = longitude
+                    worker["latitude"] = latitude
                     worker["profileSummary"] = profileDescription
                     worker["imageName"] = imageName
                 } catch (e: Exception) {
@@ -413,7 +320,7 @@ class Worker_Signup2 : AppCompatActivity() {
             override fun getByteData(): MutableMap<String, FileDataPart> {
                 val params = HashMap<String, FileDataPart>()
                 params["imageFile"] =
-                    FileDataPart(email, imageData!!, "")
+                    FileDataPart(phone, imageData!!, "")
                 return params
             }
         }/*VolleyFileUploadRequest(...) ends here*/
