@@ -90,7 +90,7 @@ class Post_A_Job : AppCompatActivity() {
     private fun populateJobFieldMenu() {
 
         val specialtyReq = JsonObjectRequest(
-            Request.Method.GET, URLs.specialty_get, null,
+            Request.Method.GET, URLs.get_specialty, null,
             { response ->
                 try {
                     val specialtyList = ArrayList<HashMap<String, String>>()
