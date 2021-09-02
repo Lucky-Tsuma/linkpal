@@ -135,7 +135,7 @@ class Employer_Signup : AppCompatActivity() {
 
     /*SEND EMPLOYER DATA TO SERVER*/
     private fun registerEmployer() {
-        val request = object : VolleyFileUploadRequest(Method.POST, URLs.user_register,
+        val request = object : VolleyFileUploadRequest(Method.POST, URLs.register,
             Response.Listener { response ->
 
                 val res = String(response.data)

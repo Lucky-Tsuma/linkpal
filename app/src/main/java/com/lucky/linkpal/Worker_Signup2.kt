@@ -38,8 +38,8 @@ import java.util.*
 class Worker_Signup2 : AppCompatActivity() {
 
     private var status: Boolean = true
-    private lateinit var longitude: String
-    private lateinit var latitude: String
+    private var longitude: Double? = null
+    private var latitude: Double? = null
     private lateinit var userJobField: String
     private lateinit var jsonQueue: RequestQueue
     private lateinit var profileDescription: String
@@ -149,7 +149,7 @@ class Worker_Signup2 : AppCompatActivity() {
     /*ON JOB FIELD*/
     private fun populateJobFieldMenu() {
 
-        val specialtyReq = JsonObjectRequest(Request.Method.GET, URLs.specialty_get, null,
+        val specialtyReq = JsonObjectRequest(Request.Method.GET, URLs.get_specialty, null,
             /*Lambda returning a type Response.Listener*/{ response ->
                 try {
                     val specialtyList = ArrayList<HashMap<String, String>>()
@@ -271,7 +271,7 @@ class Worker_Signup2 : AppCompatActivity() {
         val dialog: Dialog = AlertDialog.Builder(this).setView(R.layout.loading).create()
         dialog.show()
 
-        val request = object : VolleyFileUploadRequest(Method.POST, URLs.user_register,
+        val request = object : VolleyFileUploadRequest(Method.POST, URLs.register,
             Response.Listener { response ->
                 dialog.dismiss()
                 val res = String(response.data)
@@ -307,8 +307,8 @@ class Worker_Signup2 : AppCompatActivity() {
                     worker["password"] = password
                     worker["gender"] = gender
                     worker["jobField"] = userJobField0.toString()
-                    worker["longitude"] = longitude
-                    worker["latitude"] = latitude
+                    worker["longitude"] = longitude.toString()
+                    worker["latitude"] = latitude.toString()
                     worker["profileSummary"] = profileDescription
                     worker["imageName"] = imageName
                 } catch (e: Exception) {
