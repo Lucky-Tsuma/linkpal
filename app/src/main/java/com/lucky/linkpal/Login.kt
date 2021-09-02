@@ -14,7 +14,6 @@ import com.lucky.linkpal.utils.VolleyFileUploadRequest
 import kotlinx.android.synthetic.main.activity_login.*
 import org.json.JSONException
 import org.json.JSONObject
-import java.util.regex.Pattern
 
 class Login : AppCompatActivity() {
     private lateinit var phone_number: String
@@ -43,16 +42,21 @@ class Login : AppCompatActivity() {
         return if (phone_number.isEmpty()) {
             phone_login.error = "Cannot be empty"
             false
-        } else if (!REGEX.PHONE_PATTERN1.matcher(phone_number).matches() && !REGEX.PHONE_PATTERN2.matcher(
+        } else if (!REGEX.PHONE_PATTERN1.matcher(phone_number)
+                .matches() && !REGEX.PHONE_PATTERN2.matcher(
                 phone_number
             ).matches()
         ) {
             phone_login.error = "Invalid input"
             false
-        } else if (REGEX.PHONE_PATTERN1.matcher(phone_number).matches() && phone_number.length != 10) {
+        } else if (REGEX.PHONE_PATTERN1.matcher(phone_number)
+                .matches() && phone_number.length != 10
+        ) {
             phone_login.error = "Invalid input"
             false
-        } else if (REGEX.PHONE_PATTERN2.matcher(phone_number).matches() && phone_number.length != 13) {
+        } else if (REGEX.PHONE_PATTERN2.matcher(phone_number)
+                .matches() && phone_number.length != 13
+        ) {
             phone_login.error = "Invalid input"
             false
         } else {
