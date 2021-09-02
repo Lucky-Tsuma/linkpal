@@ -1,11 +1,24 @@
 package com.lucky.linkpal
 
+import android.Manifest
 import android.content.Intent
+import android.content.IntentSender
+import android.content.pm.PackageManager
+import android.location.Location
 import android.os.Bundle
+import android.os.Looper
+import android.util.Log
 import android.widget.Toast
+import androidx.activity.result.IntentSenderRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.android.volley.Response
 import com.android.volley.toolbox.Volley
+import com.google.android.gms.common.api.ResolvableApiException
+import com.google.android.gms.location.*
+import com.google.android.gms.tasks.Task
 import com.lucky.linkpal.utils.REGEX
 import com.lucky.linkpal.utils.SafeClickListener.Companion.setSafeOnClickListener
 import com.lucky.linkpal.utils.URLs
@@ -20,22 +33,60 @@ import java.util.regex.Pattern
 class Employer_Signup : AppCompatActivity() {
     private lateinit var firstname: String
     private lateinit var lastname: String
-    private lateinit var longitude: String
-    private lateinit var latitude: String
+    private var longitude: Double? = null
+    private var latitude: Double? = null
     private lateinit var phone_number: String
     private lateinit var password: String
     private lateinit var gender: String
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private lateinit var locationRequest: LocationRequest
+
+    companion object {
+        const val REQUEST_LOCATION = 100
+    }
+
+    /*Updating location in the case that the device cannot access it. For whatever reason*/
+    private val locationCallback = object : LocationCallback() {
+        override fun onLocationResult(locationResult: LocationResult?) {
+            locationResult ?: return
+            for (location in locationResult.locations) {
+                longitude = location.longitude
+                latitude = location.latitude
+            }
+        }
+    }
+
+    /*After the user has been prompted to switch location on, pick the response and work with whichever they chose*/
+    private val resolutionForResult =
+        registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()) { activityResult ->
+            if (activityResult.resultCode == RESULT_OK) {
+                pickLocation()
+            }
+            else {
+                Toast.makeText(applicationContext, "Your location will be set to unknown.", Toast.LENGTH_SHORT).show()
+                registerEmployer()
+            }
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_employer__signup)
+
+        /*Setting up a location request*/
+        locationRequest = LocationRequest.create().apply {
+            interval = 10000
+            fastestInterval = 5000
+            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+        }
+
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
 
         button_sign_up_employer.setSafeOnClickListener {
             if (!validateNames() || !validatePhoneNumber() || !validatePassword() || !validateGender()) {
                 return@setSafeOnClickListener
             }
-            registerEmployer()
+            pickLocation()
         }
     }
 
@@ -133,6 +184,73 @@ class Employer_Signup : AppCompatActivity() {
         }
     }
 
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode) {
+            1 -> {
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    if ((ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)) {
+                        pickLocation()
+                    }
+                } else {
+                    Toast.makeText(applicationContext, "Case 2. Settings are on. But app has no access", Toast.LENGTH_SHORT).show()
+                    registerEmployer()
+                }
+                return
+            }
+        }
+
+    }
+
+    private fun pickLocation() {
+        /*GETTING CURRENT LOCATION SETTINGS
+* We do this by LocationSettingsRequest.builder and adding a LocationRequest object to it as below*/
+        val builder = LocationSettingsRequest.Builder().addLocationRequest(locationRequest)
+        //Next, check whether the current location settings are satisfied as below
+        val client: SettingsClient = LocationServices.getSettingsClient(this)
+        val task: Task<LocationSettingsResponse> = client.checkLocationSettings(builder.build())
+
+        //All location settings are satisfied. The client can make location requests
+        task.addOnSuccessListener {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), REQUEST_LOCATION)
+
+            } else {
+                fusedLocationClient.lastLocation
+                    .addOnSuccessListener { location: Location? ->
+                        if (location != null) {
+                            longitude = location.longitude
+                            latitude = location.latitude
+                        } else {
+                            fusedLocationClient.requestLocationUpdates(
+                                locationRequest,
+                                locationCallback,
+                                Looper.getMainLooper()
+                            )
+                        }
+                    }
+                registerEmployer()
+            }
+        }
+
+        task.addOnFailureListener { exception ->
+            if (exception is ResolvableApiException) {
+                // Location settings are not satisfied, but this can be fixed
+                // by showing the user a dialog.
+                try {
+                    val intentSenderRequest = IntentSenderRequest.Builder(exception.resolution).build()
+                    resolutionForResult.launch(intentSenderRequest)
+                } catch (sendEx: IntentSender.SendIntentException) {
+                    // Ignore the error.
+                }
+            }
+        }
+    }
+
     /*SEND EMPLOYER DATA TO SERVER*/
     private fun registerEmployer() {
         val request = object : VolleyFileUploadRequest(Method.POST, URLs.register,
@@ -153,6 +271,7 @@ class Employer_Signup : AppCompatActivity() {
                         Toast.makeText(applicationContext, msg, Toast.LENGTH_SHORT).show()
                     }
                 } catch (e: JSONException) {
+                    Log.d("LTM_DEBUG", res)
                     Toast.makeText(this, "Oops! An error occurred", Toast.LENGTH_SHORT).show()
                 }
             },
@@ -175,11 +294,13 @@ class Employer_Signup : AppCompatActivity() {
                 try {
                     emp["firstName"] = firstname
                     emp["lastName"] = lastname
-                    emp["longitude"] = longitude
-                    emp["latitude"] = latitude
                     emp["phone"] = phone_number
                     emp["password"] = password
                     emp["gender"] = gender
+                    if (longitude != null && latitude != null) {
+                        emp["longitude"] = longitude.toString()
+                        emp["latitude"] = latitude.toString()
+                    }
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
