@@ -7,7 +7,6 @@ import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
 import android.os.Looper
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -19,6 +18,7 @@ import com.android.volley.toolbox.Volley
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
 import com.google.android.gms.tasks.Task
+import com.google.android.material.snackbar.Snackbar
 import com.lucky.linkpal.utils.REGEX
 import com.lucky.linkpal.utils.SafeClickListener.Companion.setSafeOnClickListener
 import com.lucky.linkpal.utils.URLs
@@ -27,7 +27,6 @@ import kotlinx.android.synthetic.main.activity_employer__signup.*
 import kotlinx.android.synthetic.main.activity_login.*
 import org.json.JSONException
 import org.json.JSONObject
-import java.util.regex.Pattern
 
 
 class Employer_Signup : AppCompatActivity() {
@@ -40,10 +39,6 @@ class Employer_Signup : AppCompatActivity() {
     private lateinit var gender: String
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var locationRequest: LocationRequest
-
-    companion object {
-        const val REQUEST_LOCATION = 100
-    }
 
     /*Updating location in the case that the device cannot access it. For whatever reason*/
     private val locationCallback = object : LocationCallback() {
@@ -61,9 +56,12 @@ class Employer_Signup : AppCompatActivity() {
         registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()) { activityResult ->
             if (activityResult.resultCode == RESULT_OK) {
                 pickLocation()
-            }
-            else {
-                Toast.makeText(applicationContext, "Your location will be set to unknown.", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(
+                    applicationContext,
+                    "Registration will proceed with an unknown location.",
+                    Toast.LENGTH_SHORT
+                ).show()
                 registerEmployer()
             }
         }
@@ -119,16 +117,21 @@ class Employer_Signup : AppCompatActivity() {
         return if (phone_number.isEmpty()) {
             employer_phone.error = "Cannot be empty"
             false
-        } else if (!REGEX.PHONE_PATTERN1.matcher(phone_number).matches() && !REGEX.PHONE_PATTERN2.matcher(
+        } else if (!REGEX.PHONE_PATTERN1.matcher(phone_number)
+                .matches() && !REGEX.PHONE_PATTERN2.matcher(
                 phone_number
             ).matches()
         ) {
             employer_phone.error = "Invalid input"
             false
-        } else if (REGEX.PHONE_PATTERN1.matcher(phone_number).matches() && phone_number.length != 10) {
+        } else if (REGEX.PHONE_PATTERN1.matcher(phone_number)
+                .matches() && phone_number.length != 10
+        ) {
             employer_phone.error = "Invalid input"
             false
-        } else if (REGEX.PHONE_PATTERN2.matcher(phone_number).matches() && phone_number.length != 13) {
+        } else if (REGEX.PHONE_PATTERN2.matcher(phone_number)
+                .matches() && phone_number.length != 13
+        ) {
             employer_phone.error = "Invalid input"
             false
         } else {
@@ -184,26 +187,50 @@ class Employer_Signup : AppCompatActivity() {
         }
     }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        when (requestCode) {
-            1 -> {
-                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    if ((ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)) {
-                        pickLocation()
-                    }
-                } else {
-                    Toast.makeText(applicationContext, "Case 2. Settings are on. But app has no access", Toast.LENGTH_SHORT).show()
-                    registerEmployer()
-                }
-                return
+    /*launches dialog to request app location permission*/
+    private var requestLocationPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
+            if (isGranted) {
+                pickLocation()
+            } else {
+                Toast.makeText(
+                    applicationContext,
+                    "Registration will proceed with an unknown location.",
+                    Toast.LENGTH_SHORT
+                ).show()
+                registerEmployer()
             }
         }
 
+    /*Checks for 3 situations:
+    * 1. the permission is already granted
+    * 2. there is need to explain to the user why we need the permission before asking for it
+    * 3. we just need to request the permission*/
+    private fun requestLocationPermission() {
+        when {
+            ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED -> {
+                pickLocation()
+            }
+            ActivityCompat.shouldShowRequestPermissionRationale(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) -> {
+                val snackBar = Snackbar.make(
+                    layout_employer_signup,
+                    "You need to enable location to get suggestions on nearby users",
+                    Snackbar.LENGTH_INDEFINITE
+                )
+                snackBar.setAction("Ok") { snackBar.dismiss() }
+                snackBar.show()
+                requestLocationPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+            }
+            else -> {
+                requestLocationPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+            }
+        }
     }
 
     private fun pickLocation() {
@@ -216,9 +243,15 @@ class Employer_Signup : AppCompatActivity() {
 
         //All location settings are satisfied. The client can make location requests
         task.addOnSuccessListener {
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), REQUEST_LOCATION)
-
+            if (ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                requestLocationPermission()
             } else {
                 fusedLocationClient.lastLocation
                     .addOnSuccessListener { location: Location? ->
@@ -242,7 +275,8 @@ class Employer_Signup : AppCompatActivity() {
                 // Location settings are not satisfied, but this can be fixed
                 // by showing the user a dialog.
                 try {
-                    val intentSenderRequest = IntentSenderRequest.Builder(exception.resolution).build()
+                    val intentSenderRequest =
+                        IntentSenderRequest.Builder(exception.resolution).build()
                     resolutionForResult.launch(intentSenderRequest)
                 } catch (sendEx: IntentSender.SendIntentException) {
                     // Ignore the error.
@@ -271,7 +305,6 @@ class Employer_Signup : AppCompatActivity() {
                         Toast.makeText(applicationContext, msg, Toast.LENGTH_SHORT).show()
                     }
                 } catch (e: JSONException) {
-                    Log.d("LTM_DEBUG", res)
                     Toast.makeText(this, "Oops! An error occurred", Toast.LENGTH_SHORT).show()
                 }
             },
