@@ -17,9 +17,9 @@
         android:textSize="32sp" />
 
     <TextView
-        android:id="@+id/useremail"
+        android:id="@+id/nav_phone_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/temp_useremail"
+        android:text="@string/temp_phone"
         android:textSize="16sp" />
 </LinearLayout>
