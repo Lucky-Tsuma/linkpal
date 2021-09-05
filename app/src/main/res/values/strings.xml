@@ -78,7 +78,7 @@
     <!--Drawer Nav Header-->
     <string name="user_profile_pic">User profile picture</string>
     <string name="temp_username">Sample Username</string>
-    <string name="temp_useremail">samplemail@gmail.com</string>
+    <string name="temp_phone">07########</string>
 
     <!--Drawer Worker Menu-->
     <string name="pending_requests">Pending Requests</string>
