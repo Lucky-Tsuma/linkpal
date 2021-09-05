@@ -22,4 +22,21 @@
         android:layout_height="wrap_content"
         android:text="@string/temp_phone"
         android:textSize="16sp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_my_location" />
+
+        <TextView
+            android:id="@+id/nav_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/location" />
+    </LinearLayout>
 </LinearLayout>
