@@ -26,7 +26,7 @@ class Worker_Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSele
 //        val user_id = sh.getInt("user_id", 0)
         val firstname = sh.getString("firstname", null)
         val lastname = sh.getString("lastname", null)
-        val email = sh.getString("email", null)
+        val phone_number = sh.getString("phone_number", null)
         val profile_pic = sh.getString("profile_pic", null)
 
         toolbar_worker.title = "Available Jobs"
@@ -48,7 +48,7 @@ class Worker_Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSele
         /*setting user information on nav header*/
         val header = nav_view_worker.getHeaderView(0)
         header.nav_username.text = getString(R.string.username, "$firstname", "$lastname")
-        header.useremail.text = email
+        header.nav_phone_number.text = phone_number
         Glide.with(this).load(URLs.root_url + profile_pic).into(header.user_profile_pic)
 
         /*So the activity opens to the home fragment by default. And the home fragment will be restored only in case of a first configuration change*/
