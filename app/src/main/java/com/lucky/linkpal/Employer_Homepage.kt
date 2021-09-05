@@ -23,7 +23,7 @@ class Employer_Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSe
         val sh: SharedPreferences = getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
         val firstname = sh.getString("firstname", null)
         val lastname = sh.getString("lastname", null)
-        val email = sh.getString("email", null)
+        val phone_number = sh.getString("phone_number", null)
 //        val user_id = sh.getInt("user_id", 0)
 
         toolbar_employer.title = "Your Posts"
@@ -41,7 +41,7 @@ class Employer_Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSe
         /*setting user information on nav header*/
         val header = nav_view_employer.getHeaderView(0)
         header.nav_username.text = getString(R.string.username, "$firstname", "$lastname")
-        header.useremail.text = email
+        header.nav_phone_number.text = phone_number
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
@@ -58,12 +58,12 @@ class Employer_Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSe
         val sh: SharedPreferences = getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
         val firstname = sh.getString("firstname", null)
         val lastname = sh.getString("lastname", null)
-        val email = sh.getString("email", null)
+        val phone_number = sh.getString("phone_number", null)
 
         /*setting user information on nav header*/
         val header = nav_view_employer.getHeaderView(0)
         header.nav_username.text = getString(R.string.username, "$firstname", "$lastname")
-        header.useremail.text = email
+        header.nav_phone_number.text = phone_number
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
