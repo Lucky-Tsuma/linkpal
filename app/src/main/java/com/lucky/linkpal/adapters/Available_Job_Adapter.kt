@@ -2,6 +2,8 @@ package com.lucky.linkpal.adapters
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.location.Address
+import android.location.Geocoder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,8 +18,12 @@ import com.lucky.linkpal.data_classes.Available_Job
 import com.lucky.linkpal.utils.SafeClickListener.Companion.setSafeOnClickListener
 import com.lucky.linkpal.utils.URLs
 import com.lucky.linkpal.utils.VolleyFileUploadRequest
+import kotlinx.android.synthetic.main.nav_drawer_header_employer.view.*
 import org.json.JSONException
 import org.json.JSONObject
+import java.io.IOException
+import java.util.*
+import kotlin.collections.HashMap
 
 class Available_Job_Adapter(
     private var context: Context,
@@ -28,8 +34,8 @@ class Available_Job_Adapter(
     val user = sh.getInt("user_id", 0)
     val firstname = sh.getString("firstname", null)
     val lastname = sh.getString("lastname", null)
+    private lateinit var Addresses: List<Address>
     lateinit var message: String
-    lateinit var emp_email: String
 
     override fun getView(position: Int, view: View?, parent: ViewGroup?): View {
         val mView: View? =
@@ -37,13 +43,28 @@ class Available_Job_Adapter(
 
         val job_id = mView?.findViewById<TextView>(R.id.job_id)
         val job_title = mView?.findViewById<TextView>(R.id.job_title)
-        val employer_email = mView?.findViewById<TextView>(R.id.employer_email)
-        val job_location = mView?.findViewById<TextView>(R.id.job_location)
+        val employer_phone = mView?.findViewById<TextView>(R.id.employer_phone)
         val job_summary = mView?.findViewById<TextView>(R.id.job_summary)
-        val amount = mView?.findViewById<TextView>(R.id.amount)
         val posted_by = mView?.findViewById<TextView>(R.id.posted_by)
         val post_date = mView?.findViewById<TextView>(R.id.post_date)
         val apply_job = mView?.findViewById<Button>(R.id.button_apply_job)
+        val location = mView?.findViewById<TextView>(R.id.job_location)
+
+        val longitude = list[position].longitude
+        val latitude = list[position].latitude
+
+        val geocoder = Geocoder(context, Locale.getDefault())
+        try {
+            Addresses =
+                geocoder.getFromLocation(latitude.toDouble(), longitude.toDouble(), 1)
+            if (Addresses.isNotEmpty()) {
+                if (location != null) {
+                    location.text = Addresses[0].adminArea
+                }
+            }
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
 
         if (job_id != null) {
             job_id.text = list[position].job_id
@@ -51,14 +72,8 @@ class Available_Job_Adapter(
         if (job_title != null) {
             job_title.text = list[position].job_specialty
         }
-        if (job_location != null) {
-            job_location.text = list[position].job_location
-        }
         if (job_summary != null) {
             job_summary.text = list[position].job_description
-        }
-        if (amount != null) {
-            amount.text = list[position].amount + "/="
         }
         if (posted_by != null) {
             posted_by.text = list[position].firstname + " " + list[position].lastname
@@ -66,20 +81,12 @@ class Available_Job_Adapter(
         if (post_date != null) {
             post_date.text = list[position].post_date
         }
-        if (employer_email != null) {
-            employer_email.text = list[position].employer_email
+        if (employer_phone != null) {
+            employer_phone.text = list[position].employer_phone
         }
-
-        if (employer_email != null) {
-            emp_email = employer_email.text as String
-        }
-
-        message =
-            "You have received a job request from $firstname $lastname on your ${job_title!!.text} job posted on linkpal at ${post_date!!.text}.Log in to your " +
-                    "account to either accept or decline the request."
 
         apply_job!!.setSafeOnClickListener {
-            applyJob(list[position].job_id)
+            /*applyJob(list[position].job_id)*/
         }
 
         return mView
@@ -134,7 +141,6 @@ class Available_Job_Adapter(
                 try {
                     application["user_id"] = user.toString()
                     application["job_id"] = jobId
-                    application["email"] = emp_email
                     application["message"] = message
                 } catch (e: Exception) {
                     e.printStackTrace()

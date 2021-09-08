@@ -30,7 +30,7 @@ class WorkerHomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val sh: SharedPreferences =
-            activity!!.getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
+            requireActivity().getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
         user_id = sh.getInt("user_id", 0)
 
         jsonQueue = Volley.newRequestQueue(context)
@@ -60,22 +60,22 @@ class WorkerHomeFragment : Fragment() {
                             val firstname = job.getString("firstname")
                             val lastname = job.getString("lastname")
                             val job_description = job.getString("job_description")
-                            val amount = job.getString("amount")
                             val post_date = job.getString("post_date")
                             val job_specialty = job.getString("job_specialty")
-                            val job_location = job.getString("job_location")
-                            val employer_email = job.getString("employer_email")
+                            val employer_phone = job.getString("employer_phone")
+                            val longitude = job.getString("longitude")
+                            val latitude = job.getString("latitude")
                             jobs.add(
                                 Available_Job(
                                     job_id,
                                     firstname,
                                     lastname,
                                     job_description,
-                                    amount,
                                     post_date,
                                     job_specialty,
-                                    job_location,
-                                    employer_email
+                                    employer_phone,
+                                    longitude,
+                                    latitude
                                 )
                             )
                         }

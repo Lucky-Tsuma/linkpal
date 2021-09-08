@@ -5,9 +5,9 @@ class Available_Job(
     var firstname: String,
     var lastname: String,
     var job_description: String,
-    var amount: String,
     var post_date: String,
     var job_specialty: String,
-    var job_location: String,
-    var employer_email: String
+    var employer_phone: String,
+    var longitude: String,
+    var latitude: String
 )
