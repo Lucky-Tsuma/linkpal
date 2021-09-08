@@ -13,24 +13,19 @@
             android:title="@string/profile" />
 
         <item
-            android:id="@+id/upgrade_account"
-            android:icon="@drawable/ic_upgrade_account"
-            android:title="@string/upgrade_account" />
-
-        <item
             android:id="@+id/job_requests"
             android:icon="@drawable/ic_job_requests"
             android:title="@string/job_requests" />
 
         <item
-            android:id="@+id/job_invites"
-            android:icon="@drawable/ic_job_invites"
+            android:id="@+id/book_worker"
+            android:icon="@drawable/ic_book"
             android:title="@string/job_invites" />
 
         <item
-            android:id="@+id/search"
-            android:icon="@drawable/ic_search"
-            android:title="@string/search" />
+            android:id="@+id/rate_jobs"
+            android:icon="@drawable/ic_upgrade_account"
+            android:title="@string/rate_jobs" />
     </group>
     <item
         android:id="@+id/log_out"
