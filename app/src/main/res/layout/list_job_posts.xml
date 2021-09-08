@@ -21,24 +21,13 @@
 
         <TextView
             android:id="@+id/job_title"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="3"
             android:gravity="center"
             android:text="@string/placeholder"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/job_location"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="@string/placeholder"
-            android:textColor="@color/light_blue"
-            android:textSize="16sp"
-            android:textStyle="bold|italic" />
 
     </LinearLayout>
 
@@ -77,21 +66,12 @@
         android:layout_weight="1"
         android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/amount"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/placeholder"
-            android:textSize="16sp"
-            android:textStyle="bold|italic" />
 
         <TextView
             android:id="@+id/post_date"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:gravity="center"
             android:text="@string/placeholder"
             android:textSize="16sp"
             android:textStyle="bold|italic" />

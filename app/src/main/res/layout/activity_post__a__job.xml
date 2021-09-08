@@ -7,83 +7,93 @@
     android:background="@color/white"
     tools:context=".Post_A_Job">
 
-
-    <ScrollView
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true"
+        android:layout_height="wrap_content"
+        android:layout_margin="6dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="8dp"
+        app:contentPadding="6dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
+
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:layout_height="match_parent"
+            android:fillViewport="true">
 
-            <TextView
-                android:id="@+id/txtView_job_type"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="8dp"
-                android:layout_weight="0.5"
-                android:gravity="center"
-                android:hint="@string/job_type"
-                android:textColor="@color/black"
-                android:textColorHint="@color/colorAccent"
-                android:textSize="16sp"
-                app:drawableLeftCompat="@drawable/ic_carret_down"
-                app:drawableStartCompat="@drawable/ic_carret_down" />
-
-
-            <EditText
-                android:id="@+id/editTxt_job_description"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="2dp"
-                android:layout_weight="6"
-                android:gravity="center"
-                android:hint="@string/job_description"
-                android:importantForAutofill="no"
-                android:inputType="textMultiLine"
-                android:textColor="@color/black"
-                android:textColorHint="@color/colorAccent" />
+                android:orientation="vertical"
+                android:padding="16dp">
 
-            <Button
-                android:id="@+id/button_post"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="0.3"
-                android:background="@drawable/border_blue_button"
-                android:text="@string/post"
-                android:textColor="@color/light_blue" />
-        </LinearLayout>
-    </ScrollView>
+                <TextView
+                    android:id="@+id/txtView_job_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="8dp"
+                    android:layout_weight="0.5"
+                    android:gravity="center"
+                    android:hint="@string/job_type"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/colorAccent"
+                    android:textSize="16sp"
+                    app:drawableLeftCompat="@drawable/ic_carret_down"
+                    app:drawableStartCompat="@drawable/ic_carret_down" />
 
-    <ListView
-        android:id="@+id/list_location"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:choiceMode="singleChoice"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/editTxt_job_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    app:errorEnabled="true">
 
-    <ListView
-        android:id="@+id/list_job_type"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:hint="@string/job_description"
+                        android:inputType="textMultiLine" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Button
+                    android:id="@+id/button_post"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.3"
+                    android:background="@drawable/border_blue_button"
+                    android:text="@string/post"
+                    android:textColor="@color/light_blue" />
+            </LinearLayout>
+        </ScrollView>
+
+        <ListView
+            android:id="@+id/list_location"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:choiceMode="singleChoice"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ListView
+            android:id="@+id/list_job_type"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

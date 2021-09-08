@@ -27,18 +27,15 @@ class Posted_Job_Adapter(private var context: Context, private var list: Mutable
             LayoutInflater.from(context).inflate(R.layout.list_job_posts, parent, false)
         val job_id = mView!!.findViewById<TextView>(R.id.job_id)
         val job_title = mView.findViewById<TextView>(R.id.job_title)
-        val job_location = mView.findViewById<TextView>(R.id.job_location)
         val job_summary = mView.findViewById<TextView>(R.id.job_summary)
-        val amount = mView.findViewById<TextView>(R.id.amount)
         val post_date = mView.findViewById<TextView>(R.id.post_date)
         val delete_post = mView.findViewById<Button>(R.id.button_delete_post)
 
         job_id.text = list[position].job_id.toString()
         job_title.text = list[position].job_specialty
-        job_location.text = list[position].job_location
         job_summary.text = list[position].job_description
-        amount.text = "${list[position].amount}/="
         post_date.text = list[position].post_date
+
 
         delete_post!!.setSafeOnClickListener {
             deleteJob(list[position].job_id.toString())

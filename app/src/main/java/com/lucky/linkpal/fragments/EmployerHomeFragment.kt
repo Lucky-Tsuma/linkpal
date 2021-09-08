@@ -63,18 +63,14 @@ class EmployerHomeFragment : Fragment() {
                             val job = jsonArray.getJSONObject(i)
                             val job_id = job.getString("job_id").toInt()
                             val job_description = job.getString("job_description")
-                            val amount = job.getString("amount")
                             val post_date = job.getString("post_date")
                             val job_specialty = job.getString("job_specialty")
-                            val job_location = job.getString("job_location")
                             jobs.add(
                                 Posted_Job(
                                     job_id,
                                     job_description,
-                                    amount,
                                     post_date,
-                                    job_specialty,
-                                    job_location
+                                    job_specialty
                                 )
                             )
                         }

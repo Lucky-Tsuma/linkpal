@@ -117,12 +117,11 @@ class Post_A_Job : AppCompatActivity() {
         /*reset in case there was previous wrong input*/
         status = true
         txtView_job_type.setHintTextColor(Color.parseColor("#737373"))
-        editTxt_job_description.setHintTextColor(Color.parseColor("#737373"))
-        editTxt_job_description.setTextColor(Color.BLACK)
+        editTxt_job_description.error = null
 
         /*Get user input and trim it*/
         job_type = txtView_job_type.text.toString()
-        job_description = editTxt_job_description.text.toString().trim()
+        job_description = editTxt_job_description.editText?.text.toString()
 
         if (job_type.isEmpty() || job_description.isEmpty()) {
             Toast.makeText(
@@ -135,19 +134,14 @@ class Post_A_Job : AppCompatActivity() {
                 txtView_job_type.setHintTextColor(Color.RED)
             }
             if (job_description.isEmpty()) {
-                editTxt_job_description.setHintTextColor(Color.RED)
+                editTxt_job_description.error = "This filed cannot be empty."
             }
         }
 
         if (status) {
             if (job_description.length < 20) {
                 status = false
-                Toast.makeText(
-                    applicationContext,
-                    "Description should be at least 20 characters",
-                    Toast.LENGTH_SHORT
-                ).show()
-                editTxt_job_description.setTextColor(Color.RED)
+                editTxt_job_description.error = "Description too short. should be at least 20 characters."
             }
         }
     }
