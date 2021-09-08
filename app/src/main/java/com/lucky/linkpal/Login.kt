@@ -95,6 +95,8 @@ class Login : AppCompatActivity() {
                         val firstname = obj.getString("firstname")
                         val lastname = obj.getString("lastname")
                         val phone_number = obj.getString("phone_number")
+                        val longitude = obj.getString("longitude")
+                        val latitude = obj.getString("latitude")
                         if (userType == "employer") {
                             Toast.makeText(applicationContext, msg, Toast.LENGTH_SHORT).show()
 
@@ -105,6 +107,8 @@ class Login : AppCompatActivity() {
                             editor.putString("firstname", firstname)
                             editor.putString("lastname", lastname)
                             editor.putString("phone_number", phone_number)
+                            editor.putString("longitude", longitude)
+                            editor.putString("latitude", latitude)
                             editor.apply()
 
                             val intentEmployer = Intent(this, Employer_Homepage::class.java)
@@ -123,6 +127,8 @@ class Login : AppCompatActivity() {
                             editor.putString("lastname", lastname)
                             editor.putString("phone_number", phone_number)
                             editor.putString("profile_pic", profile_pic)
+                            editor.putString("longitude", longitude)
+                            editor.putString("latitude", latitude)
                             editor.putFloat("rating", rating.toFloat())
                             editor.apply()
 
