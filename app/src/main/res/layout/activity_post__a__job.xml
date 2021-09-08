@@ -12,7 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
-
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,20 +38,6 @@
                 app:drawableLeftCompat="@drawable/ic_carret_down"
                 app:drawableStartCompat="@drawable/ic_carret_down" />
 
-            <TextView
-                android:id="@+id/txtView_job_location"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="8dp"
-                android:layout_weight="0.5"
-                android:gravity="center"
-                android:hint="@string/job_location"
-                android:textColor="@color/black"
-                android:textColorHint="@color/colorAccent"
-                android:textSize="16sp"
-                app:drawableStartCompat="@drawable/ic_carret_down"
-                app:drawableLeftCompat="@drawable/ic_carret_down" />
 
             <EditText
                 android:id="@+id/editTxt_job_description"
@@ -65,20 +50,6 @@
                 android:hint="@string/job_description"
                 android:importantForAutofill="no"
                 android:inputType="textMultiLine"
-                android:textColor="@color/black"
-                android:textColorHint="@color/colorAccent" />
-
-            <EditText
-                android:id="@+id/editTxt_amount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="2dp"
-                android:layout_weight="0.5"
-                android:gravity="center"
-                android:hint="@string/amount"
-                android:importantForAutofill="no"
-                android:inputType="number"
                 android:textColor="@color/black"
                 android:textColorHint="@color/colorAccent" />
 
