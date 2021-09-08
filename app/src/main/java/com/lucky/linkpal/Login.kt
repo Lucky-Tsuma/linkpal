@@ -109,6 +109,7 @@ class Login : AppCompatActivity() {
                             editor.putString("phone_number", phone_number)
                             editor.putString("longitude", longitude)
                             editor.putString("latitude", latitude)
+                            editor.putBoolean("showDialog", true)
                             editor.apply()
 
                             val intentEmployer = Intent(this, Employer_Homepage::class.java)

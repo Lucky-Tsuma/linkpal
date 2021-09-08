@@ -75,9 +75,9 @@
 
 
     <!--Drawer Employer Menu-->
-    <string name="upgrade_account">Upgrade Account</string>
+    <string name="rate_jobs">Rate previous jobs</string>
     <string name="job_requests">Job Requests</string>
-    <string name="job_invites">Job Invites(Outgoing)</string>
+    <string name="job_invites">Book a Worker</string>
 
 
     <!--Drawer Nav Header-->

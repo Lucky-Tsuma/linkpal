@@ -37,8 +37,10 @@ import org.json.JSONException
 import org.json.JSONObject
 import java.io.IOException
 import java.util.*
+import kotlin.properties.Delegates
 
 class Employer_Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+    private lateinit var sh: SharedPreferences
     private lateinit var header: View
     private var user_id: Int? = null
     private var latitude: String? = null
@@ -97,13 +99,23 @@ class Employer_Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSe
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_employer_homepage)
 
-        val sh: SharedPreferences = getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
+        sh = getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
         val firstname = sh.getString("firstname", null)
         val lastname = sh.getString("lastname", null)
         val phone_number = sh.getString("phone_number", null)
         user_id = sh.getInt("user_id", 0)
         latitude = sh.getString("latitude", null)
         longitude = sh.getString("longitude", null)
+        val showDialog = sh.getBoolean("showDialog", false)
+
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .replace(
+                    R.id.fragment_container_employer,
+                    EmployerHomeFragment()
+                ).commit()
+            nav_view_employer.setCheckedItem(R.id.employer_home)
+        }
 
         locationRequest = LocationRequest.create().apply {
             interval = 10000
@@ -124,21 +136,12 @@ class Employer_Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
         nav_view_employer.setNavigationItemSelectedListener(this)
 
-        if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
-                .replace(
-                    R.id.fragment_container_employer,
-                    EmployerHomeFragment()
-                ).commit()
-            nav_view_employer.setCheckedItem(R.id.employer_home)
-        }
-
         /*setting user information on nav header*/
         header = nav_view_employer.getHeaderView(0)
         header.nav_username.text = getString(R.string.username, "$firstname", "$lastname")
         header.nav_phone_number.text = phone_number
 
-        /*Creating an alert dialog so a user can choose to update location*/
+        /*Creating an alert dialog so a user can choose to update location.*/
         val builder = AlertDialog.Builder(this)
         builder.setTitle(R.string.dialog_title)
         builder.setMessage(R.string.dialog_message)
@@ -153,7 +156,13 @@ class Employer_Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
         val alertDialog: AlertDialog = builder.create()
         alertDialog.setCancelable(false)
-        alertDialog.show()
+
+        if(showDialog) {
+            val editor: SharedPreferences.Editor = sh.edit()
+            editor.putBoolean("showDialog", false)
+            editor.apply()
+            alertDialog.show()
+        }
     }/*onCreate method ends*/
 
     override fun onResume() {
@@ -192,11 +201,11 @@ class Employer_Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSe
                 toolbar_employer.title = "Profile"
             }
 
-            R.id.upgrade_account -> {
+            R.id.rate_jobs -> {
                 supportFragmentManager.beginTransaction()
                     .replace(
                         R.id.fragment_container_employer,
-                        UpgradeAccountFragment()
+                        RateJobsFragment()
                     )
                     .commit()
                 toolbar_employer.title = "Upgrade Account"
@@ -212,11 +221,11 @@ class Employer_Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSe
                 toolbar_employer.title = "Job Requests"
             }
 
-            R.id.job_invites -> {
+            R.id.book_worker -> {
                 supportFragmentManager.beginTransaction()
                     .replace(
                         R.id.fragment_container_employer,
-                        JobInvitesFragment()
+                        BookWorkerFragment()
                     )
                     .commit()
                 toolbar_employer.title = "Job Invites"
