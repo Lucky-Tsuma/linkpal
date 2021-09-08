@@ -27,11 +27,8 @@ class Post_A_Job : AppCompatActivity() {
     private var status: Boolean = true
     private var user_id: Int? = null
     private lateinit var job_type: String
-    private lateinit var job_location: String
     private lateinit var job_description: String
-    private var amount: Int? = null
     private lateinit var jsonQueue: RequestQueue
-    private var job_location_0: Int? = null
     private var job_type_0: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,23 +55,6 @@ class Post_A_Job : AppCompatActivity() {
             txtView_job_type.text = stringJobType
             job_type_0 = stringJobType0.toInt()/*A key we will send to database*/
             list_job_type.visibility = View.GONE
-        }
-
-        list_location.setOnItemClickListener { _, view, _, _ ->
-            val selectedItem = view as LinearLayout
-            val textViewLocation = selectedItem.getChildAt(1) as TextView
-            val textViewLocation0 = selectedItem.getChildAt(0) as TextView
-            val stringLocation = textViewLocation.text.toString()
-            val stringLocation0 = textViewLocation0.text.toString()
-            txtView_job_location.text = stringLocation
-            job_location_0 = stringLocation0.toInt()/*A key we will send to database*/
-            list_location.visibility = View.GONE
-        }
-
-        list_location.visibility = View.GONE
-        txtView_job_location.setSafeOnClickListener {
-            populateLocationMenu()
-            list_location.visibility = View.VISIBLE
         }
 
         button_post.setSafeOnClickListener {
@@ -133,75 +113,18 @@ class Post_A_Job : AppCompatActivity() {
         jsonQueue.add(specialtyReq)
 
     }
-
-    /*ON LOCATION*/
-    private fun populateLocationMenu() {
-
-        val locationReq = JsonObjectRequest(
-            Request.Method.GET, URLs.location_get, null,
-            { response ->
-                try {
-                    val locationList = ArrayList<HashMap<String, String>>()
-                    val jsonArray = response.getJSONArray("location")
-
-                    for (i in 0 until jsonArray.length()) {
-                        val location = jsonArray.getJSONObject(i)
-                        val id = location.getString("location_id")
-                        val name = location.getString("location_name")
-
-                        val locationMap = HashMap<String, String>()
-                        locationMap["location_id"] = id
-                        locationMap["name"] = name
-
-                        locationList.add(locationMap)
-                    }
-
-                    val adapterLocation = SimpleAdapter(
-                        this, locationList, R.layout.activity_listview_location,
-                        arrayOf("location_id", "name"), intArrayOf(R.id.location_id, R.id.name)
-                    )
-                    list_location.adapter = adapterLocation
-                } catch (e: JSONException) {
-                    e.printStackTrace()
-                }
-            },
-            { error ->
-                error.printStackTrace()
-                if (error.toString().matches(Regex("(.*)NoConnectionError(.*)"))) {
-                    Toast.makeText(
-                        applicationContext,
-                        "Check your internet connection. Or try again later.",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                } else {
-                    Toast.makeText(applicationContext, error.toString(), Toast.LENGTH_SHORT).show()
-                }
-            })
-
-        jsonQueue.add(locationReq)
-    }
-
     private fun checkUserInput() {
         /*reset in case there was previous wrong input*/
         status = true
         txtView_job_type.setHintTextColor(Color.parseColor("#737373"))
-        txtView_job_location.setHintTextColor(Color.parseColor("#737373"))
         editTxt_job_description.setHintTextColor(Color.parseColor("#737373"))
-        editTxt_amount.setHintTextColor(Color.parseColor("#737373"))
         editTxt_job_description.setTextColor(Color.BLACK)
-        editTxt_amount.setTextColor(Color.BLACK)
 
         /*Get user input and trim it*/
         job_type = txtView_job_type.text.toString()
-        job_location = txtView_job_location.text.toString()
         job_description = editTxt_job_description.text.toString().trim()
-        amount = if (editTxt_amount.text.toString() == "") {
-            0
-        } else {
-            editTxt_amount.text.toString().toInt()
-        }
 
-        if (job_type.isEmpty() || job_location.isEmpty() || job_description.isEmpty() || editTxt_amount.text.toString() == "") {
+        if (job_type.isEmpty() || job_description.isEmpty()) {
             Toast.makeText(
                 applicationContext,
                 "Please fill the highlighted fields",
@@ -211,26 +134,8 @@ class Post_A_Job : AppCompatActivity() {
             if (job_type.isEmpty()) {
                 txtView_job_type.setHintTextColor(Color.RED)
             }
-            if (job_location.isEmpty()) {
-                txtView_job_location.setHintTextColor(Color.RED)
-            }
             if (job_description.isEmpty()) {
                 editTxt_job_description.setHintTextColor(Color.RED)
-            }
-            if (editTxt_amount.text.toString() == "") {
-                editTxt_amount.setHintTextColor(Color.RED)
-            }
-        }
-
-        if (status) {
-            if (amount!! <= 0 || amount!! < 500) {
-                status = false
-                Toast.makeText(
-                    applicationContext,
-                    "Amount cannot be less than 500",
-                    Toast.LENGTH_SHORT
-                ).show()
-                editTxt_amount.setHintTextColor(Color.RED)
             }
         }
 
@@ -285,10 +190,8 @@ class Post_A_Job : AppCompatActivity() {
                 val job = HashMap<String, String>()
                 try {
                     job["user_id"] = user_id.toString()
-                    job["amount"] = amount.toString()
                     job["job_description"] = job_description
                     job["job_specialty"] = job_type_0.toString()
-                    job["job_location"] = job_location_0.toString()
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
