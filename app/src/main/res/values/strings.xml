@@ -69,6 +69,11 @@
     <string name="post_a_job">Post a job</string>
     <string name="desc_post_a_job">Button to post a job</string>
 
+    <!--Alert dialog-->
+    <string name="dialog_title">Update location</string>
+    <string name="dialog_message">Allow linkpal to update your current location?</string>
+
+
     <!--Drawer Employer Menu-->
     <string name="upgrade_account">Upgrade Account</string>
     <string name="job_requests">Job Requests</string>
