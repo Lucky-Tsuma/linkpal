@@ -91,7 +91,7 @@
 
     <!--Drawer Worker Menu-->
     <string name="pending_requests">Pending Requests</string>
-    <string name="jobs_invited">Jobs Invited</string>
+    <string name="bookings">Bookings(Job invitations)</string>
 
     <!--Loading-->
     <string name="loading">Loading…</string>

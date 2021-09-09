@@ -24,16 +24,15 @@
 
         <item
             android:id="@+id/jobs_invited"
-            android:icon="@drawable/ic_job_requests"
-            android:title="@string/jobs_invited" />
+            android:icon="@drawable/ic_book"
+            android:title="@string/bookings" />
 
-        <item
-            android:id="@+id/search"
-            android:icon="@drawable/ic_search"
-            android:title="@string/search" />
     </group>
-    <item
-        android:id="@+id/log_out"
-        android:icon="@drawable/ic_logout"
-        android:title="@string/logout" />
+
+    <group android:id="@+id/group_divider">
+        <item
+            android:id="@+id/log_out"
+            android:icon="@drawable/ic_logout"
+            android:title="@string/logout" />
+    </group>
 </menu>
