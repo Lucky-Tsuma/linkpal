@@ -69,10 +69,14 @@
     <string name="post_a_job">Post a job</string>
     <string name="desc_post_a_job">Button to post a job</string>
 
-    <!--Alert dialog-->
+    <!--Location Alert dialog-->
     <string name="dialog_title">Update location</string>
     <string name="dialog_message">Allow linkpal to update your current location?</string>
 
+    <!--Apply Job Alert Dialog-->
+    <string name="job_dialog_title">Apply job</string>
+    <string name="job_proposal">Draft a brief proposal</string>
+    <string name="job_price">Quote your price</string>
 
     <!--Drawer Employer Menu-->
     <string name="rate_jobs">Rate previous jobs</string>

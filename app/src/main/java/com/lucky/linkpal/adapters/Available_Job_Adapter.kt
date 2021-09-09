@@ -1,16 +1,17 @@
 package com.lucky.linkpal.adapters
 
 import android.content.Context
+import android.content.DialogInterface
 import android.content.SharedPreferences
 import android.location.Address
 import android.location.Geocoder
+import android.text.InputType
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
-import android.widget.Button
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import com.android.volley.Response
 import com.android.volley.toolbox.Volley
 import com.lucky.linkpal.R
@@ -35,7 +36,8 @@ class Available_Job_Adapter(
     val firstname = sh.getString("firstname", null)
     val lastname = sh.getString("lastname", null)
     private lateinit var Addresses: List<Address>
-    lateinit var message: String
+    private lateinit var proposal: String
+    private lateinit var price: String
 
     override fun getView(position: Int, view: View?, parent: ViewGroup?): View {
         val mView: View? =
@@ -85,8 +87,52 @@ class Available_Job_Adapter(
             employer_phone.text = list[position].employer_phone
         }
 
+        fun quotePrice(){
+            val builder: AlertDialog.Builder = AlertDialog.Builder(context)
+            builder.setTitle(R.string.job_dialog_title)
+
+            val inputPrice = EditText(context)
+            inputPrice.setHint(R.string.job_price)
+            inputPrice.inputType = InputType.TYPE_CLASS_NUMBER
+            builder.setView(inputPrice)
+
+            builder.setPositiveButton("OK") { _, _ ->
+                price = inputPrice.text.toString()
+
+                if (price.isNotEmpty()) {
+                    applyJob(list[position].job_id)
+                } else {
+                    Toast.makeText(context, "Input cannot be less than 20 characters", Toast.LENGTH_SHORT).show()
+                }
+            }
+            builder.setNegativeButton("Cancel") { dialog, _ -> dialog.cancel() }
+            builder.show()
+        }
+
+        fun makeProposal(){
+            val builder: AlertDialog.Builder = AlertDialog.Builder(context)
+            builder.setTitle(R.string.job_dialog_title)
+
+            val inputProposal = EditText(context)
+            inputProposal.setHint(R.string.job_proposal)
+            inputProposal.inputType = InputType.TYPE_CLASS_TEXT
+            builder.setView(inputProposal)
+
+            builder.setPositiveButton("OK") { _, _ ->
+                proposal = inputProposal.text.toString()
+
+                if (proposal.isNotEmpty() && proposal.length > 20) {
+                    quotePrice()
+                } else {
+                    Toast.makeText(context, "Input cannot be less than 20 characters", Toast.LENGTH_SHORT).show()
+                }
+            }
+            builder.setNegativeButton("Cancel") { dialog, _ -> dialog.cancel() }
+            builder.show()
+        }
+
         apply_job!!.setSafeOnClickListener {
-            /*applyJob(list[position].job_id)*/
+            makeProposal()
         }
 
         return mView
@@ -121,6 +167,8 @@ class Available_Job_Adapter(
                         Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
                     }
                 } catch (e: JSONException) {
+                    Log.d("LTM_DEBUGR", res)
+                    Log.d("LTM_DEBUG", e.toString())
                     Toast.makeText(context, "Oops! An error occurred", Toast.LENGTH_SHORT).show()
                 }
             },
@@ -141,7 +189,8 @@ class Available_Job_Adapter(
                 try {
                     application["user_id"] = user.toString()
                     application["job_id"] = jobId
-                    application["message"] = message
+                    application["price"] = price
+                    application["proposal"] = proposal
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
