@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.android.volley.Response
+import com.android.volley.RetryPolicy
+import com.android.volley.VolleyError
 import com.android.volley.toolbox.Volley
 import com.lucky.linkpal.R
 import com.lucky.linkpal.adapters.Adapter_Job_Requests
@@ -108,6 +110,19 @@ class JobRequestsFragment : Fragment() {
                     e.printStackTrace()
                 }
                 return user
+            }
+        }
+        request.retryPolicy = object : RetryPolicy {
+            override fun getCurrentTimeout(): Int {
+                return 50000
+            }
+
+            override fun getCurrentRetryCount(): Int {
+                return 50000
+            }
+
+            @Throws(VolleyError::class)
+            override fun retry(error: VolleyError) {
             }
         }
         Volley.newRequestQueue(context).add(request)

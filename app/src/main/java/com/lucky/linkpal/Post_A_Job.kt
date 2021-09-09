@@ -11,9 +11,7 @@ import android.widget.SimpleAdapter
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.android.volley.Request
-import com.android.volley.RequestQueue
-import com.android.volley.Response
+import com.android.volley.*
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.lucky.linkpal.utils.SafeClickListener.Companion.setSafeOnClickListener
@@ -110,6 +108,19 @@ class Post_A_Job : AppCompatActivity() {
                     Toast.makeText(applicationContext, error.toString(), Toast.LENGTH_SHORT).show()
                 }
             })
+        specialtyReq.retryPolicy = object : RetryPolicy {
+            override fun getCurrentTimeout(): Int {
+                return 50000
+            }
+
+            override fun getCurrentRetryCount(): Int {
+                return 50000
+            }
+
+            @Throws(VolleyError::class)
+            override fun retry(error: VolleyError) {
+            }
+        }
         jsonQueue.add(specialtyReq)
 
     }
@@ -190,6 +201,19 @@ class Post_A_Job : AppCompatActivity() {
                     e.printStackTrace()
                 }
                 return job
+            }
+        }
+        request.retryPolicy = object : RetryPolicy {
+            override fun getCurrentTimeout(): Int {
+                return 50000
+            }
+
+            override fun getCurrentRetryCount(): Int {
+                return 50000
+            }
+
+            @Throws(VolleyError::class)
+            override fun retry(error: VolleyError) {
             }
         }
         Volley.newRequestQueue(this).add(request)

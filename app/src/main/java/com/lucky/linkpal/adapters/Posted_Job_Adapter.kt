@@ -1,7 +1,6 @@
 package com.lucky.linkpal.adapters
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +9,8 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import com.android.volley.Response
+import com.android.volley.RetryPolicy
+import com.android.volley.VolleyError
 import com.android.volley.toolbox.Volley
 import com.lucky.linkpal.R
 import com.lucky.linkpal.data_classes.Posted_Job
@@ -73,7 +74,6 @@ class Posted_Job_Adapter(private var context: Context, private var list: Mutable
                         Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
                     }
                 } catch (e: JSONException) {
-                    Log.i("LTM_DEBUG", res)
                     Toast.makeText(context, "Oops! An error occurred", Toast.LENGTH_SHORT).show()
                 }
             },
@@ -97,6 +97,19 @@ class Posted_Job_Adapter(private var context: Context, private var list: Mutable
                     e.printStackTrace()
                 }
                 return job
+            }
+        }
+        request.retryPolicy = object : RetryPolicy {
+            override fun getCurrentTimeout(): Int {
+                return 50000
+            }
+
+            override fun getCurrentRetryCount(): Int {
+                return 50000
+            }
+
+            @Throws(VolleyError::class)
+            override fun retry(error: VolleyError) {
             }
         }
         Volley.newRequestQueue(context).add(request)

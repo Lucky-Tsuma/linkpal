@@ -13,6 +13,8 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import com.android.volley.Response
+import com.android.volley.RetryPolicy
+import com.android.volley.VolleyError
 import com.android.volley.toolbox.Volley
 import com.lucky.linkpal.R
 import com.lucky.linkpal.data_classes.Available_Job
@@ -195,6 +197,19 @@ class Available_Job_Adapter(
                     e.printStackTrace()
                 }
                 return application
+            }
+        }
+        request.retryPolicy = object : RetryPolicy {
+            override fun getCurrentTimeout(): Int {
+                return 50000
+            }
+
+            override fun getCurrentRetryCount(): Int {
+                return 50000
+            }
+
+            @Throws(VolleyError::class)
+            override fun retry(error: VolleyError) {
             }
         }
         Volley.newRequestQueue(context).add(request)

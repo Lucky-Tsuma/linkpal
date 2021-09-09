@@ -25,9 +25,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProviders
-import com.android.volley.Request
-import com.android.volley.RequestQueue
-import com.android.volley.Response
+import com.android.volley.*
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.google.android.gms.common.api.ResolvableApiException
@@ -239,6 +237,19 @@ class Worker_Signup2 : AppCompatActivity() {
                     Toast.makeText(applicationContext, error.toString(), Toast.LENGTH_SHORT).show()
                 }
             })
+        specialtyReq.retryPolicy = object : RetryPolicy {
+            override fun getCurrentTimeout(): Int {
+                return 50000
+            }
+
+            override fun getCurrentRetryCount(): Int {
+                return 50000
+            }
+
+            @Throws(VolleyError::class)
+            override fun retry(error: VolleyError) {
+            }
+        }
         jsonQueue.add(specialtyReq)
 
     }
@@ -376,6 +387,19 @@ class Worker_Signup2 : AppCompatActivity() {
                 return params
             }
         }/*VolleyFileUploadRequest(...) ends here*/
+        request.retryPolicy = object : RetryPolicy {
+            override fun getCurrentTimeout(): Int {
+                return 50000
+            }
+
+            override fun getCurrentRetryCount(): Int {
+                return 50000
+            }
+
+            @Throws(VolleyError::class)
+            override fun retry(error: VolleyError) {
+            }
+        }
         Volley.newRequestQueue(this).add(request)
     }/*uploadImage() ends here*/
 
