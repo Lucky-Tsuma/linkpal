@@ -2,7 +2,7 @@ package com.lucky.linkpal.utils
 
 class URLs {
     companion object {
-        const val root_url = "http://172.16.8.34/linkpal2.0"
+        const val root_url = "http://192.168.1.186/linkpal2.0"
         const val register = "$root_url/register.php"
         const val get_specialty = "$root_url/get_specialty.php"
         const val update_location = "$root_url/update_location.php"
