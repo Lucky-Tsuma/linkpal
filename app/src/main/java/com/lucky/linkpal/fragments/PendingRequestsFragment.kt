@@ -53,16 +53,22 @@ class PendingRequestsFragment : Fragment() {
                         for (i in 0 until jsonArray.length()) {
                             val job = jsonArray.getJSONObject(i)
                             val job_id = job.getString("job_id")
-                            val amount = job.getString("amount")
+                            val bidding_amount = job.getString("bidding_amount")
                             val job_title = job.getString("job_title")
-                            val job_location = job.getString("job_location")
+                            val longitude = job.getString("longitude")
+                            val latitude = job.getString("latitude")
+                            val firstname = job.getString("firstname")
+                            val lastname = job.getString("lastname")
                             val request_date = job.getString("request_date")
                             pending_requests.add(
                                 Pending_Request(
                                     job_id,
-                                    amount,
+                                    bidding_amount,
                                     job_title,
-                                    job_location,
+                                    longitude,
+                                    latitude,
+                                    firstname,
+                                    lastname,
                                     request_date
                                 )
                             )

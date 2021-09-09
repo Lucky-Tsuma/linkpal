@@ -2,6 +2,8 @@ package com.lucky.linkpal.adapters
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.location.Address
+import android.location.Geocoder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +20,9 @@ import com.lucky.linkpal.utils.URLs
 import com.lucky.linkpal.utils.VolleyFileUploadRequest
 import org.json.JSONException
 import org.json.JSONObject
+import java.io.IOException
+import java.util.*
+import kotlin.collections.HashMap
 
 class Adapter_Pending_Requests(
     private var context: Context,
@@ -25,6 +30,7 @@ class Adapter_Pending_Requests(
 ) : BaseAdapter() {
     val sh: SharedPreferences = context.getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
     val user_id = sh.getInt("user_id", 0)
+    private lateinit var Addresses: List<Address>
 
     override fun getView(position: Int, view: View?, parent: ViewGroup?): View {
         val mView: View? =
@@ -33,24 +39,41 @@ class Adapter_Pending_Requests(
         val job_id = mView?.findViewById<TextView>(R.id.job_id)
         val job_title = mView?.findViewById<TextView>(R.id.job_title)
         val job_location = mView?.findViewById<TextView>(R.id.job_location)
+        val employer = mView?.findViewById<TextView>(R.id.employer)
         val amount = mView?.findViewById<TextView>(R.id.amount)
         val request_date = mView?.findViewById<TextView>(R.id.request_date)
         val delete_request = mView?.findViewById<Button>(R.id.button_delete_request)
+
+        val longitude = list[position].longitude
+        val latitude = list[position].latitude
+
+        val geocoder = Geocoder(context, Locale.getDefault())
+        try {
+            Addresses =
+                geocoder.getFromLocation(latitude.toDouble(), longitude.toDouble(), 1)
+            if (Addresses.isNotEmpty()) {
+                if (job_location != null) {
+                    job_location.text = Addresses[0].adminArea
+                }
+            }
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
 
         if (job_id != null) {
             job_id.text = list[position].job_id
         }
         if (amount != null) {
-            amount.text = list[position].amount + "/="
+            amount.text = "My price: "+list[position].bidding_amount + "/="
         }
         if (job_title != null) {
             job_title.text = list[position].job_title
         }
-        if (job_location != null) {
-            job_location.text = list[position].job_location
-        }
         if (request_date != null) {
             request_date.text = list[position].request_date
+        }
+        if(employer != null) {
+            employer.text = "Posted by: " + list[position].firstname + " " + list[position].lastname
         }
 
         delete_request!!.setSafeOnClickListener {
