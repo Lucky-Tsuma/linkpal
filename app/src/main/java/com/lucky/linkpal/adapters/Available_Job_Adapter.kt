@@ -199,7 +199,7 @@ class Available_Job_Adapter(
                 return application
             }
         }
-        request.retryPolicy = object : RetryPolicy {
+        /*request.retryPolicy = object : RetryPolicy {
             override fun getCurrentTimeout(): Int {
                 return 50000
             }
@@ -211,7 +211,7 @@ class Available_Job_Adapter(
             @Throws(VolleyError::class)
             override fun retry(error: VolleyError) {
             }
-        }
+        }*/
         Volley.newRequestQueue(context).add(request)
     }
 }

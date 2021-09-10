@@ -139,7 +139,7 @@ class Adapter_Pending_Requests(
                 return info
             }
         }
-        request.retryPolicy = object : RetryPolicy {
+        /*request.retryPolicy = object : RetryPolicy {
             override fun getCurrentTimeout(): Int {
                 return 50000
             }
@@ -151,7 +151,7 @@ class Adapter_Pending_Requests(
             @Throws(VolleyError::class)
             override fun retry(error: VolleyError) {
             }
-        }
+        }*/
         Volley.newRequestQueue(context).add(request)
     }
 }

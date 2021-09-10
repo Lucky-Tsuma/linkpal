@@ -112,7 +112,7 @@ class PendingRequestsFragment : Fragment() {
                 return user
             }
         }
-        request.retryPolicy = object : RetryPolicy {
+       /* request.retryPolicy = object : RetryPolicy {
             override fun getCurrentTimeout(): Int {
                 return 50000
             }
@@ -124,7 +124,7 @@ class PendingRequestsFragment : Fragment() {
             @Throws(VolleyError::class)
             override fun retry(error: VolleyError) {
             }
-        }
+        }*/
         Volley.newRequestQueue(context).add(request)
     }
 }

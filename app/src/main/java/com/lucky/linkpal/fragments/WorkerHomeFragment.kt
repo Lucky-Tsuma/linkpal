@@ -103,7 +103,7 @@ class WorkerHomeFragment : Fragment() {
                     Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show()
                 }
             })
-        availableJobsReq.retryPolicy = object : RetryPolicy {
+        /*availableJobsReq.retryPolicy = object : RetryPolicy {
             override fun getCurrentTimeout(): Int {
                 return 50000
             }
@@ -115,7 +115,7 @@ class WorkerHomeFragment : Fragment() {
             @Throws(VolleyError::class)
             override fun retry(error: VolleyError) {
             }
-        }
+        }*/
         jsonQueue.add(availableJobsReq)
     }
 

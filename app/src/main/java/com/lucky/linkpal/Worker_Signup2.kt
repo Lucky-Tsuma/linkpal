@@ -237,7 +237,7 @@ class Worker_Signup2 : AppCompatActivity() {
                     Toast.makeText(applicationContext, error.toString(), Toast.LENGTH_SHORT).show()
                 }
             })
-        specialtyReq.retryPolicy = object : RetryPolicy {
+        /*specialtyReq.retryPolicy = object : RetryPolicy {
             override fun getCurrentTimeout(): Int {
                 return 50000
             }
@@ -249,7 +249,7 @@ class Worker_Signup2 : AppCompatActivity() {
             @Throws(VolleyError::class)
             override fun retry(error: VolleyError) {
             }
-        }
+        }*/
         jsonQueue.add(specialtyReq)
 
     }

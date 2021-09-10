@@ -108,7 +108,7 @@ class Post_A_Job : AppCompatActivity() {
                     Toast.makeText(applicationContext, error.toString(), Toast.LENGTH_SHORT).show()
                 }
             })
-        specialtyReq.retryPolicy = object : RetryPolicy {
+        /*specialtyReq.retryPolicy = object : RetryPolicy {
             override fun getCurrentTimeout(): Int {
                 return 50000
             }
@@ -120,7 +120,7 @@ class Post_A_Job : AppCompatActivity() {
             @Throws(VolleyError::class)
             override fun retry(error: VolleyError) {
             }
-        }
+        }*/
         jsonQueue.add(specialtyReq)
 
     }
@@ -203,7 +203,7 @@ class Post_A_Job : AppCompatActivity() {
                 return job
             }
         }
-        request.retryPolicy = object : RetryPolicy {
+       /* request.retryPolicy = object : RetryPolicy {
             override fun getCurrentTimeout(): Int {
                 return 50000
             }
@@ -215,7 +215,7 @@ class Post_A_Job : AppCompatActivity() {
             @Throws(VolleyError::class)
             override fun retry(error: VolleyError) {
             }
-        }
+        }*/
         Volley.newRequestQueue(this).add(request)
     }
 

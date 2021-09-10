@@ -176,7 +176,7 @@ class Login : AppCompatActivity() {
                 return loginDetails
             }
         }
-        request.retryPolicy = object : RetryPolicy {
+       /* request.retryPolicy = object : RetryPolicy {
             override fun getCurrentTimeout(): Int {
                 return 50000
             }
@@ -188,7 +188,7 @@ class Login : AppCompatActivity() {
             @Throws(VolleyError::class)
             override fun retry(error: VolleyError) {
             }
-        }
+        }*/
         Volley.newRequestQueue(this).add(request)
     }
 
