@@ -56,22 +56,28 @@ class JobRequestsFragment : Fragment() {
                             val job = jsonArray.getJSONObject(i)
                             val job_id = job.getString("job_id")
                             val user_id = job.getString("user_id")
+                            val bidding_amount = job.getString("bidding_amount")
+                            val proposal = job.getString("proposal")
                             val firstname = job.getString("firstname")
                             val lastname = job.getString("lastname")
+                            val longitude = job.getString("longitude")
+                            val latitude = job.getString("latitude")
                             val job_title = job.getString("job_title")
-                            val job_location = job.getString("job_location")
                             val request_date = job.getString("request_date")
-                            val email = job.getString("email")
+                            val phone_number = job.getString("phone_number")
                             job_requests.add(
                                 Job_Request(
                                     job_id,
                                     user_id,
+                                    bidding_amount,
+                                    proposal,
                                     firstname,
                                     lastname,
+                                    longitude,
+                                    latitude,
                                     job_title,
-                                    job_location,
                                     request_date,
-                                    email
+                                    phone_number
                                 )
                             )
                         }

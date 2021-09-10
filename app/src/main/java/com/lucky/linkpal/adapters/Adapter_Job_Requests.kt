@@ -2,6 +2,8 @@ package com.lucky.linkpal.adapters
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.location.Address
+import android.location.Geocoder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,6 +22,9 @@ import com.lucky.linkpal.utils.URLs
 import com.lucky.linkpal.utils.VolleyFileUploadRequest
 import org.json.JSONException
 import org.json.JSONObject
+import java.io.IOException
+import java.util.*
+import kotlin.collections.HashMap
 
 class Adapter_Job_Requests(
     private var context: Context,
@@ -28,29 +33,41 @@ class Adapter_Job_Requests(
     var sh: SharedPreferences = context.getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
     var firstname = sh.getString("firstname", null)
     var lastname = sh.getString("lastname", null)
-    var phone_number = sh.getString("phone_number", null)
     var employer_id = sh.getInt("user_id", 0)
+    private lateinit var Addresses: List<Address>
     private lateinit var worker_id: String
-    private lateinit var message: String
 
-    override fun getView(position: Int, view: View?, parent: ViewGroup?): View {
+    override fun getView(position: Int, view: View?, parent: ViewGroup?): View? {
         val mView: View? =
             LayoutInflater.from(context).inflate(R.layout.list_job_requests, parent, false)
 
         val job_id = mView?.findViewById<TextView>(R.id.job_id)
         val applicant_id = mView?.findViewById<TextView>(R.id.applicant_id)
-        val job_title = mView?.findViewById<TextView>(R.id.job_title)
-        val job_location = mView?.findViewById<TextView>(R.id.job_location)
+        val bidding_amount = mView?.findViewById<TextView>(R.id.price)
+        val proposal = mView?.findViewById<TextView>(R.id.proposal)
         val username = mView?.findViewById<TextView>(R.id.username)
+        val worker_location = mView?.findViewById<TextView>(R.id.worker_location)
+        val job_title = mView?.findViewById<TextView>(R.id.job_title)
         val request_date = mView?.findViewById<TextView>(R.id.request_date)
-        val email = mView?.findViewById<TextView>(R.id.email)
+        val phone_number = mView?.findViewById<TextView>(R.id.phone_number)
         val recruit = mView?.findViewById<Button>(R.id.button_recruit)
         val decline = mView?.findViewById<Button>(R.id.button_decline)
 
-        val date = list[position].request_date
-        val jobTitle = list[position].job_title
-        val email_address = list[position].email
-        worker_id = list[position].user_id
+        val longitude = list[position].longitude
+        val latitude = list[position].latitude
+
+        val geocoder = Geocoder(context, Locale.getDefault())
+        try {
+            Addresses =
+                geocoder.getFromLocation(latitude.toDouble(), longitude.toDouble(), 1)
+            if (Addresses.isNotEmpty()) {
+                if (worker_location != null) {
+                    worker_location.text = Addresses[0].adminArea
+                }
+            }
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
 
         if (job_id != null) {
             job_id.text = list[position].job_id
@@ -61,28 +78,27 @@ class Adapter_Job_Requests(
         if (job_title != null) {
             job_title.text = list[position].job_title
         }
-        if (job_location != null) {
-            job_location.text = list[position].job_location
-        }
         if (username != null) {
             username.text = list[position].firstname + " " + list[position].lastname
         }
         if (request_date != null) {
             request_date.text = "Request date: " + list[position].request_date
         }
-        if (email != null) {
-            email.text = list[position].email
+        if (phone_number != null) {
+            phone_number.text = list[position].phone_number
         }
-
-        message =
-            "Your job request made on $date to work on $firstname $lastname's $jobTitle job has been accepted. Contact them through " +
-                    "$phone_number to catch up on further details."
+        if (proposal != null) {
+            proposal.text = list[position].proposal
+        }
+        if (bidding_amount != null) {
+            bidding_amount.text = "My price: " + list[position].bidding_amount + "/="
+        }
 
         decline!!.setSafeOnClickListener {
             declineRequest(list[position].job_id, list[position].user_id)
         }
         recruit!!.setSafeOnClickListener {
-            recruitWorker(list[position].job_id, list[position].user_id, email_address)
+            recruitWorker(list[position].job_id, list[position].user_id)
         }
         return mView
     }
@@ -159,7 +175,7 @@ class Adapter_Job_Requests(
         Volley.newRequestQueue(context).add(request)
     }
 
-    private fun recruitWorker(jobId: String, worker_id: String, email_address: String) {
+    private fun recruitWorker(jobId: String, worker_id: String) {
         val request = object : VolleyFileUploadRequest(Method.POST, URLs.recruit,
             Response.Listener { response ->
 
@@ -197,8 +213,6 @@ class Adapter_Job_Requests(
                     info["job_id"] = jobId
                     info["worker_id"] = worker_id
                     info["employer_id"] = employer_id.toString()
-                    info["message"] = message
-                    info["email_address"] = email_address
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
