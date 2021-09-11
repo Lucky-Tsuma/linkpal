@@ -19,8 +19,7 @@ import com.android.volley.VolleyError
 import com.android.volley.RetryPolicy
 
 import android.R.string.no
-
-
+import android.util.Log
 
 
 class Login : AppCompatActivity() {
@@ -92,6 +91,7 @@ class Login : AppCompatActivity() {
         val request = object : VolleyFileUploadRequest(Method.POST, URLs.login,
             Response.Listener { response ->
                 val res = String(response.data)
+                Log.d("LTM_DEBUG", res)
                 try {
                     val obj = JSONObject(res)
 
@@ -124,7 +124,7 @@ class Login : AppCompatActivity() {
                             startActivity(intentEmployer)
                         } else {
                             val profile_pic = obj.getString("profile_pic")
-                            val rating = obj.getDouble("rating")
+                            val rating = obj.getInt("rating")
 
                             Toast.makeText(applicationContext, msg, Toast.LENGTH_SHORT).show()
 
@@ -138,7 +138,7 @@ class Login : AppCompatActivity() {
                             editor.putString("profile_pic", profile_pic)
                             editor.putString("longitude", longitude)
                             editor.putString("latitude", latitude)
-                            editor.putFloat("rating", rating.toFloat())
+                            editor.putInt("rating", rating)
                             editor.apply()
 
                             val intentWorker = Intent(this, Worker_Homepage::class.java)

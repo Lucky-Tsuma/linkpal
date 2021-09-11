@@ -7,8 +7,8 @@
     android:gravity="center"
     android:orientation="vertical"
     android:paddingStart="16dp"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <androidx.cardview.widget.CardView
@@ -59,20 +59,19 @@
             android:text="@string/location" />
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/rating" />
-
-        <TextView
-            android:id="@+id/nav_location"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/location" />
-    </LinearLayout>
+            android:orientation="horizontal">
+            <RatingBar
+                android:id="@+id/user_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:max="100"
+                android:gravity="center"
+                android:numStars="5"
+                android:rating="0"
+                android:isIndicator="true"
+                android:stepSize="1" />
+        </LinearLayout>
 </LinearLayout>

@@ -103,6 +103,7 @@ class Worker_Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSele
         val lastname = sh.getString("lastname", null)
         val phone_number = sh.getString("phone_number", null)
         val profile_pic = sh.getString("profile_pic", null)
+        val rating = sh.getInt("rating", 0)
         latitude = sh.getString("latitude", null)
         longitude = sh.getString("longitude", null)
 
@@ -133,6 +134,7 @@ class Worker_Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSele
         header = nav_view_worker.getHeaderView(0)
         header.nav_username.text = getString(R.string.username, "$firstname", "$lastname")
         header.nav_phone_number.text = phone_number
+        header.user_rating.rating = rating.toFloat()
         Glide.with(this).load(URLs.root_url + profile_pic).into(header.user_profile_pic)
 
         /*So the activity opens to the home fragment by default. And the home fragment will be restored only in case of a first configuration change*/
