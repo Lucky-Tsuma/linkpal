@@ -115,4 +115,10 @@
     <string name="recruit">recruit</string>
     <string name="decline">decline</string>
 
+    <!--Rate jobs-->
+    <string name="rating">rating</string>
+    <string name="rate_me">Rate me</string>
+    <string name="rate_job">Rate job</string>
+    <string name="no_pending_ratings">There are no jobs to rate. Please post a job and hire from the platform.</string>
+
 </resources>

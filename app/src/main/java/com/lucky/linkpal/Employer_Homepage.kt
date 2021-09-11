@@ -209,7 +209,7 @@ class Employer_Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSe
                         RateJobsFragment()
                     )
                     .commit()
-                toolbar_employer.title = "Upgrade Account"
+                toolbar_employer.title = "Rate completed jobs"
             }
 
             R.id.job_requests -> {
@@ -229,7 +229,7 @@ class Employer_Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSe
                         BookWorkerFragment()
                     )
                     .commit()
-                toolbar_employer.title = "Job Invites"
+                toolbar_employer.title = "Book Worker"
             }
             R.id.log_out -> {
                 val sh: SharedPreferences = getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
