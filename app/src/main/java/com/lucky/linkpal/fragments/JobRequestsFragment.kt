@@ -23,6 +23,8 @@ import org.json.JSONObject
 
 class JobRequestsFragment : Fragment() {
     private var employer_id: Int? = null
+    private var longitude: String? = null
+    private var latitude: String? = null
     private lateinit var job_requests: MutableList<Job_Request>
 
     override fun onCreateView(
@@ -33,6 +35,8 @@ class JobRequestsFragment : Fragment() {
         val sh: SharedPreferences =
             requireActivity().getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
         employer_id = sh.getInt("user_id", 0)
+        longitude = sh.getString("longitude", null)
+        latitude = sh.getString("latitude", null)
 
         showJobRequests()
 
@@ -56,7 +60,7 @@ class JobRequestsFragment : Fragment() {
                             val job = jsonArray.getJSONObject(i)
                             val job_id = job.getString("job_id")
                             val user_id = job.getString("user_id")
-                            val bidding_amount = job.getString("bidding_amount")
+                            val bidding_amount = job.getString("bidding_amount").toInt()
                             val proposal = job.getString("proposal")
                             val firstname = job.getString("firstname")
                             val lastname = job.getString("lastname")
@@ -66,6 +70,7 @@ class JobRequestsFragment : Fragment() {
                             val request_date = job.getString("request_date")
                             val phone_number = job.getString("phone_number")
                             val rating = job.getString("rating").toFloat()
+                            val distance = job.getString("distance").toFloat()
                             job_requests.add(
                                 Job_Request(
                                     job_id,
@@ -79,7 +84,8 @@ class JobRequestsFragment : Fragment() {
                                     job_title,
                                     request_date,
                                     phone_number,
-                                    rating
+                                    rating,
+                                    distance
                                 )
                             )
                         }
@@ -114,6 +120,8 @@ class JobRequestsFragment : Fragment() {
                 val user = HashMap<String, String>()
                 try {
                     user["employer_id"] = employer_id.toString()
+                    user["longitude"] = longitude.toString()
+                    user["latitude"] = latitude.toString()
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }

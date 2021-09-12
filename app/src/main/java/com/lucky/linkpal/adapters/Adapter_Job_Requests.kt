@@ -32,7 +32,6 @@ class Adapter_Job_Requests(
     var lastname = sh.getString("lastname", null)
     var employer_id = sh.getInt("user_id", 0)
     private lateinit var Addresses: List<Address>
-    private lateinit var worker_id: String
 
     override fun getView(position: Int, view: View?, parent: ViewGroup?): View? {
         val mView: View? =
@@ -53,6 +52,7 @@ class Adapter_Job_Requests(
 
         val longitude = list[position].longitude
         val latitude = list[position].latitude
+        val distance = list[position].distance
 
         val geocoder = Geocoder(context, Locale.getDefault())
         try {

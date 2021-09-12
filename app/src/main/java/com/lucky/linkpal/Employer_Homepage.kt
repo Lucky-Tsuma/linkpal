@@ -258,6 +258,10 @@ class Employer_Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSe
     private fun showLocation() {
         geocoder = Geocoder(this, Locale.getDefault())
         if (latitude != null && longitude != null) {
+            val editor: SharedPreferences.Editor = sh.edit()
+            editor.putString("longitude", longitude)
+            editor.putString("latitude", latitude)
+            editor.apply()
             try {
                 Adresses =
                     geocoder.getFromLocation(latitude!!.toDouble(), longitude!!.toDouble(), 1)
