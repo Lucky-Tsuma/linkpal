@@ -14,12 +14,6 @@ import com.lucky.linkpal.utils.VolleyFileUploadRequest
 import kotlinx.android.synthetic.main.activity_login.*
 import org.json.JSONException
 import org.json.JSONObject
-import com.android.volley.VolleyError
-
-import com.android.volley.RetryPolicy
-
-import android.R.string.no
-import android.util.Log
 
 
 class Login : AppCompatActivity() {
@@ -175,19 +169,19 @@ class Login : AppCompatActivity() {
                 return loginDetails
             }
         }
-       /* request.retryPolicy = object : RetryPolicy {
-            override fun getCurrentTimeout(): Int {
-                return 50000
-            }
+        /* request.retryPolicy = object : RetryPolicy {
+             override fun getCurrentTimeout(): Int {
+                 return 50000
+             }
 
-            override fun getCurrentRetryCount(): Int {
-                return 50000
-            }
+             override fun getCurrentRetryCount(): Int {
+                 return 50000
+             }
 
-            @Throws(VolleyError::class)
-            override fun retry(error: VolleyError) {
-            }
-        }*/
+             @Throws(VolleyError::class)
+             override fun retry(error: VolleyError) {
+             }
+         }*/
         Volley.newRequestQueue(this).add(request)
     }
 

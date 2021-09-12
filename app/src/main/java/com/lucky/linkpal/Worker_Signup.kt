@@ -1,7 +1,6 @@
 package com.lucky.linkpal
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -65,16 +64,21 @@ class Worker_Signup : AppCompatActivity() {
         return if (phone_number.isEmpty()) {
             worker_phone.error = "Cannot be empty"
             false
-        } else if (!REGEX.PHONE_PATTERN1.matcher(phone_number).matches() && !REGEX.PHONE_PATTERN2.matcher(
+        } else if (!REGEX.PHONE_PATTERN1.matcher(phone_number)
+                .matches() && !REGEX.PHONE_PATTERN2.matcher(
                 phone_number
             ).matches()
         ) {
             worker_phone.error = "Invalid input"
             false
-        } else if (REGEX.PHONE_PATTERN1.matcher(phone_number).matches() && phone_number.length != 10) {
+        } else if (REGEX.PHONE_PATTERN1.matcher(phone_number)
+                .matches() && phone_number.length != 10
+        ) {
             worker_phone.error = "Invalid input"
             false
-        } else if (REGEX.PHONE_PATTERN2.matcher(phone_number).matches() && phone_number.length != 13) {
+        } else if (REGEX.PHONE_PATTERN2.matcher(phone_number)
+                .matches() && phone_number.length != 13
+        ) {
             worker_phone.error = "Invalid input"
             false
         } else {

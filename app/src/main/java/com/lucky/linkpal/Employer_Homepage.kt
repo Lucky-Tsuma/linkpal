@@ -10,7 +10,6 @@ import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
 import android.os.Looper
-import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
@@ -38,7 +37,6 @@ import org.json.JSONException
 import org.json.JSONObject
 import java.io.IOException
 import java.util.*
-import kotlin.properties.Delegates
 
 class Employer_Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private lateinit var sh: SharedPreferences
@@ -158,7 +156,7 @@ class Employer_Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSe
         val alertDialog: AlertDialog = builder.create()
         alertDialog.setCancelable(false)
 
-        if(showDialog) {
+        if (showDialog) {
             val editor: SharedPreferences.Editor = sh.edit()
             editor.putBoolean("showDialog", false)
             editor.apply()

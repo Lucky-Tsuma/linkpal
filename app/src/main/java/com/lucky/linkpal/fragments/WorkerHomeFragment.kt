@@ -10,8 +10,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.android.volley.Request
 import com.android.volley.RequestQueue
-import com.android.volley.RetryPolicy
-import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.lucky.linkpal.R

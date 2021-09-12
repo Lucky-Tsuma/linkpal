@@ -66,7 +66,7 @@
                 android:text="@string/placeholder"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/worker_location"
@@ -112,8 +112,8 @@
             android:gravity="center"
             android:text="@string/placeholder"
             android:textColor="@color/black"
-            android:textStyle="italic"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:textStyle="italic" />
 
     </LinearLayout>
 
@@ -126,11 +126,11 @@
             android:id="@+id/user_rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:max="100"
             android:gravity="center"
+            android:isIndicator="true"
+            android:max="100"
             android:numStars="5"
             android:rating="0"
-            android:isIndicator="true"
             android:stepSize="0.5" />
     </LinearLayout>
 

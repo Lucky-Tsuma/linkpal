@@ -11,7 +11,9 @@ import android.widget.SimpleAdapter
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.android.volley.*
+import com.android.volley.Request
+import com.android.volley.RequestQueue
+import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.lucky.linkpal.utils.SafeClickListener.Companion.setSafeOnClickListener
@@ -124,6 +126,7 @@ class Post_A_Job : AppCompatActivity() {
         jsonQueue.add(specialtyReq)
 
     }
+
     private fun checkUserInput() {
         /*reset in case there was previous wrong input*/
         status = true
@@ -152,7 +155,8 @@ class Post_A_Job : AppCompatActivity() {
         if (status) {
             if (job_description.length < 20) {
                 status = false
-                editTxt_job_description.error = "Description too short. should be at least 20 characters."
+                editTxt_job_description.error =
+                    "Description too short. should be at least 20 characters."
             }
         }
     }
@@ -203,19 +207,19 @@ class Post_A_Job : AppCompatActivity() {
                 return job
             }
         }
-       /* request.retryPolicy = object : RetryPolicy {
-            override fun getCurrentTimeout(): Int {
-                return 50000
-            }
+        /* request.retryPolicy = object : RetryPolicy {
+             override fun getCurrentTimeout(): Int {
+                 return 50000
+             }
 
-            override fun getCurrentRetryCount(): Int {
-                return 50000
-            }
+             override fun getCurrentRetryCount(): Int {
+                 return 50000
+             }
 
-            @Throws(VolleyError::class)
-            override fun retry(error: VolleyError) {
-            }
-        }*/
+             @Throws(VolleyError::class)
+             override fun retry(error: VolleyError) {
+             }
+         }*/
         Volley.newRequestQueue(this).add(request)
     }
 
