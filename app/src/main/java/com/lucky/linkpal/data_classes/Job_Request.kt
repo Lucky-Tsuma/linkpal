@@ -11,5 +11,6 @@ class Job_Request(
     var latitude: String,
     var job_title: String,
     var request_date: String,
-    var phone_number: String
+    var phone_number: String,
+    var rating: Float
 )

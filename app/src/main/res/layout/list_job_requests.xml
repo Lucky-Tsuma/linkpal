@@ -122,6 +122,23 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
+        <RatingBar
+            android:id="@+id/user_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:max="100"
+            android:gravity="center"
+            android:numStars="5"
+            android:rating="0"
+            android:isIndicator="true"
+            android:stepSize="0.5" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_recruit"
             android:layout_width="0dp"

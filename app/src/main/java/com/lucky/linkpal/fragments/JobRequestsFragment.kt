@@ -65,6 +65,7 @@ class JobRequestsFragment : Fragment() {
                             val job_title = job.getString("job_title")
                             val request_date = job.getString("request_date")
                             val phone_number = job.getString("phone_number")
+                            val rating = job.getString("rating").toFloat()
                             job_requests.add(
                                 Job_Request(
                                     job_id,
@@ -77,7 +78,8 @@ class JobRequestsFragment : Fragment() {
                                     latitude,
                                     job_title,
                                     request_date,
-                                    phone_number
+                                    phone_number,
+                                    rating
                                 )
                             )
                         }

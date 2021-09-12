@@ -7,10 +7,7 @@ import android.location.Geocoder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
-import android.widget.Button
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import com.android.volley.Response
 import com.android.volley.RetryPolicy
 import com.android.volley.VolleyError
@@ -50,6 +47,7 @@ class Adapter_Job_Requests(
         val job_title = mView?.findViewById<TextView>(R.id.job_title)
         val request_date = mView?.findViewById<TextView>(R.id.request_date)
         val phone_number = mView?.findViewById<TextView>(R.id.phone_number)
+        val rating = mView?.findViewById<RatingBar>(R.id.user_rating)
         val recruit = mView?.findViewById<Button>(R.id.button_recruit)
         val decline = mView?.findViewById<Button>(R.id.button_decline)
 
@@ -92,6 +90,9 @@ class Adapter_Job_Requests(
         }
         if (bidding_amount != null) {
             bidding_amount.text = "My price: " + list[position].bidding_amount + "/="
+        }
+        if (rating != null) {
+            rating.rating = list[position].rating
         }
 
         decline!!.setSafeOnClickListener {

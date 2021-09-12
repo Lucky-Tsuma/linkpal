@@ -103,7 +103,7 @@ class Worker_Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSele
         val lastname = sh.getString("lastname", null)
         val phone_number = sh.getString("phone_number", null)
         val profile_pic = sh.getString("profile_pic", null)
-        val rating = sh.getInt("rating", 0)
+        val rating = sh.getFloat("rating", 0F)
         latitude = sh.getString("latitude", null)
         longitude = sh.getString("longitude", null)
 

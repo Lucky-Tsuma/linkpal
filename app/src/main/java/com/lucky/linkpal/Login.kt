@@ -91,7 +91,6 @@ class Login : AppCompatActivity() {
         val request = object : VolleyFileUploadRequest(Method.POST, URLs.login,
             Response.Listener { response ->
                 val res = String(response.data)
-                Log.d("LTM_DEBUG", res)
                 try {
                     val obj = JSONObject(res)
 
@@ -124,7 +123,7 @@ class Login : AppCompatActivity() {
                             startActivity(intentEmployer)
                         } else {
                             val profile_pic = obj.getString("profile_pic")
-                            val rating = obj.getInt("rating")
+                            val rating = obj.getDouble("rating")
 
                             Toast.makeText(applicationContext, msg, Toast.LENGTH_SHORT).show()
 
@@ -138,7 +137,7 @@ class Login : AppCompatActivity() {
                             editor.putString("profile_pic", profile_pic)
                             editor.putString("longitude", longitude)
                             editor.putString("latitude", latitude)
-                            editor.putInt("rating", rating)
+                            editor.putFloat("rating", rating.toFloat())
                             editor.apply()
 
                             val intentWorker = Intent(this, Worker_Homepage::class.java)
