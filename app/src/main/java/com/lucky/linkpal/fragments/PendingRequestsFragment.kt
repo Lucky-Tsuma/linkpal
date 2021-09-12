@@ -24,7 +24,6 @@ import org.json.JSONObject
 class PendingRequestsFragment : Fragment() {
     private var user_id: Int? = null
     private lateinit var pending_requests: MutableList<Pending_Request>
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
