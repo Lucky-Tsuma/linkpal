@@ -162,7 +162,10 @@ class Worker_Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSele
 
         val alertDialog: AlertDialog = builder.create()
         alertDialog.setCancelable(false)
-        alertDialog.show()
+//        alertDialog.show()
+
+        /*Am picking the location automatically, no user dialog*/
+        pickLocation()
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {

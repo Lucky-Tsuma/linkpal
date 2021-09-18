@@ -10,6 +10,8 @@ import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
 import android.os.Looper
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
@@ -156,12 +158,14 @@ class Employer_Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSe
         val alertDialog: AlertDialog = builder.create()
         alertDialog.setCancelable(false)
 
-        if (showDialog) {
+       /* if (showDialog) {
             val editor: SharedPreferences.Editor = sh.edit()
             editor.putBoolean("showDialog", false)
             editor.apply()
             alertDialog.show()
-        }
+        }*/
+        /*I'll just pick the location everytime the page is loaded. No alert dialog*/
+        pickLocation()
     }/*onCreate method ends*/
 
     override fun onResume() {
@@ -436,4 +440,5 @@ class Employer_Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSe
         }
         Volley.newRequestQueue(this).add(request)
     }
+
 }
