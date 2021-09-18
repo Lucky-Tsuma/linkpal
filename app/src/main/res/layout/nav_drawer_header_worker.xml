@@ -70,6 +70,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:isIndicator="true"
+            android:theme="@style/RatingBar"
             android:max="100"
             android:numStars="5"
             android:rating="0"

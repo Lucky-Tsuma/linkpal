@@ -25,11 +25,8 @@
     <string name="account_worker">find a job</string>
 
     <!--About page-->
-    <string name="about_page_text">
-        Find a wide market for your casual skills among businesses and homesteads within Mombasa. Are you proficient in plumbing,
-        gardening, painting, wiring, manicure and pedicure, photography among many other fields listed on our platform? Then linkpal
-        is just for you. Create an account and start receiving job invitations or send job requests. You can, on the other hand,
-        create an account to post jobs and employ from our talented team.
+    <string name="about_page_text">We connect job seekers to potential employers all over the country. Create an account to hire
+        or find a casual job.
     </string>
 
     <!--Sign up globals-->
@@ -120,5 +117,10 @@
     <string name="rate_me">Rate me</string>
     <string name="rate_job">Rate job</string>
     <string name="no_pending_ratings">There are no jobs to rate. Please post a job and hire from the platform.</string>
+
+    <!--Sort options-->
+    <string name="option_rating">rating</string>
+    <string name="option_distance">distance</string>
+    <string name="option_price">price</string>
 
 </resources>

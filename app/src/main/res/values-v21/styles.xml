@@ -17,4 +17,8 @@
         <item name="android:statusBarColor">@color/colorPrimaryDark</item>
     </style>
 
+    <style name="RatingBar" parent="AppTheme">
+        <item name="colorControlActivated">@android:color/holo_green_light</item>
+        <item name="colorControlNormal">@color/colorAccent</item>
+    </style>
 </resources>
