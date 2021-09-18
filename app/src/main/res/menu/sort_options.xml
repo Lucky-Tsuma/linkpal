@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <item
+        android:id="@+id/option_rating"
+        android:title="@string/option_rating" />
+
+    <item
+        android:id="@+id/option_distance"
+        android:title="@string/option_distance" />
+
+    <item
+        android:id="@+id/option_price"
+        android:title="@string/option_price" />
+
 </menu>
