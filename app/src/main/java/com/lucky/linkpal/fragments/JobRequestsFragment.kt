@@ -3,9 +3,7 @@ package com.lucky.linkpal.fragments
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.android.volley.Response
@@ -24,6 +22,7 @@ class JobRequestsFragment : Fragment() {
     private var longitude: String? = null
     private var latitude: String? = null
     private lateinit var job_requests: MutableList<Job_Request>
+    private var sort_criteria: Int = 1
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,6 +36,8 @@ class JobRequestsFragment : Fragment() {
         latitude = sh.getString("latitude", null)
 
         showJobRequests()
+
+        setHasOptionsMenu(true)
 
         return inflater.inflate(R.layout.fragment_job_requests, container, false)
     }
@@ -120,6 +121,7 @@ class JobRequestsFragment : Fragment() {
                     user["employer_id"] = employer_id.toString()
                     user["longitude"] = longitude.toString()
                     user["latitude"] = latitude.toString()
+                    user["sort_method"] = sort_criteria.toString()
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
@@ -140,5 +142,29 @@ class JobRequestsFragment : Fragment() {
             }
         }*/
         Volley.newRequestQueue(context).add(request)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.sort_options, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        sort_criteria = when (item.itemId) {
+            R.id.option_rating -> {
+                1
+            }
+            R.id.option_distance -> {
+                2
+            }
+            R.id.option_price -> {
+                3
+            }
+            else -> {
+                1
+            }
+        }
+        showJobRequests()
+        return super.onOptionsItemSelected(item)
     }
 }
