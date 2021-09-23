@@ -12,6 +12,10 @@
     <!--Permission to read external storage eg. memory card-->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
+    <!--sms sending permission-->
+    <uses-permission android:name="android.permission.SEND_SMS" />
+
+
     <application
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
