@@ -12,6 +12,7 @@ import com.android.volley.Response
 import com.android.volley.toolbox.Volley
 import com.lucky.linkpal.R
 import com.lucky.linkpal.data_classes.Job_Request
+import com.lucky.linkpal.utils.GLOBALS
 import com.lucky.linkpal.utils.SafeClickListener.Companion.setSafeOnClickListener
 import com.lucky.linkpal.utils.URLs
 import com.lucky.linkpal.utils.VolleyFileUploadRequest
@@ -30,6 +31,16 @@ class Adapter_Job_Requests(
     var lastname = sh.getString("lastname", null)
     var employer_id = sh.getInt("user_id", 0)
     private lateinit var Addresses: List<Address>
+
+    private lateinit var smsSend: OnSmsSendListener
+
+    interface OnSmsSendListener {
+        fun OnSms(firstname: String, lastname: String, job_type: String, worker_phone: String)
+    }
+
+    fun setOnSmsListener(smsSend: OnSmsSendListener) {
+        this.smsSend = smsSend
+    }
 
     override fun getView(position: Int, view: View?, parent: ViewGroup?): View? {
         val mView: View? =
@@ -50,7 +61,6 @@ class Adapter_Job_Requests(
 
         val longitude = list[position].longitude
         val latitude = list[position].latitude
-        val distance = list[position].distance
 
         val geocoder = Geocoder(context, Locale.getDefault())
         try {
@@ -97,7 +107,22 @@ class Adapter_Job_Requests(
             declineRequest(list[position].job_id, list[position].user_id)
         }
         recruit!!.setSafeOnClickListener {
-            recruitWorker(list[position].job_id, list[position].user_id)
+            smsSend.OnSms(
+                firstname.toString(),
+                lastname.toString(),
+                list[position].job_title,
+                list[position].phone_number
+            )
+            if (GLOBALS.recruitSmsChecker) {
+                recruitWorker(list[position].job_id, list[position].user_id)
+            } else {
+                Toast.makeText(
+                    context,
+                    "Please allow linkpal to send an sms to the user you are recruiting",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
         }
         return mView
     }

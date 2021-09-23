@@ -12,6 +12,5 @@ class Job_Request(
     var job_title: String,
     var request_date: String,
     var phone_number: String,
-    var rating: Float,
-    var distance: Float
+    var rating: Float
 )

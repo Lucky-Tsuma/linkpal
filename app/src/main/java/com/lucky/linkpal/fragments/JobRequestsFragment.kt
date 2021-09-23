@@ -1,16 +1,24 @@
 package com.lucky.linkpal.fragments
 
+import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.telephony.SmsManager
 import android.view.*
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.android.volley.Response
 import com.android.volley.toolbox.Volley
+import com.google.android.material.snackbar.Snackbar
 import com.lucky.linkpal.R
 import com.lucky.linkpal.adapters.Adapter_Job_Requests
 import com.lucky.linkpal.data_classes.Job_Request
+import com.lucky.linkpal.utils.GLOBALS
 import com.lucky.linkpal.utils.URLs
 import com.lucky.linkpal.utils.VolleyFileUploadRequest
 import kotlinx.android.synthetic.main.fragment_job_requests.*
@@ -21,7 +29,9 @@ class JobRequestsFragment : Fragment() {
     private var employer_id: Int? = null
     private var longitude: String? = null
     private var latitude: String? = null
+    private lateinit var employer_phone: String
     private lateinit var job_requests: MutableList<Job_Request>
+    private lateinit var job_requests_adapter: Adapter_Job_Requests
     private var sort_criteria: Int = 1
 
     override fun onCreateView(
@@ -34,6 +44,7 @@ class JobRequestsFragment : Fragment() {
         employer_id = sh.getInt("user_id", 0)
         longitude = sh.getString("longitude", null)
         latitude = sh.getString("latitude", null)
+        employer_phone = sh.getString("phone_number", null).toString()
 
         showJobRequests()
 
@@ -69,7 +80,6 @@ class JobRequestsFragment : Fragment() {
                             val request_date = job.getString("request_date")
                             val phone_number = job.getString("phone_number")
                             val rating = job.getString("rating").toFloat()
-                            val distance = job.getString("distance").toFloat()
                             job_requests.add(
                                 Job_Request(
                                     job_id,
@@ -83,17 +93,28 @@ class JobRequestsFragment : Fragment() {
                                     job_title,
                                     request_date,
                                     phone_number,
-                                    rating,
-                                    distance
+                                    rating
                                 )
                             )
                         }
-                        val job_requests_adapter =
+                        job_requests_adapter =
                             Adapter_Job_Requests(
                                 requireContext(),
                                 job_requests
                             )
                         list_view_job_requests.adapter = job_requests_adapter
+
+                        job_requests_adapter.setOnSmsListener(object :
+                            Adapter_Job_Requests.OnSmsSendListener {
+                            override fun OnSms(
+                                firstname: String,
+                                lastname: String,
+                                job_type: String,
+                                worker_phone: String
+                            ) {
+                                onSmsFunc(firstname, lastname, job_type, worker_phone)
+                            }
+                        })
 
                     } catch (e: JSONException) {
                         Toast.makeText(context, "Oops! An error occurred", Toast.LENGTH_SHORT)
@@ -144,6 +165,31 @@ class JobRequestsFragment : Fragment() {
         Volley.newRequestQueue(context).add(request)
     }
 
+    private fun onSmsFunc(
+        firstname: String,
+        lastname: String,
+        jobType: String,
+        workerPhone: String
+    ) {
+        if (ContextCompat.checkSelfPermission(
+                requireContext(),
+                android.Manifest.permission.SEND_SMS
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            requestSmsPermission()
+        } else {
+            val smsManager = SmsManager.getDefault()
+            smsManager.sendTextMessage(
+                workerPhone,
+                null,
+                "$firstname $lastname recruited you to work on the $jobType job for which you applied. Kindly reach out through $employer_phone",
+                null,
+                null
+            )
+            GLOBALS.recruitSmsChecker = true
+        }
+    }
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.sort_options, menu)
@@ -167,4 +213,39 @@ class JobRequestsFragment : Fragment() {
         showJobRequests()
         return super.onOptionsItemSelected(item)
     }
+
+    private fun requestSmsPermission() {
+        when {
+            ActivityCompat.shouldShowRequestPermissionRationale(
+                context as Activity,
+                android.Manifest.permission.SEND_SMS
+            ) -> {
+                var sb = Snackbar.make(
+                    layout_job_requests,
+                    "You need to give sms permission for good performance",
+                    Snackbar.LENGTH_INDEFINITE
+                )
+                sb.setAction("Ok") { }
+                sb.show()
+                requestSmsPermissionLauncher.launch(android.Manifest.permission.SEND_SMS)
+            }
+            else -> {
+                requestSmsPermissionLauncher.launch(android.Manifest.permission.SEND_SMS)
+            }
+        }
+    }
+
+    private var requestSmsPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
+            if (isGranted) {
+                Toast.makeText(
+                    context,
+                    "Permission granted. You can now resend the message",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else {
+                requestSmsPermission()
+            }
+        }
+
 }
