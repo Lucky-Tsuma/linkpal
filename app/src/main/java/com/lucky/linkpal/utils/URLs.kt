@@ -18,6 +18,7 @@ class URLs {
         const val recruit = "$root_url/recruit.php"
         const val pending_ratings = "$root_url/pending_ratings.php"
         const val rate_job = "$root_url/rate_job.php"
+        const val user_numbers = "$root_url/get_user_numbers.php"
     }
 }
 
